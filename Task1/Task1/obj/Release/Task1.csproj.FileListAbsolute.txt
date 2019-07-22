@@ -1,0 +1,7 @@
+C:\Users\dmutp\source\repos\Task1\Task1\bin\Release\Task1.exe.config
+C:\Users\dmutp\source\repos\Task1\Task1\bin\Release\Task1.exe
+C:\Users\dmutp\source\repos\Task1\Task1\bin\Release\Task1.pdb
+C:\Users\dmutp\source\repos\Task1\Task1\obj\Release\Task1.csproj.CoreCompileInputs.cache
+C:\Users\dmutp\source\repos\Task1\Task1\obj\Release\Task1.exe
+C:\Users\dmutp\source\repos\Task1\Task1\obj\Release\Task1.pdb
+C:\Users\dmutp\source\repos\Task1\Task1\obj\Release\Task1.csprojAssemblyReference.cache
