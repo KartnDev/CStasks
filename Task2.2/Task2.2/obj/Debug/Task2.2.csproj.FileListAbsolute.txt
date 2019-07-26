@@ -1,0 +1,10 @@
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\bin\Debug\Task2.2.exe.config
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\bin\Debug\Task2.2.exe
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\bin\Debug\Task2.2.pdb
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\obj\Debug\Task2.2.csprojAssemblyReference.cache
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\obj\Debug\Task2._2.Form1.resources
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\obj\Debug\Task2._2.Properties.Resources.resources
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\obj\Debug\Task2.2.csproj.GenerateResource.cache
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\obj\Debug\Task2.2.csproj.CoreCompileInputs.cache
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\obj\Debug\Task2.2.exe
+C:\Users\Dmutp\source\repos\Task2.2\Task2.2\obj\Debug\Task2.2.pdb
