@@ -18,36 +18,41 @@ namespace Task2._2
 
     public partial class Form1 : Form
     {
-        private enum UTFBinds
-        {
-            ONE = 31, TWO = 32, THREE = 33, FOUR = 34, FIVE = 35, 
-            SIX = 36, SEVEN = 37, EIGHT = 38, NINE = 39, A = 41, B = 42, 
-            C = 43, D = 44, E = 45, F = 46, G = 47, H = 48, I = 49, J =50,
-            K = 51, L = 52, M = 53, N = 54, O = 55, P = 56,  Q = 57, R = 58, 
-            S = 59, 
-
-        }
-
+        private List<string> CorrentSymbols;
         
 
         public Form1()
         {
+           
+            CorrentSymbols = new List<string>();
+            for (int i = 0; i < 10; i++)
+            {
+                CorrentSymbols.Add(i.ToString());
+            }
+            for (int i = 65; i < 91; i++)
+            {
+                CorrentSymbols.Add(((char)i).ToString());
+                CorrentSymbols.Add(((char)(i + 32)).ToString());
+            }
+            foreach(string item in CorrentSymbols)
+            {
+                Console.WriteLine(item);
+            }
             InitializeComponent();
+
         }
 
 
-        public string RandomString(Random random, int size, bool lowerCase)
+        public string RandomCharAsString(Random random, ref List<string> DictOfAllowedChars)
         {
-            StringBuilder builder = new StringBuilder();
-            char ch;
-            for (int i = 0; i < size; i++)
+            int tempRand = random.Next(DictOfAllowedChars.Count);
+            string toResult = DictOfAllowedChars.ElementAtOrDefault(tempRand);
+            if (toResult != null)
             {
-                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(30 * random.NextDouble() + 65)));
-                builder.Append(ch);
+                DictOfAllowedChars.RemoveAt(tempRand);
+                return toResult;
             }
-            if (lowerCase)
-                return builder.ToString().ToLower();
-            return builder.ToString();
+            return "0";
         }
     }
 }
