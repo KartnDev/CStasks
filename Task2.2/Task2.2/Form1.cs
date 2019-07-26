@@ -47,12 +47,16 @@ namespace Task2._2
         {
             int tempRand = random.Next(DictOfAllowedChars.Count);
             string toResult = DictOfAllowedChars.ElementAtOrDefault(tempRand);
-            if (toResult != null)
+            if(toResult != null)
             {
                 DictOfAllowedChars.RemoveAt(tempRand);
                 return toResult;
             }
-            return "0";
+            else
+            {
+               return DictOfAllowedChars.ElementAt(0);
+            }
+
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-
-namespace Task2._2
+﻿namespace Task2._2
 {
     partial class Form1
     {
@@ -15,8 +13,6 @@ namespace Task2._2
             }
             base.Dispose(disposing);
         }
-
-        #region Код, автоматически созданный конструктором форм Windows
 
         
         private void InitializeComponent()
@@ -67,7 +63,6 @@ namespace Task2._2
 
         }
 
-        #endregion
 
         private System.Windows.Forms.Button[] buttons;
         private System.Windows.Forms.TextBox textBox;
