@@ -2,53 +2,62 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 
-namespace ConsoleApp1
+namespace EntityApp
 {
-
-    public class User
+    public class Student
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-    }
-
-
-    class UserContext : DbContext
-    {
-        public UserContext()
-            :base("DbConnection")
-        { }
-          
-        public DbSet<User> Users { get; set; }
+        public int ID { get; set; }
+        public int groupID { get; set; }
+        public string name { get; set; }
     }
 
 
 
-    class Program
+    public class Group
+    {
+      
+        public int ID { get; set; }
+        public string name { get; set; }
+    }
+
+
+
+    public class StudentContext : DbContext
+    {
+
+        public StudentContext(string nameOrConnection) : base("DbConnection")
+        {
+            
+        }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Group> Groups { get; set; }
+    }
+    public class Program
     {
         static void Main(string[] args)
         {
-            using (UserContext db = new UserContext())
+            using (StudentContext db = new StudentContext("DbConnection"))
             {
-                // создаем два объекта User
-                User user1 = new User { Name = "Tom", Age = 33 };
-                User user2 = new User { Name = "Sam", Age = 26 };
 
-                // добавляем их в бд
-                db.Users.Add(user1);
-                db.Users.Add(user2);
+                Group groupRadioPhysics = new Group { ID = 1, name = "RadioPhysics" };
+                Group groupMicroElectrics = new Group { ID = 2, name = "MicroElectrics" };
+                Group groupGeneralPhysics = new Group { ID = 3, name = "GeneralPhysics" };
+
+                db.Groups.Add(groupRadioPhysics);
+                db.Groups.Add(groupMicroElectrics);
+                db.Groups.Add(groupGeneralPhysics);
                 db.SaveChanges();
-                Console.WriteLine("Объекты успешно сохранены");
 
-                // получаем объекты из бд и выводим на консоль
-                var users = db.Users;
+                var groups = db.Groups;
                 Console.WriteLine("Список объектов:");
-                foreach (User u in users)
+                foreach (var item in groups)
                 {
-                    Console.WriteLine("{0}.{1} - {2}", u.Id, u.Name, u.Age);
+                    Console.WriteLine("Group No.{0} Is {1}", item.ID, item.name);
                 }
+
+
             }
-            Console.Read();
+            Console.ReadLine();
         }
     }
 }
