@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace EntityApp
 {
@@ -32,9 +33,22 @@ namespace EntityApp
     }
     public class Program
     {
-        private static int StudentValue = 0;
+        private static int StudentCount;
 
-
+        public Program()
+        {
+            StudentCount = 0;
+        }
+        private static void ViewAllStudentAtGroup(StudentContext db, int GroupID)
+        {
+            foreach (var student in db.Students)
+            {
+                if (student.groupID == GroupID)
+                {
+                    Console.WriteLine("Student {0} is {1}", student.ID, student.name);
+                } 
+            }
+        }
         private static void ViewAllStudentsByGroups(StudentContext db)
         {
             foreach (var group in db.Groups)
@@ -64,7 +78,7 @@ namespace EntityApp
             db.Groups.Add( new Group { ID = 1, name = "RadioPhysics" });
             db.Groups.Add(new Group { ID = 2, name = "MicroElectrics" });
             db.Groups.Add(new Group { ID = 3, name = "GeneralPhysics" });
-            
+            // TODO ЗАПОЛНЕНИЕ ЦАРЯМИ РОССИИ
             db.Students.Add(new Student { ID = 1, name = "zxc", groupID = 1 });
             db.Students.Add(new Student { ID = 2, name = "sdsd", groupID = 3 });
             db.Students.Add(new Student { ID = 3, name = "asfsdfad", groupID = 1 });
@@ -83,25 +97,27 @@ namespace EntityApp
         {
             db.Students.Add(new Student { name = studentName, groupID = GroupID });
             db.SaveChanges();
+            StudentCount++;
         }
         private static void RemoveStudentFromDB(StudentContext db, int StudentID)
         {
             // TODO check ID student should be legal
-            Student toDelete = new Student { ID = StudentID };
-            db.Students.Attach(toDelete);
-            db.Students.Remove(toDelete);
+            var toDelete = new Student { ID = StudentID};
+            db.Entry(toDelete).State = EntityState.Deleted;
             db.SaveChanges();
+            StudentCount--;
         }
         private static int DoBinaryVote(string message)
         {
             Console.WriteLine(message);
-            char vote = (char)Console.Read();
-            if (vote == '1')
+            string vote = Console.ReadLine();
+
+            if (vote == "1")
             {
                 Console.WriteLine("You choose first action!");
                 return 1;
             }
-            else if (vote == '2')
+            else if (vote == "2")
             {
                 Console.WriteLine("You choose second action!");
                 return 2;
@@ -113,6 +129,9 @@ namespace EntityApp
             }
             return 0;
         }
+
+
+
 
         public static void Main(string[] args)
         {
@@ -126,6 +145,7 @@ namespace EntityApp
                 /// студент Н фио
                 /// группа - номер 
                 /// ...........
+                
                 ViewAllStudentsByGroups(db);
 
 
@@ -138,16 +158,20 @@ namespace EntityApp
                     //3)
                     Console.WriteLine("\nChoose group ID..");
                     ViewAllGroups(db);
-                    // TODO group should be 1 - 3 range
-                    int groupID = Console.Read();
+                    string groupID = Console.ReadLine();
                     Console.WriteLine("\nInsert student name...");
                     string name = Console.ReadLine();
-                    AddStudentToDB(db, name, groupID);
+                    AddStudentToDB(db, name, int.Parse(groupID));
                 }
                 else
                 {
                     //4)
+                    Console.WriteLine("\nChoose group ID..");
                     ViewAllGroups(db);
+                    string groupID = Console.ReadLine();
+                    ViewAllStudentAtGroup(db, int.Parse(groupID));
+                    Console.WriteLine("\nInsert student ID...");
+                    string studentID = Console.ReadLine();
 
                 }
                 Console.Read();
