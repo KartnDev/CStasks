@@ -1,0 +1,5 @@
+C:\Users\Dmutp\Desktop\PopularPatterns-task\DependencyInjection.Tests\bin\Debug\netcoreapp2.1\DependencyInjection.dll
+C:\Users\Dmutp\Desktop\PopularPatterns-task\DependencyInjection.Tests\obj\Debug\netcoreapp2.1\DependencyInjection.Tests.csprojAssemblyReference.cache
+C:\Users\Dmutp\Desktop\PopularPatterns-task\DependencyInjection.Tests\obj\Debug\netcoreapp2.1\DependencyInjection.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Dmutp\Desktop\PopularPatterns-task\DependencyInjection.Tests\obj\Debug\netcoreapp2.1\DependencyInjection.Tests.AssemblyInfoInputs.cache
+C:\Users\Dmutp\Desktop\PopularPatterns-task\DependencyInjection.Tests\obj\Debug\netcoreapp2.1\DependencyInjection.Tests.AssemblyInfo.cs
