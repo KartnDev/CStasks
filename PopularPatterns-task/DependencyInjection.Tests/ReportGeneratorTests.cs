@@ -1,8 +1,10 @@
-﻿using DependencyInjection.Database.Seeding;
+﻿using DependencyInjection.Database;
+using DependencyInjection.Database.Seeding;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
@@ -12,14 +14,15 @@ namespace DependencyInjection.Tests
     [TestClass]
     public class ReportGeneratorTests
     {
+        private DateTime today = new DateTime(19, 01, 23);
         private const string ConnectionString =
             @"Server=LAPTOP-TBO8G4T7\SQLEXPRESS;Database=Restaurant;Trusted_Connection=True;";
-
+        
         [TestMethod]
         public async Task TodayReservations_OneShift_GeneratesFilePerShift()
         {
             // arrange
-            var today = new DateTime(19, 01, 23);
+            
 
             await DatabaseUtil.RecreateAndSeedAsync(ConnectionString, Restaurant.New()
                 .Tables("Table A")
@@ -29,7 +32,7 @@ namespace DependencyInjection.Tests
             var reportGenerator = new ReportGenerator(ConnectionString);
 
             // act
-            await reportGenerator.TodayReservationsAsync(new List(), );
+            await reportGenerator.GenerateAllReportContent(today, new RestaurantContext(ConnectionString));
 
             // assert
             await AssertReportCorrectAsync(
@@ -58,7 +61,7 @@ namespace DependencyInjection.Tests
             var reportGenerator = new ReportGenerator(ConnectionString);
 
             // act
-            await reportGenerator.TodayReservationsAsync();
+            await reportGenerator.GenerateAllReportContent(today, new RestaurantContext(ConnectionString));
 
             // assert
             await AssertReportCorrectAsync(
@@ -87,6 +90,10 @@ namespace DependencyInjection.Tests
             var expectedContents = string.Join(Environment.NewLine, expectedContentLines) + Environment.NewLine;
             actualContents.Should().Be(expectedContents);
         }
+
+  
+
+
 
         private static string FileNameDate(DateTime date) => 
             date.ToString("yyyyMMdd");

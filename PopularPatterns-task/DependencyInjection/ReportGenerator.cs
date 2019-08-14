@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace DependencyInjection
 {
+
+
     public class ReportGenerator
     {
         private readonly string _connectionString;
@@ -18,21 +20,46 @@ namespace DependencyInjection
             _connectionString = connectionString;
         }
 
-        public async Task<IReadOnlyList<string>> TodayReservationsAsync(IReadOnlyList<Reservation> Reservations, // LoadReservationsForDateAsync
-                                                 IReadOnlyList<Shift> Shifts, DateTime dataTime) //await context.Shifts.ToListAsync()
+
+        private async Task<IReadOnlyList<Shift>> GetShiftsAsync(RestaurantContext context)
         {
-            List<string> ListFileNames = new List<string>();
+            return await context.Shifts.ToListAsync();
+        }
+
+        public async Task GenerateAllReportContent(DateTime dateTime, RestaurantContext context)
+        {
+            var ReservationList = await LoadReservationsForDateAsync(context, dateTime);
+            var Shifts = await GetShiftsAsync(context);
+            var General_Instances = await TodayReservationsAsync(ReservationList, Shifts, dateTime);
+
+            foreach(var tuple in General_Instances)
+            {
+                await GenerateReportContentAsync(tuple.Item4, tuple.Item1, tuple.Item2, tuple.Item3);
+            }
+        }
+
+
+
+
+        private async Task<List<Tuple<Shift, DateTime, IReadOnlyList<Reservation>, string>>> TodayReservationsAsync(IReadOnlyList<Reservation> Reservations, 
+                                                 IReadOnlyList<Shift> Shifts, 
+                                                 DateTime NowDateTime) // after this await GenerateReportContentAsync(stream, shift, date, reservationsInShift);
+        {
+            var Result = new List<Tuple<Shift, DateTime, IReadOnlyList<Reservation>, string>>();
+
             foreach (var shift in Shifts)
             {
                 var reservationsInShift = FilterReservationsInShift(shift, Reservations);
 
-                ListFileNames.Add(GenerateReportFileName(shift, dataTime.Date));
+                var reportFileName = GenerateReportFileName(shift, NowDateTime);
                     
+                Result.Add(new Tuple<Shift, DateTime, IReadOnlyList<Reservation>, string>(shift, NowDateTime, reservationsInShift, reportFileName));
+
             }
-            return ListFileNames;
+            return Result;
         }
-        // не трогать, загрузка из ДБ только
-        public async Task<IReadOnlyList<Reservation>> LoadReservationsForDateAsync(
+
+        private async Task<IReadOnlyList<Reservation>> LoadReservationsForDateAsync(
             RestaurantContext context,
             DateTime date)
         {
@@ -49,30 +76,7 @@ namespace DependencyInjection
                 .ThenInclude(ta => ta.Table)
                 .ToListAsync();
         }
-        /// TODO :
-        /// нужно сделать так, чтобы все функции были лишь по мнимым аргументам, 
-        /// тогда мы добьемся определенной изоляции
-        /// появится возможность по частям делать код
-        /// сделать его рабочим
-        /// после этого
-        /// можно его еще раз рефакторить с использованием паттеров
-        /// и когда он будет рабочим и в паттернах
-        /// мы сможем делать юнит тест для функций, которые будут самыми высокоуровневыми
-        public async Task<IReadOnlyList<Reservation>> GetReservations(DateTime dataTime)
-        {
-            List<Reservation> ResultList;
-            using (var context = GenerateSessionContext(_connectionString))
-            {
-                ResultList = await LoadReservationsForDateAsync(new RestaurantContext(_connectionString), dataTime);
-            }
-            return null;
-        }
-        private async Task<RestaurantContext> GenerateSessionContext(string connection)
-        {
-            return new RestaurantContext(connection);
-        }
 
-        // не трогать, только возвращает из дб лист
         private IReadOnlyList<Reservation> FilterReservationsInShift(
             Shift shift,
             IReadOnlyList<Reservation> reservations)
@@ -87,14 +91,14 @@ namespace DependencyInjection
         {
             return $"{date.ToString("yyyyMMdd")}_{shift.Name}.txt";
         }
-        // просто генерирует файл
+
         private async Task GenerateReportContentAsync(
-            string reportFileName,
+            string path,
             Shift shift,
             DateTime date,
             IReadOnlyList<Reservation> reservationsInShift)
         {
-                using (var writer = new StreamWriter(File.OpenWrite(reportFileName))) 
+            using (var writer = new StreamWriter(File.OpenWrite(path))) 
             {
                 writer.WriteLine($"{Date(date)} {TimeOfDay(shift.StartsAt)}-{TimeOfDay(shift.EndsAt)}");
                 writer.WriteLine($"Shift '{shift.Name}'");
