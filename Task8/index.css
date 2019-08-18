@@ -1,0 +1,73 @@
+body {
+	text-align:center;
+	background:#CC6699;
+	padding:25px 0;
+}
+.wrapper {
+	width:96%;
+	margin:0 auto;
+	text-align:left;
+	background:#fff;
+	border:5px solid #000;
+	padding:10px;
+}
+.header, .footer {
+	z-index:2;
+	background:#fff;
+	padding:10px;
+	border:1px solid #000;
+	height:100px;
+}
+.inner {
+	position:relative;
+	width:100%;
+	clear:both;
+	z-index:2;
+	margin:10px 0;
+	overflow:hidden;
+}
+
+.group{
+	padding-left: 10%;
+	font-size: 20px;
+	font-weight: bold;
+	counter-increment: section;                 /* Инкрементирует счетчик*/
+	content: "Секция " counter(section) ": "; 
+}
+
+.adder{
+	font-weight: normal;
+	padding-left:2em;
+}
+
+.content {
+	border:1px solid #000;
+	position:relative;
+	z-index:2;	
+	margin-top: 2%;
+	zoom:1.0;
+}
+
+.student{
+	margin-left:5%;
+	margin-top: 0.8%;
+	margin-bottom: 1.5%;
+	font-weight: normal;	
+}
+
+#img{
+	margin-bottom: 100%;
+	position: fixed;
+	float:left;
+	width: 8%; 
+	height: 11%;	
+}
+
+#HeaderName{
+	font-size: 40px;
+	position:fixed;
+	z-index:2;
+	margin:0 0 0 326px;
+	margin-top: 30px;
+	zoom:1.0;/*ie haslayout fix */
+}
