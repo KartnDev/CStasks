@@ -1,0 +1,7 @@
+C:\Users\dmutp\source\repos\RuTask5\RuTask5\bin\Debug\RuTask5.exe.config
+C:\Users\dmutp\source\repos\RuTask5\RuTask5\bin\Debug\RuTask5.exe
+C:\Users\dmutp\source\repos\RuTask5\RuTask5\bin\Debug\RuTask5.pdb
+C:\Users\dmutp\source\repos\RuTask5\RuTask5\obj\Debug\RuTask5.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\RuTask5\RuTask5\obj\Debug\RuTask5.csproj.CoreCompileInputs.cache
+C:\Users\dmutp\source\repos\RuTask5\RuTask5\obj\Debug\RuTask5.exe
+C:\Users\dmutp\source\repos\RuTask5\RuTask5\obj\Debug\RuTask5.pdb
