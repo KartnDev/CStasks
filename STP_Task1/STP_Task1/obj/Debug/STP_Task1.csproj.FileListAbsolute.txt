@@ -1,0 +1,7 @@
+C:\Users\dmutp\source\repos\STP_Task1\STP_Task1\bin\Debug\STP_Task1.exe.config
+C:\Users\dmutp\source\repos\STP_Task1\STP_Task1\bin\Debug\STP_Task1.exe
+C:\Users\dmutp\source\repos\STP_Task1\STP_Task1\bin\Debug\STP_Task1.pdb
+C:\Users\dmutp\source\repos\STP_Task1\STP_Task1\obj\Debug\STP_Task1.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\STP_Task1\STP_Task1\obj\Debug\STP_Task1.csproj.CoreCompileInputs.cache
+C:\Users\dmutp\source\repos\STP_Task1\STP_Task1\obj\Debug\STP_Task1.exe
+C:\Users\dmutp\source\repos\STP_Task1\STP_Task1\obj\Debug\STP_Task1.pdb
