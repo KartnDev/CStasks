@@ -13,11 +13,15 @@ namespace CG_Task1
 {
     public partial class Form1 : Form
     {
+
+        private Rectangle leftBorder, rightBorder, topBorder, bottomBorder;
+        private int ballSpeedX = 5, ballSpeedY = 5;
+
+
         public Form1()
         {
             InitializeComponent();
         }
-
 
         private class Ball
         {
@@ -26,25 +30,8 @@ namespace CG_Task1
             public Ball(int startupX, int startupY, int radius)
             {
                 rectangleEntity = new Rectangle(startupX, startupY, radius * 2, radius * 2);
-
-
             }
-
-
-
-
         }
-
-        private void checkIntersectBorders()
-        {
-
-        }
-
-        private void checkintersectEntities()
-        {
-
-        }
-
         private void fillBorders(Graphics g, int marginLeft, int marginTop, int marginRight, int margineBottem)
         {
 
@@ -65,21 +52,10 @@ namespace CG_Task1
 
         }
 
-
-        private Rectangle leftBorder, rightBorder, topBorder, bottomBorder;
-
-        private int ballSpeedX = 5, ballSpeedY = 5;
-
         private void ClearTable(Graphics g)
         {
             g.Clear(Color.White);
         }
-
-
-
-
-
-
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -95,6 +71,7 @@ namespace CG_Task1
                 Thread.Sleep(50);
                 ball1.rectangleEntity.X += ballSpeedX;
                 ball1.rectangleEntity.Y += ballSpeedY;
+
                 if (ball1.rectangleEntity.IntersectsWith(rightBorder))
                 {
                     ballSpeedX = -5;
@@ -111,6 +88,7 @@ namespace CG_Task1
                 {
                     ballSpeedX = +5;
                 }
+
                 ClearTable(e.Graphics);
 
 
