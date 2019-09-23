@@ -1,0 +1,10 @@
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\bin\Debug\CG_task2.exe.config
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\bin\Debug\CG_task2.exe
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\bin\Debug\CG_task2.pdb
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\obj\Debug\CG_task2.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\obj\Debug\CG_task2.Form1.resources
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\obj\Debug\CG_task2.Properties.Resources.resources
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\obj\Debug\CG_task2.csproj.GenerateResource.cache
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\obj\Debug\CG_task2.csproj.CoreCompileInputs.cache
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\obj\Debug\CG_task2.exe
+C:\Users\dmutp\source\repos\CG_task2\CG_task2\obj\Debug\CG_task2.pdb
