@@ -1,0 +1,10 @@
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\bin\Debug\STP_Task2.exe.config
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\bin\Debug\STP_Task2.exe
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\bin\Debug\STP_Task2.pdb
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\obj\Debug\STP_Task2.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\obj\Debug\STP_Task2.Form1.resources
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\obj\Debug\STP_Task2.Properties.Resources.resources
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\obj\Debug\STP_Task2.csproj.GenerateResource.cache
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\obj\Debug\STP_Task2.csproj.CoreCompileInputs.cache
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\obj\Debug\STP_Task2.exe
+C:\Users\dmutp\source\repos\STP_Task2\STP_Task2\obj\Debug\STP_Task2.pdb
