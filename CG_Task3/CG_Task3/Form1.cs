@@ -31,11 +31,25 @@ namespace CG_Task3
             return Color.FromArgb(r, g, b);
         }
 
+        private void ClearCanvas(Graphics g)
+        {
+            g.Clear(pictureBox1.BackColor);
+        }
+
 
         private void ResultButton_Click(object sender, EventArgs e)
         {
             graphics = pictureBox1.CreateGraphics();
-            DrawColumnDiagram(graphics, RowArray, 30, 200, 60, 40);
+
+            ClearCanvas(graphics);
+            if (comboBox1.SelectedItem == "Column Diagram")
+            { 
+                DrawColumnDiagram(graphics, RowArray, 30, 200, 60, 20);
+            }
+            else if(comboBox1.SelectedItem == "Circle Diagram")
+            {
+                DrawCircleDiagram(graphics, RowArray, 100, 15);
+            }
         }
 
         private void DrawColumnDiagram(Graphics g, int[] array, int startPosXArg, int startPosYArg, int ColWidth, int ColHeight)
@@ -45,10 +59,11 @@ namespace CG_Task3
 
             for(int i = 0; i < array.Length; i++)
             {
+
                 g.FillRectangle
                     (new SolidBrush(RandColor(i)),
                     CorrentX,
-                    CorrentY - ColHeight * array[i] ,
+                    CorrentY - ColHeight * array[i],
                     ColWidth,
                     CorrentY + ColHeight * array[i]
                     );
@@ -57,9 +72,17 @@ namespace CG_Task3
             }
         }
 
-        private void DrawCircleDiagram(Graphics g, int[] arrayArgs)
+        private void DrawCircleDiagram(Graphics g, int[] array, int x0, int y0)
         {
+            int ArreySum = array.Sum();
 
+            float correntPieDegree = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                g.FillPie(new SolidBrush(RandColor(i)), new Rectangle(x0, y0, 400, 400), correntPieDegree, (float)((double)array[i] / ArreySum) * 360);
+                correntPieDegree += (float)((double)array[i] / ArreySum) * 360;
+            }
         }
 
 
