@@ -8,75 +8,113 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CG_Task2
+namespace CG_task2
 {
     public partial class Form1 : Form
     {
+        private const int accretion = 2;
 
-        private Point firstPointOfLIne;
-        private Point lastPointOfLine;
-        private Rectangle pseudoPixel;
+
+        private static readonly int WIDTH = accretion;
+        private static readonly int HEIGHT = accretion;
 
         public Form1()
         {
             InitializeComponent();
 
-            firstPointOfLIne = new Point(Width - 200, 150);
-            lastPointOfLine = new Point(200, 10);
-            pseudoPixel = new Rectangle(20, 20, 20, 20);
         }
 
-        private class Point
+        private static void DrawPixel(Graphics g, Color color, int x, int y, int alpha)
         {
-            public Point(int x, int y)
-            {
-                this.X = x;
-                this.Y = y;
-            }
-            public int X { get; }
-            public int Y { get; }
+            g.FillRectangle(new SolidBrush(Color.FromArgb(alpha, color)), x, y, WIDTH, HEIGHT);
         }
 
-        
-        private void 
 
-
-
-        void BresenhamLine(int x0, int y0, int x1, int y1)
+        public void DrawBrezinheimLine(Graphics graphics, Color color, int x0, int y0, int x1, int y1)
         {
-            var steep = Math.Abs(y1 - y0) > Math.Abs(x1 - x0); // Проверяем рост отрезка по оси икс и по оси игрек
-                                                               // Отражаем линию по диагонали, если угол наклона слишком большой
-            if (steep)
+            // Coordinte change speed
+            // Can be changed to Abs
+            int dx = (x1 > x0) ? (x1 - x0) : (x0 - x1);
+            int dy = (y1 > y0) ? (y1 - y0) : (y0 - y1);
+
+            //accretion choose
+            int signX = (x1 >= x0) ? (accretion) : (-accretion);
+            int signY = (y1 >= y0) ? (accretion) : (-accretion);
+
+
+            // Is Ox accration faster then Oy ? 
+            if (dy < dx)
             {
-                Swap(ref x0, ref y0); // Перетасовка координат вынесена в отдельную функцию для красоты
-                Swap(ref x1, ref y1);
-            }
-            // Если линия растёт не слева направо, то меняем начало и конец отрезка местами
-            if (x0 > x1)
-            {
-                Swap(ref x0, ref x1);
-                Swap(ref y0, ref y1);
-            }
-            int dx = x1 - x0;
-            int dy = Math.Abs(y1 - y0);
-            int error = dx / 2; // Здесь используется оптимизация с умножением на dx, чтобы избавиться от лишних дробей
-            int ystep = (y0 < y1) ? 1 : -1; // Выбираем направление роста координаты y
-            int y = y0;
-            for (int x = x0; x <= x1; x++)
-            {
-                DrawPoint(steep ? y : x, steep ? x : y); // Не забываем вернуть координаты на место
-                error -= dy;
-                if (error < 0)
+
+                // D = 2dy - dx 
+                int d = (dy << 1) - dx;
+                int d1 = dy << 1;
+                int d2 = (dy - dx) << 1;
+
+                // drawing zeroed - pixel
+                DrawPixel(graphics, color, x0, y0, 255);
+
+                int x = x0 + signX;
+                int y = y0;
+
+                for (int i = 1; i <= dx; i++)
                 {
-                    y += ystep;
-                    error += dx;
+                    if (d > 0)
+                    {
+                        d += d2;
+                        y += signY;
+                    }
+                    else
+                    {
+                        d += d1;
+                    }
+
+                    DrawPixel(graphics, color, x, y, 255);
+
+                    x += signX;
+                }
+            }
+            else
+            {
+                int d = (dx << 1) - dy;
+                int d1 = dx << 1;
+                int d2 = (dx - dy) << 1;
+
+                DrawPixel(graphics, color, x0, y0, 255);
+
+                int x = x0;
+                int y = y0 + signY;
+                for (int i = 1; i <= dy; i++)
+                {
+                    if (d > 0)
+                    {
+                        d += d2;
+                        x += signX;
+                    }
+                    else
+                        d += d1;
+
+                    DrawPixel(graphics, color, x, y, 255);
+
+                    y += signY;
                 }
             }
         }
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            double angularCoef = (lastPointOfLine.Y - firstPointOfLIne.Y) / (lastPointOfLine.X - firstPointOfLIne.X);
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Graphics g = pictureBox1.CreateGraphics();
+
+            if(string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text) ||
+                string.IsNullOrEmpty(textBox3.Text) || string.IsNullOrEmpty(textBox4.Text))
+            {
+                MessageBox.Show("Entry textboxes..");
+
+            }
+            else
+            {
+                DrawBrezinheimLine(g, Color.Black, int.Parse(textBox1.Text), int.Parse(textBox2.Text), int.Parse(textBox3.Text), int.Parse(textBox4.Text));
+            }
         }
     }
 }

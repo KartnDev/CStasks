@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CG_Task2.Properties
+namespace CG_task2.Properties
 {
 
 

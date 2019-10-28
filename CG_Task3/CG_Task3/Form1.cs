@@ -44,7 +44,7 @@ namespace CG_Task3
             ClearCanvas(graphics);
             if (comboBox1.SelectedItem == "Column Diagram")
             { 
-                DrawColumnDiagram(graphics, RowArray, 30, 200, 60, 20);
+                DrawColumnDiagram(graphics, RowArray, 30, 200, 60, 100);
             }
             else if(comboBox1.SelectedItem == "Circle Diagram")
             {
@@ -63,9 +63,9 @@ namespace CG_Task3
                 g.FillRectangle
                     (new SolidBrush(RandColor(i)),
                     CorrentX,
-                    CorrentY - ColHeight * array[i],
+                    CorrentY - ColHeight * (float)((double)array[i]/array.Sum()),
                     ColWidth,
-                    CorrentY + ColHeight * array[i]
+                    CorrentY + ColHeight * (float)((double)array[i] / array.Sum())
                     );
 
                 CorrentX += ColWidth;
