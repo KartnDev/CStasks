@@ -43,6 +43,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -187,11 +188,24 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "X Value:";
             // 
+            // textBox8
+            // 
+            this.textBox8.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox8.HideSelection = false;
+            this.textBox8.Location = new System.Drawing.Point(107, 148);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.Size = new System.Drawing.Size(298, 13);
+            this.textBox8.TabIndex = 15;
+            this.textBox8.Text = "EPS = ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(489, 475);
+            this.Controls.Add(this.textBox8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label5);
@@ -231,6 +245,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox8;
     }
 }
 

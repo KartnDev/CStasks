@@ -30,22 +30,14 @@ namespace STP_Task1
         {
             double summ = 1;
 
-            int minus = 1;
-
-            double rowMember = 0;
-
-            long fact = 2; // 0! + 2!
-
+            double rowMember = 1;
 
             for (int i=1, f = 1; i < n; i++, f+=2)
             {
-                Console.WriteLine($"{fact} <> {factorial(2*i)}\n");
 
-                rowMember = Math.Pow(value, 2*i) / fact;
-                minus *= -1;
+                rowMember *= -value * value / (2 * i - 1) /( 2 * i); //Math.Pow(value, 2*i) / fact;
 
-                fact *= (f+2)*(f+3);
-                summ += minus * rowMember;
+                summ += rowMember;
             }
 
             return summ;

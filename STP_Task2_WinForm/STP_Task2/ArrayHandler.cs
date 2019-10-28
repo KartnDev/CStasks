@@ -8,9 +8,9 @@ namespace STP_Task2
 {
     class ArrayHandler
     {
-        public int[] Array { get; private set; } 
+        public double[] Array { get; private set; } 
 
-        public ArrayHandler(int[] arrayArg)
+        public ArrayHandler(double[] arrayArg)
         {
             this.Array = arrayArg;
         }

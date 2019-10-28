@@ -12,7 +12,7 @@ namespace STP_Task2
 {
     public partial class Form1 : Form
     {
-        private static int[] RowArray;
+        private static double[] RowArray;
 
 
 
@@ -23,28 +23,44 @@ namespace STP_Task2
 
         private void CheckArrayButton_Click(object sender, EventArgs e)
         {
-            ArrayHandler arrayHandler = new ArrayHandler(RowArray);
-            textBox2.Text = "" + arrayHandler.CheckSequence();
-            //textBox2.Text = "" + (arrayHandler.CheckSequence() ? 1 : 0);
-        }
 
-        private void GetArrayButton_Click(object sender, EventArgs e)
-        {
-            RowArray = new int[dataGridView1.RowCount - 1];
-
+            RowArray = new double[ArrayDataGrid.RowCount - 1];
 
             int iter = 0;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in ArrayDataGrid.Rows)
             {
                 if (row.Cells[0].Value != null)
                 {
-                    RowArray[iter] = int.Parse((string)row.Cells[0].Value);
-                    iter++;
+
+                    if (!double.TryParse((string)row.Cells[0].Value, out RowArray[iter]))
+                    {
+                        MessageBox.Show($"БЫЛ ДАН НЕПРАВИЛЬНЫЙ ФОРМАТ СТРОКИ! Ошибка в ячейке = {row.Cells[0].Value} под номером {iter + 1}");
+                        return;
+                    }
+
                 }
+                iter++;
             }
 
-            // мы имеет n+1 column 
-            // и в н+1 лежит разерервированный null
+
+            ArrayHandler arrayHandler = new ArrayHandler(RowArray);
+            ResultLabel.Text = "" + arrayHandler.CheckSequence();
+
+        }
+
+        private void ButtonClear_Click(object sender, EventArgs e)
+        {
+            do
+            {
+                foreach (DataGridViewRow rowMember in ArrayDataGrid.Rows)
+                {
+                    try
+                    {
+                        ArrayDataGrid.Rows.Remove(rowMember);
+                    }
+                    catch (Exception) { }
+                }
+            } while (ArrayDataGrid.Rows.Count > 1);
         }
     }
 }
