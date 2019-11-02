@@ -1,0 +1,9 @@
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\bin\Debug\STP_Task3_WinForm_.exe.config
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\bin\Debug\STP_Task3_WinForm_.exe
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\bin\Debug\STP_Task3_WinForm_.pdb
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\obj\Debug\STP_Task3_WinForm_.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\obj\Debug\STP_Task3_WinForm_.Form1.resources
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\obj\Debug\STP_Task3_WinForm_.Properties.Resources.resources
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\obj\Debug\STP_Task3_WinForm_.csproj.GenerateResource.cache
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\obj\Debug\STP_Task3_WinForm_.exe
+C:\Users\dmutp\source\repos\STP_Task3_WinForm_\STP_Task3_WinForm_\obj\Debug\STP_Task3_WinForm_.pdb
