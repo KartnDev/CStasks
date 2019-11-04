@@ -1,0 +1,9 @@
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\bin\Debug\STP_Task4.exe.config
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\bin\Debug\STP_Task4.exe
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\bin\Debug\STP_Task4.pdb
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\obj\Debug\STP_Task4.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\obj\Debug\STP_Task4.Properties.Resources.resources
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\obj\Debug\STP_Task4.csproj.GenerateResource.cache
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\obj\Debug\STP_Task4.exe
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\obj\Debug\STP_Task4.pdb
+C:\Users\dmutp\source\repos\STP_Task4\STP_Task4\obj\Debug\STP_Task4.Form1.resources
