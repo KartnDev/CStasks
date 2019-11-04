@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STP_Task3_WinForm_", "STP_Task3_WinForm_\STP_Task3_WinForm_.csproj", "{F94CF2D3-3458-4A4D-B60C-46C09ED0739D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F94CF2D3-3458-4A4D-B60C-46C09ED0739D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F94CF2D3-3458-4A4D-B60C-46C09ED0739D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F94CF2D3-3458-4A4D-B60C-46C09ED0739D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F94CF2D3-3458-4A4D-B60C-46C09ED0739D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E686F13-DDA5-4B4E-A67B-827C33A49E31}
+	EndGlobalSection
+EndGlobal
