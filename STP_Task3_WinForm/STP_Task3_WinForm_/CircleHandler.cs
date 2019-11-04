@@ -9,7 +9,7 @@ namespace STP_Task3_WinForm_
 {
     public class CircleHandler
     {
-        private readonly List<Circle> circles;
+        private List<Circle> circles;
         private readonly int HEIGHT;
         private readonly int WIDTH;
         public CircleHandler(IEnumerable<Circle> circles, int height, int width)
@@ -55,6 +55,8 @@ namespace STP_Task3_WinForm_
                 (correntCircle.Y - pointPosY) * (correntCircle.Y - pointPosY));
             return correntCircle.Radius > distanceBetweenCenterAndPoint ? true : false;
         }
+
+
 
     }
 }

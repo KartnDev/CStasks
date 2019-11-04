@@ -135,4 +135,18 @@
   <metadata name="Radius.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="TextTaskLable.Text" xml:space="preserve">
+    <value>Массивы 
+
+1. Даны действительные числа x1, x2, ... , xn, y1, y2, ... , yn, r1, r2, ... , rn.
+ Выяснить, есть ли на плоскости точка c целочисленными координатами, 
+принадлежащая всем кругам с1, с2, ... , сn, 
+где ci имеет центр с координатами xi, yi и радиус ri
+ (предположим, что все круги попадают в квадрат размером 1000 на 1000).
+
+Комментарий:
+
+Задачу решать полным перебором всех точек,
+ которые могут попасть в область квадрата 1000 на 1000.</value>
+  </data>
 </root>

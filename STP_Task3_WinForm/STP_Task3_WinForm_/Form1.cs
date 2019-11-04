@@ -20,11 +20,13 @@ namespace STP_Task3_WinForm_
             InitializeComponent();
         }
 
-        private void FeedButton_Click(object sender, EventArgs e)
+        private void ComputeButton_Click(object sender, EventArgs e)
         {
+            circles.Clear();
+
             int iter = 1;
 
-            foreach(DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.Index == dataGridView1.RowCount - 1)
                 {
@@ -45,19 +47,21 @@ namespace STP_Task3_WinForm_
                 }
                 iter++;
             }
-            
-        }
 
-        private void ComputeButton_Click(object sender, EventArgs e)
-        {
+
+
             CircleHandler circleHandler = new CircleHandler(circles, 1000, 1000);
 
             KeyValuePair<int, int> coord = circleHandler.FirstPointOrDefualt();
-            MessageBox.Show(coord.Key == -1 && coord.Value == -1 ? "Таких нет" : $"Point (X: {coord.Key}, Y: {coord.Value})");
-            // DEFEALT : FIRST
+
+            ResultOutputLable.Text = coord.Key == -1 && coord.Value == -1 ? "Таких нет" : $"Point (X: {coord.Key}, Y: {coord.Value})";
 
         }
 
-
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            ResultOutputLable.Text = "...";
+            circles.Clear();
+        }
     }
 }

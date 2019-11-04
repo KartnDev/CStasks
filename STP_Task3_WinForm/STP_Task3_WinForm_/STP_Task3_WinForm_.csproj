@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F94CF2D3-3458-4A4D-B60C-46C09ED0739D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>STP_Task3_WinForm_</RootNamespace>
     <AssemblyName>STP_Task3_WinForm_</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
