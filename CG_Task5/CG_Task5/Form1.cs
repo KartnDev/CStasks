@@ -30,7 +30,7 @@ namespace CG_Task5
             //drawCube(250, 250, 70, 50, "OX");
             //RenderTetrahedron(Graphics3D, MyPen, 100, 100, 200, 300, Math.PI / 4);
             //RenderOctahedron(Graphics3D, MyPen, 300, 300, 70);
-            DrawDodecahedron(Graphics3D, MyPen, 400, 400, 50);
+            DrawDodecahedron(Graphics3D, MyPen, 400, 400, 65);
         }
 
 
@@ -40,15 +40,15 @@ namespace CG_Task5
             g.DrawLine(MyPen, x, y, (float)((x + width) / 1.5), (float)(width * Math.Cos(alpha)));
             g.DrawLine(MyPen, x + width, y, (float)((x + width) / 1.5), (float)(width * Math.Sin(alpha)));
 
-            g.DrawLine(MyPen, x + width, y, (float)((x + width) / 1.5), y+height);
+            g.DrawLine(MyPen, x + width, y, (float)((x + width) / 1.5), y + height);
             g.DrawLine(MyPen, x, y, (float)((x + width) / 1.5), y + height);
             g.DrawLine(MyPen, (float)((x + width) / 1.5), (float)(width * Math.Sin(alpha)), (float)((x + width) / 1.5), y + height);
         }
 
         private void RenderOctahedron(Graphics g, Pen pen, int x, int y, int radius)
         {
-            
-            
+
+
 
 
             for (double i = 0; true; i += Math.PI / 10)
@@ -59,7 +59,7 @@ namespace CG_Task5
 
                 for (double alpha = 0; alpha < 2 * Math.PI; alpha += Math.PI / 2)
                 {
-                    
+
                     Graphics3D.DrawLine(MyPen, (int)(x + radius * Math.Cos(i + alpha) * 2),
                                                (int)(y + radius * Math.Sin(i + alpha)),
                                                (int)(x + radius * Math.Cos(i + alpha + Math.PI / 2) * 2),
@@ -67,7 +67,7 @@ namespace CG_Task5
 
                     Graphics3D.DrawLine(MyPen, (int)(x + radius * Math.Cos(i + alpha) * 2),
                                                (int)(y + radius * Math.Sin(i + alpha)),
-                                               (int)x, 
+                                               (int)x,
                                                (int)(y - radius));
                     Graphics3D.DrawLine(MyPen, (int)(x + radius * Math.Cos(i + alpha) * 2),
                                                (int)(y + radius * Math.Sin(i + alpha)),
@@ -91,46 +91,120 @@ namespace CG_Task5
 
 
                 //Render Last small traingle
-                for (double alpha = 0; alpha < 2 * Math.PI; alpha += 2*Math.PI / 3)
+                for (double alpha = 0; alpha < 2 * Math.PI; alpha += 2 * Math.PI / 3)
                 {
                     Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
                     Graphics3D.DrawLine(MyPen, (int)(x + radius * Math.Cos(i + alpha) * 2),
                                                (int)(y + radius * Math.Sin(i + alpha)),
-                                               (int)(x + radius * Math.Cos(i + alpha + 2*Math.PI / 3) * 2),
+                                               (int)(x + radius * Math.Cos(i + alpha + 2 * Math.PI / 3) * 2),
                                                (int)(y + radius * Math.Sin(i + alpha + 2 * Math.PI / 3)));
                 }
 
 
-                //Render pre-last big traingle + No-offset
-                for (double alpha = Math.PI / 3; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
-                {
-                    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
-                    Graphics3D.DrawLine(MyPen, (int)(x + 2 * radius * Math.Cos(i + alpha) * 2),
-                                               (int)(y - 50 + 2 * radius * Math.Sin(i + alpha)),
-                                               (int)(x + 2 * radius * Math.Cos(i + alpha + 2 * Math.PI / 3) * 2),
-                                               (int)(y - 50 + 2 * radius * Math.Sin(i + alpha + 2 * Math.PI / 3)));
-                }
-                /*
+                ////Render pre-last big traingle + No-offset
+                //for (double alpha = Math.PI / 3; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
+                //{
+                //    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
+                //    Graphics3D.DrawLine(MyPen, (int)(x + 1.5 * radius * Math.Cos(i + alpha) * 2),
+                //                               (int)(y - 50 + 1.5 * radius * Math.Sin(i + alpha)),
+                //                               (int)(x + 1.5 * radius * Math.Cos(i + alpha + 2 * Math.PI / 3) * 2),
+                //                               (int)(y - 50 + 1.5 * radius * Math.Sin(i + alpha + 2 * Math.PI / 3)));
+                //}
 
-                // Glue last and pre-last triangles
+
+                // Glue last and pre-last triangles 3-4
                 for (double alpha = 0; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
                 {
                     Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
                     Graphics3D.DrawLine(MyPen, (int)(x + radius * Math.Cos(i + alpha) * 2),
                                                (int)(y + radius * Math.Sin(i + alpha)),
-                                               (int)(x + 2 * radius * Math.Cos(i + alpha + 2 * Math.PI / 3) * 2),
-                                               (int)(y - 50 + 2 * radius * Math.Sin(i + alpha + 2 * Math.PI / 3)));
-                }*/
-
-                //Render pre-First big traingle + No-offset
-                for (double alpha = 0; alpha < 2 * Math.PI; alpha += 2 * Math.PI / 3)
+                                               (int)(x + 1.5 * radius * Math.Cos(i + alpha + Math.PI / 3) * 2),
+                                               (int)(y - 50 + 1.5 * radius * Math.Sin(i + alpha + Math.PI / 3)));
+                }
+                // Glue last and pre-last triangles 3-4
+                for (double alpha = 0; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
                 {
                     Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
-                    Graphics3D.DrawLine(MyPen, (int)(x + 2*radius * Math.Cos(i + alpha) * 2),
-                                               (int)(y - 100 + 2*radius * Math.Sin(i + alpha)),
-                                               (int)(x + 2*radius * Math.Cos(i + alpha + 2 * Math.PI / 3) * 2),
-                                               (int)(y - 100 + 2*radius * Math.Sin(i + alpha + 2 * Math.PI / 3)));
+                    Graphics3D.DrawLine(MyPen, (int)(x + radius * Math.Cos(i + alpha + 2 * Math.PI / 3) * 2),
+                                               (int)(y + radius * Math.Sin(i + alpha + 2 * Math.PI / 3)),
+                                               (int)(x + 1.5 * radius * Math.Cos(i + alpha + Math.PI / 3) * 2),
+                                               (int)(y - 50 + 1.5 * radius * Math.Sin(i + alpha + Math.PI / 3)));
                 }
+
+                ////Render pre-First big traingle + No-offset
+                //for (double alpha = 0; alpha < 2 * Math.PI; alpha += 2 * Math.PI / 3)
+                //{
+                //    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
+                //    Graphics3D.DrawLine(MyPen, (int)(x + 1.5 * radius * Math.Cos(i + alpha) * 2),
+                //                               (int)(y - 100 + 1.5 * radius * Math.Sin(i + alpha)),
+                //                               (int)(x + 1.5 * radius * Math.Cos(i + alpha + 2 * Math.PI / 3) * 2),
+                //                               (int)(y - 100 + 1.5 * radius * Math.Sin(i + alpha + 2 * Math.PI / 3)));
+                //}
+
+
+
+                // Glue pre-last and pre-first triangles 2-4
+                for (double alpha = 0; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
+                {
+                    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
+                    Graphics3D.DrawLine(MyPen, (int)(x + radius * Math.Cos(i + alpha) * 2),
+                                               (int)(y + radius * Math.Sin(i + alpha)),
+                                               (int)(x + 1.5 * radius * Math.Cos(i + alpha) * 2),
+                                               (int)(y - 100 + 1.5 * radius * Math.Sin(i + alpha)));
+                }
+
+                // Glue pre-last and pre-first triangles 1-3
+                for (double alpha = Math.PI / 3; alpha < 2 * Math.PI + Math.PI / 3 + Math.PI / 3; alpha += 2 * Math.PI / 3)
+                {
+                    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
+                    Graphics3D.DrawLine(MyPen, (int)(x + radius * Math.Cos(i + alpha) * 2),
+                                               (int)(y - 150 + radius * Math.Sin(i + alpha)),
+                                               (int)(x + 1.5 * radius * Math.Cos(i + alpha) * 2),
+                                               (int)(y - 50 + 1.5 * radius * Math.Sin(i + alpha)));
+                }
+
+
+                // Glue pre-last and pre-first triangles 1-2
+                for (double alpha = 0; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
+                {
+                    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
+                    Graphics3D.DrawLine(MyPen, (int)(x + 1.5 * radius * Math.Cos(i + alpha) * 2),
+                                               (int)(y - 100 + 1.5 * radius * Math.Sin(i + alpha)),
+                                               (int)(x + radius * Math.Cos(i + alpha + Math.PI / 3) * 2),
+                                               (int)(y - 150 + radius * Math.Sin(i + alpha + Math.PI / 3)));
+                }
+                // Glue pre-last and pre-first triangles 1-2
+                for (double alpha = 0; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
+                {
+                    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
+                    Graphics3D.DrawLine(MyPen, (int)(x + 1.5 * radius * Math.Cos(i + alpha + 2*Math.PI / 3) * 2),
+                                               (int)(y - 100 + 1.5 * radius * Math.Sin(i + alpha + 2*Math.PI / 3)),
+                                               (int)(x + radius * Math.Cos(i + alpha + Math.PI / 3) * 2),
+                                               (int)(y - 150 + radius * Math.Sin(i + alpha + Math.PI / 3)));
+                }
+
+                // Glue pre-last and pre-first triangles 2-3
+                for (double alpha = 0; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
+                {
+                    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
+                    Graphics3D.DrawLine(MyPen, (int)(x + 1.5 * radius * Math.Cos(i + alpha +Math.PI / 3) * 2),
+                                               (int)(y - 50 + 1.5 * radius * Math.Sin(i + alpha + Math.PI / 3)),
+                                               (int)(x + 1.5 * radius * Math.Cos(i + alpha) * 2),
+                                               (int)(y - 100 + 1.5 * radius * Math.Sin(i + alpha)));
+                }
+
+                // Glue pre-last and pre-first triangles 2-3
+                for (double alpha = 0; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
+                {
+                    Graphics3D.DrawRectangle(MyPen, x, y, 2, 2);
+                    Graphics3D.DrawLine(MyPen, (int)(x + 1.5 * radius * Math.Cos(i + alpha - Math.PI / 3) * 2),
+                                               (int)(y - 50 + 1.5 * radius * Math.Sin(i + alpha - Math.PI / 3)),
+                                               (int)(x + 1.5 * radius * Math.Cos(i + alpha) * 2),
+                                               (int)(y - 100 + 1.5 * radius * Math.Sin(i + alpha)));
+                }
+
+
+
                 //Render First small traingle + offset
                 for (double alpha = Math.PI / 3; alpha < 2 * Math.PI + Math.PI / 3; alpha += 2 * Math.PI / 3)
                 {
