@@ -7,3 +7,12 @@ C:\Users\dmutp\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.Properties.Reso
 C:\Users\dmutp\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.csproj.GenerateResource.cache
 C:\Users\dmutp\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.exe
 C:\Users\dmutp\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.pdb
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\bin\Debug\CG_Task5.exe.config
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\bin\Debug\CG_Task5.exe
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\bin\Debug\CG_Task5.pdb
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.csprojAssemblyReference.cache
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.Form1.resources
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.Properties.Resources.resources
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.csproj.GenerateResource.cache
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.exe
+C:\Users\Dima\source\repos\CG_Task5\CG_Task5\obj\Debug\CG_Task5.pdb
