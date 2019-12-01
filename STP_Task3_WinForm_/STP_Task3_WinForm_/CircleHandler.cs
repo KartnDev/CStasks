@@ -53,7 +53,7 @@ namespace STP_Task3_WinForm_
             double distanceBetweenCenterAndPoint = Math.Sqrt(
                 (correntCircle.X - pointPosX) * (correntCircle.X - pointPosX) +
                 (correntCircle.Y - pointPosY) * (correntCircle.Y - pointPosY));
-            return correntCircle.Radius > distanceBetweenCenterAndPoint ? true : false;
+            return correntCircle.Radius > distanceBetweenCenterAndPoint;
         }
 
 
