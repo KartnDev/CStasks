@@ -14,19 +14,21 @@ namespace STP_Task4
             this.strValue = str;
         }
 
-        public string WordsReverseBySep(char separator)
+        public string WordsReverseBySep(char[] separator)
         {
             StringBuilder result = new StringBuilder(strValue.Length);
 
-            var words = strValue.Split(separator).ToList().Reverse<string>();
+            var wt = (from w in strValue.Split(separator).Reverse() select w).ToList();
 
-            for (int i =0; i < words.Count(); i++)
+            result.Append(wt[0]);
+
+
+            for (int i = 1; i < wt.Count(); i++)
             {
-                if(i != 0)
-                {
-                    result.Append(" ");
-                }
-                result.Append(words.ElementAt(i));
+
+                result.Append(" ");
+
+                result.Append(wt[i]);
             }
             return result.ToString();
         }

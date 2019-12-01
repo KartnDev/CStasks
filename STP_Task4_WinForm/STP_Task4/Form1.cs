@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,40 @@ namespace STP_Task4
         {
             if(string.IsNullOrWhiteSpace(InputTextBox.Text))
             {
-                MessageBox.Show("enter the text..");
+                MessageBox.Show("Enter the text..");
             }
             else
             {
-                StringParser stringParser = new StringParser(InputTextBox.Text);
-                ResultBox.Text = stringParser.WordsReverseBySep(' ');
+
+                if (string.IsNullOrEmpty(SeparatorTextBox.Text))
+                {
+                    StringParser stringParser = new StringParser(InputTextBox.Text);
+                    ResultBox.Text = stringParser.WordsReverseBySep(" ".ToCharArray());
+                }
+                else
+                {
+                    StringParser stringParser = new StringParser(InputTextBox.Text);
+                    ResultBox.Text = stringParser.WordsReverseBySep(SeparatorTextBox.Text.ToCharArray());
+                }
             }
+        }
+
+        private void FillRandomButton_Click(object sender, EventArgs e)
+        {
+            InputTextBox.Text = RandomText.NextText();
+        }
+
+        private void FileButton_Click(object sender, EventArgs e)
+        {
+            using (StreamReader fs = new StreamReader("Text.txt"))
+            {
+                InputTextBox.Text = fs.ReadToEnd();
+            }
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            ResultBox.Text = InputTextBox.Text = "";
         }
     }
 }

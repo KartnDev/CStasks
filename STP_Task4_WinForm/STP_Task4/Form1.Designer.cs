@@ -35,6 +35,11 @@
             this.ResultBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.TaskLabel = new System.Windows.Forms.Label();
+            this.FillRandomButton = new System.Windows.Forms.Button();
+            this.FileButton = new System.Windows.Forms.Button();
+            this.ClearButton = new System.Windows.Forms.Button();
+            this.SeparatorTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // InputTextBox
@@ -56,7 +61,7 @@
             // 
             // TransformButton
             // 
-            this.TransformButton.Location = new System.Drawing.Point(12, 185);
+            this.TransformButton.Location = new System.Drawing.Point(260, 185);
             this.TransformButton.Name = "TransformButton";
             this.TransformButton.Size = new System.Drawing.Size(118, 48);
             this.TransformButton.TabIndex = 2;
@@ -79,7 +84,7 @@
             this.ResultBox.Multiline = true;
             this.ResultBox.Name = "ResultBox";
             this.ResultBox.ReadOnly = true;
-            this.ResultBox.Size = new System.Drawing.Size(227, 142);
+            this.ResultBox.Size = new System.Drawing.Size(242, 142);
             this.ResultBox.TabIndex = 3;
             // 
             // label1
@@ -101,11 +106,62 @@
             this.TaskLabel.TabIndex = 6;
             this.TaskLabel.Text = "TaskText:";
             // 
+            // FillRandomButton
+            // 
+            this.FillRandomButton.Location = new System.Drawing.Point(12, 185);
+            this.FillRandomButton.Name = "FillRandomButton";
+            this.FillRandomButton.Size = new System.Drawing.Size(75, 23);
+            this.FillRandomButton.TabIndex = 7;
+            this.FillRandomButton.Text = "Fill Random";
+            this.FillRandomButton.UseVisualStyleBackColor = true;
+            this.FillRandomButton.Click += new System.EventHandler(this.FillRandomButton_Click);
+            // 
+            // FileButton
+            // 
+            this.FileButton.Location = new System.Drawing.Point(12, 210);
+            this.FileButton.Name = "FileButton";
+            this.FileButton.Size = new System.Drawing.Size(75, 23);
+            this.FileButton.TabIndex = 8;
+            this.FileButton.Text = "Fill From Text";
+            this.FileButton.UseVisualStyleBackColor = true;
+            this.FileButton.Click += new System.EventHandler(this.FileButton_Click);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.Location = new System.Drawing.Point(384, 185);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(118, 48);
+            this.ClearButton.TabIndex = 9;
+            this.ClearButton.Text = "Clear";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            // 
+            // SeparatorTextBox
+            // 
+            this.SeparatorTextBox.Location = new System.Drawing.Point(155, 187);
+            this.SeparatorTextBox.Name = "SeparatorTextBox";
+            this.SeparatorTextBox.Size = new System.Drawing.Size(84, 20);
+            this.SeparatorTextBox.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(93, 190);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Separator:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.SeparatorTextBox);
+            this.Controls.Add(this.ClearButton);
+            this.Controls.Add(this.FileButton);
+            this.Controls.Add(this.FillRandomButton);
             this.Controls.Add(this.TaskLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ResultLabel);
@@ -129,6 +185,11 @@
         private System.Windows.Forms.TextBox ResultBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label TaskLabel;
+        private System.Windows.Forms.Button FillRandomButton;
+        private System.Windows.Forms.Button FileButton;
+        private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.TextBox SeparatorTextBox;
+        private System.Windows.Forms.Label label2;
     }
 }
 
