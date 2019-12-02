@@ -15,7 +15,7 @@ namespace STP_Task5_Winform
 {
     public partial class Form1 : Form
     {
-        HashTable<string, string> hash = new HashTable<string, string>(20);
+        HashTable<string, string> hash = new HashTable<string, string>(1024);
         public Form1()
         {
             InitializeComponent();
@@ -34,11 +34,10 @@ namespace STP_Task5_Winform
                 hash.Add(InputKeyBox.Text, InputValueBox.Text);
             }
         }
-
+        
 
         private void FillDataGridViewFromHash()
         {
-            ClearAll();
             int iter = 0;
             foreach (var item in hash)
             {
@@ -80,6 +79,17 @@ namespace STP_Task5_Winform
 
         private void FillButton_Click(object sender, EventArgs e)
         {
+            do
+            {
+                foreach (DataGridViewRow rowMember in dataGridView.Rows)
+                {
+                    try
+                    {
+                        dataGridView.Rows.Remove(rowMember);
+                    }
+                    catch (Exception) { }
+                }
+            } while (dataGridView.Rows.Count > 1);
             FillDataGridViewFromHash();
         }
 
@@ -91,7 +101,7 @@ namespace STP_Task5_Winform
                 InputDataGridView.Rows.Add(new DataGridViewRow());
                 for (int i = 0; i < 2; i++)
                 {
-                    InputDataGridView.Rows[rowNum].Cells[i].Value = RandomText.NextText("" + DateTime.Now.Ticks + DateTime.Now.Millisecond);
+                    InputDataGridView.Rows[rowNum].Cells[i].Value = rowNum + RandomText.NextText("" + DateTime.Now.Ticks + DateTime.Now.Millisecond);
                     await Task.Delay(1);
                 }
 
@@ -100,6 +110,7 @@ namespace STP_Task5_Winform
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
+            hash = new HashTable<string, string>(1024);
             ClearAll();
         }
 
@@ -127,6 +138,28 @@ namespace STP_Task5_Winform
                 }
             }
 
+        }
+
+        private void FillFromDataGridButton_Click(object sender, EventArgs e)
+        {
+
+            foreach (DataGridViewRow row in InputDataGridView.Rows)
+            {
+                if (row.Index == InputDataGridView.RowCount - 1)
+                {
+                    break;
+                }
+
+                if (!string.IsNullOrEmpty(row.Cells[0].Value.ToString()) && !string.IsNullOrEmpty(row.Cells[1].Value.ToString()))
+                {
+                    hash.Add(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Неправильный формат заполения");
+                    return;
+                }
+            }
         }
     }
 }

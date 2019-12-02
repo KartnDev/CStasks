@@ -43,7 +43,7 @@
             this.FillFileButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.FillFromDataGridButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InputDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -130,13 +130,13 @@
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(92, 46);
             this.ClearButton.TabIndex = 6;
-            this.ClearButton.Text = "Clear Results";
+            this.ClearButton.Text = "Clear All";
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // FillRandom
             // 
-            this.FillRandom.Location = new System.Drawing.Point(258, 126);
+            this.FillRandom.Location = new System.Drawing.Point(118, 444);
             this.FillRandom.Name = "FillRandom";
             this.FillRandom.Size = new System.Drawing.Size(100, 46);
             this.FillRandom.TabIndex = 7;
@@ -146,7 +146,7 @@
             // 
             // FillFileButton
             // 
-            this.FillFileButton.Location = new System.Drawing.Point(258, 178);
+            this.FillFileButton.Location = new System.Drawing.Point(12, 444);
             this.FillFileButton.Name = "FillFileButton";
             this.FillFileButton.Size = new System.Drawing.Size(100, 46);
             this.FillFileButton.TabIndex = 8;
@@ -172,21 +172,22 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Value:";
             // 
-            // button1
+            // FillFromDataGridButton
             // 
-            this.button1.Location = new System.Drawing.Point(258, 74);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 46);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "FillFromDataGrid";
-            this.button1.UseVisualStyleBackColor = true;
+            this.FillFromDataGridButton.Location = new System.Drawing.Point(272, 85);
+            this.FillFromDataGridButton.Name = "FillFromDataGridButton";
+            this.FillFromDataGridButton.Size = new System.Drawing.Size(107, 46);
+            this.FillFromDataGridButton.TabIndex = 11;
+            this.FillFromDataGridButton.Text = "FeedFromDataGrid";
+            this.FillFromDataGridButton.UseVisualStyleBackColor = true;
+            this.FillFromDataGridButton.Click += new System.EventHandler(this.FillFromDataGridButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 525);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.FillFromDataGridButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.FillFileButton);
@@ -224,7 +225,7 @@
         private System.Windows.Forms.Button FillFileButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button FillFromDataGridButton;
     }
 }
 
