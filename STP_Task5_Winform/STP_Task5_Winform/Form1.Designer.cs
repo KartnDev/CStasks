@@ -152,6 +152,7 @@
             this.FillFileButton.TabIndex = 8;
             this.FillFileButton.Text = "Fill From File";
             this.FillFileButton.UseVisualStyleBackColor = true;
+            this.FillFileButton.Click += new System.EventHandler(this.FillFileButton_Click);
             // 
             // label1
             // 
