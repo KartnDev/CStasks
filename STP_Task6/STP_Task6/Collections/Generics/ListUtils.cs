@@ -12,41 +12,39 @@ namespace STP_Task6.Collections.Generics
     {
 
         public delegate void CheckDelegate<TValue>(TValue item);
+        public delegate void ListConstructorDelegate<TValue>(TValue item);
+        public delegate void ConvertDelegate<TInput, TOutput>(TInput item1, TOutput item2);
 
         public static bool Exists(IList<TValue> list, CheckDelegate<TValue> delegate_func)
         {
             throw new NotImplementedException();
         }
 
-        static TValue Find<TValue>(IList<TValue> list, CheckDelegate<TValue> delegate_func)
+        public static TValue Find<TValue>(IList<TValue> list, CheckDelegate<TValue> delegate_func)
         {
             throw new NotImplementedException();
         }
 
-        static TValue FindLast<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func)
+        public static TValue FindLast<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func)
         {
             throw new NotImplementedException();
         }
 
-        static int FindIndex<T>(IList<T>, CheckDelegate<T>)
+        public static int FindIndex<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func)
         {
             throw new NotImplementedException();
         }
 
-        static int FindLastIndex<T>(IList<T>, CheckDelegate<T>)
+        static int FindLastIndex<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func)
         {
             throw new NotImplementedException();
         }
-        static IList<T> FindAll<T>(
-
-        IList<T>, CheckDelegate<T>, ListConstructorDelegate<T>)
+        static IList<TValue> FindAll<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func, ListConstructorDelegate<TValue> listConstructorDelegate)
         {
             throw new NotImplementedException();
         }
 
-        static IList<TO> ConvertAll<TI, TO>(
-
-        IList<TI>, ConvertDelegate<TI, TO>, ListConstructorDelegate<TO>)
+        static IList<TOutput> ConvertAll<TInput, TOutput>(IList<TInput> list, ConvertDelegate<TInput, TOutput> convertDelegate, ListConstructorDelegate<TOutput> listConstructorDelegate)
         {
             throw new NotImplementedException();
         }
