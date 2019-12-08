@@ -44,12 +44,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Collections\Exceptions\OperationException.cs" />
+    <Compile Include="Collections\Exceptions\UnhandledException.cs" />
     <Compile Include="Collections\Generics\ArrayList.cs" />
     <Compile Include="Collections\Generics\IList.cs" />
     <Compile Include="Collections\Generics\LinkedList.cs" />
     <Compile Include="Collections\Generics\ListUtils.cs" />
     <Compile Include="Collections\Generics\UnmutableList.cs" />
-    <Compile Include="Collections\ListException.cs" />
+    <Compile Include="Collections\Exceptions\ListException.cs" />
+    <Compile Include="Collections\Exceptions\OutOfBoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

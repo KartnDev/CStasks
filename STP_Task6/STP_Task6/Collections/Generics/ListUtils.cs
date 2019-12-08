@@ -12,6 +12,8 @@ namespace STP_Task6.Collections.Generics
     {
 
         public delegate void CheckDelegate<TValue>(TValue item);
+        public delegate void ActionDelegate<TValue>(TValue item);
+        public delegate void CompareDelegate<TValue>(TValue item);
         public delegate void ListConstructorDelegate<TValue>(TValue item);
         public delegate void ConvertDelegate<TInput, TOutput>(TInput item1, TOutput item2);
 
@@ -35,39 +37,38 @@ namespace STP_Task6.Collections.Generics
             throw new NotImplementedException();
         }
 
-        static int FindLastIndex<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func)
+        public static int FindLastIndex<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func)
         {
             throw new NotImplementedException();
         }
-        static IList<TValue> FindAll<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func, ListConstructorDelegate<TValue> listConstructorDelegate)
-        {
-            throw new NotImplementedException();
-        }
-
-        static IList<TOutput> ConvertAll<TInput, TOutput>(IList<TInput> list, ConvertDelegate<TInput, TOutput> convertDelegate, ListConstructorDelegate<TOutput> listConstructorDelegate)
+        public static IList<TValue> FindAll<TValue>(IList<TValue> list, CheckDelegate<TValue> delegete_func, ListConstructorDelegate<TValue> listConstructorDelegate)
         {
             throw new NotImplementedException();
         }
 
-        static void ForEach(IList<TValue>, ActionDelegate<TValue>)
+        public static IList<TOutput> ConvertAll<TInput, TOutput>
+            (IList<TInput> list, ConvertDelegate<TInput, TOutput> convertDelegate, ListConstructorDelegate<TOutput> listConstructorDelegate)
         {
             throw new NotImplementedException();
         }
 
-        static void Sort(IList<TValue>, CompareDelegate<TValue>)
+        public static void ForEach(IList<TValue> list, ActionDelegate<TValue> actionDelegate)
         {
             throw new NotImplementedException();
         }
 
-        static bool CheckForAll<T>(IList<T>, CheckDelegate<T>)
+        public static void Sort(IList<TValue> list, CompareDelegate<TValue> compareDelegate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool CheckForAll<T>(IList<T> list, CheckDelegate<T> checkDelegate)
         {
             throw new NotImplementedException();
         }
 
 
-        static readonly ListConstructorDelegate<TValue> ArrayListConstructor { get; }
-        static readonly ListConstructorDelegate<TValue> LinkedListConstructor { get; }
-
-
+        public static readonly ListConstructorDelegate<TValue> ArrayListConstructor;
+        public static readonly ListConstructorDelegate<TValue> LinkedListConstructor;
     }
 }
