@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STP_Task6.Collections
 {
-    class OutOfBoundException : Exception
+    class OutOfBoundException : ListException
     {
         public OutOfBoundException(string message) : base(message)
         {

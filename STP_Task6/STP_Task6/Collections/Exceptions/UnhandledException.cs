@@ -8,5 +8,8 @@ namespace STP_Task6.Collections.Exceptions
 {
     class UnhandledException : Exception
     {
+        public UnhandledException(string message) : base(message)
+        {
+        }
     }
 }

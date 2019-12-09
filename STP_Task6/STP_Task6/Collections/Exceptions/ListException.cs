@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace STP_Task6.Collections
 {
-    public sealed class ListException : Exception
+    public class ListException : Exception
     {
+        public ListException(string message) : base(message + Environment.NewLine +"List throws Exception... Check StackTrace for more information about exception..")
+        {
+        }
     }
 }
