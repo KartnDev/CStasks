@@ -1,4 +1,5 @@
-﻿using System;
+﻿using STP_Task6.Collections.Exceptions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,45 +8,123 @@ using System.Threading.Tasks;
 
 namespace STP_Task6.Collections.Generics
 {
-    class ArrayList<TValue> : IList<TValue>
+    public class ArrayList<TValue> : IList<TValue>
     {
+
+        private TValue[] array;
+        public int Length { get; private set; }
+        public int Capacity { get; private set; }
+        public ArrayList(int capacity = 32)
+        {
+            this.array = new TValue[capacity];
+            this.Capacity = capacity;
+        }
+
+        public void AppendCapacity(int capacity)
+        {
+            if(capacity < 2 || capacity > 1024)
+            {
+                throw new OperationException("Too small or too big capacity value");
+            }
+            var tempArray = this.array;
+
+            this.array = new TValue[Capacity + capacity];
+            for(int i = 0; i < Length; i++)
+            {
+                array[i] = tempArray[i];
+            }
+        }
+
         public TValue this[int index] => throw new NotImplementedException();
 
-        public int Count => throw new NotImplementedException();
+        public int Count => Length;
 
         public int Add(TValue value)
         {
-            throw new NotImplementedException();
+            if(Capacity == Length - 1)
+            {
+                AppendCapacity(Capacity * 2);
+                array[Length - 1] = value;
+                Length++;
+                return 1;
+            }
+            else
+            {
+                array[Length - 1] = value;
+                Length++;
+                return 0;
+            }
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            array = null;
+            Capacity = 0;
+            Length = 0;
         }
 
         public bool Contains(TValue value)
         {
-            throw new NotImplementedException();
+            
+            for(int i = 0; i < Length; i++)
+            {
+                if(array[i].Equals(value))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public ref TValue ElementAt(int index)
+        public TValue ElementAt(int index)
         {
-            throw new NotImplementedException();
+            OutOfBoundException.CheckForBound(index, Length);
+            return array[index];
         }
 
         public IEnumerator<TValue> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Length; i++)
+            {
+                yield return array[i];
+            }
         }
 
         public int IndexOf(TValue value)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Length; i++)
+            {
+                if (array[i].Equals(value))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         public void InsertAt(int index, TValue value)
         {
-            throw new NotImplementedException();
+            OutOfBoundException.CheckForBound(index, Length);
+            if(index == 0)
+            {
+                Add(value);
+            }
+            else
+            {
+                if(Length - 1 == Capacity)
+                {
+                    AppendCapacity(2 * Capacity);
+                }
+
+                TValue temp;
+                
+                for(int i = index; i < Length + 1; i++)
+                {
+                    temp = array[index];
+                    array[index] = value;
+                }
+                Length++;
+            }
         }
 
         public void Remove(TValue value)
@@ -60,7 +139,7 @@ namespace STP_Task6.Collections.Generics
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 }

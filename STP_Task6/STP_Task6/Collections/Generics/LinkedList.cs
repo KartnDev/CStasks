@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace STP_Task6.Collections.Generics
 {
@@ -11,7 +8,6 @@ namespace STP_Task6.Collections.Generics
     {
         public int Length { get; private set; }
         private Node<TValue> pointerHead;
-        private Node<TValue> pointerTail;
         private class Node<T> 
         {
             public T data;
@@ -34,7 +30,6 @@ namespace STP_Task6.Collections.Generics
         {
             Length = 0;
             pointerHead = null;
-            pointerTail = null;
         }
 
         public void PushBack(TValue data)
@@ -42,7 +37,6 @@ namespace STP_Task6.Collections.Generics
             if (Length == 0)
             {
                 pointerHead = new Node<TValue>(data, null);
-                pointerTail = pointerHead;
                 Length++;
             }
             else
@@ -52,9 +46,16 @@ namespace STP_Task6.Collections.Generics
             }
         }
 
-        public void InsertAt(TValue data, int index)
+        public void PushFront(TValue data)
         {
-            // O(n)
+            pointerHead = new Node<TValue>(data, pointerHead);
+            Length++;
+        }
+
+
+        public void InsertAt(int index, TValue data)
+        {
+            // O(n)      
             if ((index > this.Length) || (index < 0))
             {
                 throw new OutOfBoundException(index + "the index is out of list range");
@@ -100,7 +101,7 @@ namespace STP_Task6.Collections.Generics
 
 
 
-        public TValue RemoveAt(int index)
+        public TValue RemoveAtWithData(int index)
         {
             if ((index > this.Length) || (index < 0))
             {
@@ -124,7 +125,7 @@ namespace STP_Task6.Collections.Generics
         public TValue Last()
         {
             ///could be implemented without tail pointer? but int costs O(n) , right now it O(1)
-            return pointerTail.data;
+            return ElementAt(Length - 1);
         }
 
 
@@ -144,17 +145,35 @@ namespace STP_Task6.Collections.Generics
             {
                 PopFront();
             }
-
         }
 
         public bool Contains(TValue value)
         {
-            throw new NotImplementedException();
+
+            return IndexOf(value) != -1;
         }
 
-        public ref TValue ElementAt(int index)
+        public TValue ElementAt(int index)
         {
+            int counter = 0;
+            Node<TValue> current = this.pointerHead;
 
+            if(index > Length || index < 0)
+            {
+                throw new OutOfBoundException(index + "th index is out of list range");
+            }
+
+            while (current != null)
+            {
+                if (counter == index)
+                {
+                    return current.data;
+                }
+                current = current.pointerNext;
+
+                counter++;
+            }
+            return default(TValue);
         }
 
         public IEnumerator<TValue> GetEnumerator()
@@ -171,23 +190,32 @@ namespace STP_Task6.Collections.Generics
 
         public int IndexOf(TValue value)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Insert(int index, TValue value)
-        {
-            throw new NotImplementedException();
+            Node<TValue> temp = pointerHead;
+            for(int i = 0; i < Length; i++)
+            {
+                if(temp.data.Equals(value))
+                {
+                    return i;
+                }
+                else
+                {
+                    temp = temp.pointerNext;
+                }
+            }
+            return -1;
         }
 
         public void Remove(TValue value)
         {
-
+            PopFront();
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-        void IList<TValue>.RemoveAt(int index) => RemoveAt(index);
+        public void RemoveAt(int index) => RemoveAtWithData(index);
+
+
     }
 }

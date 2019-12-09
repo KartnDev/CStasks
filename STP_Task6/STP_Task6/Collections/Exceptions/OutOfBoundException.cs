@@ -11,5 +11,13 @@ namespace STP_Task6.Collections
         public OutOfBoundException(string message) : base(message)
         {
         }
+
+        public static void CheckForBound(int index, int length)
+        {
+            if ((index > length) || (index < 0))
+            {
+                throw new OutOfBoundException(index + "the index is out of list range");
+            }
+        }
     }
 }

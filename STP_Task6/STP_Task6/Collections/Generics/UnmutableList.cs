@@ -28,7 +28,7 @@ namespace STP_Task6.Collections.Generics
             throw new NotImplementedException();
         }
 
-        public ref TValue ElementAt(int index)
+        public TValue ElementAt(int index)
         {
             throw new NotImplementedException();
         }

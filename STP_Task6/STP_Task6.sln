@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STP_Task6", "STP_Task6\STP_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STP_Task6_Winform", "STP_Task6_Winform\STP_Task6_Winform.csproj", "{45B68B8D-3679-48EF-B464-B293E644855F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STP_Task6_Console", "STP_Task6_Console\STP_Task6_Console.csproj", "{8FEDDCFA-905B-4890-B18E-FFBA2415BB99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{45B68B8D-3679-48EF-B464-B293E644855F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45B68B8D-3679-48EF-B464-B293E644855F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45B68B8D-3679-48EF-B464-B293E644855F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FEDDCFA-905B-4890-B18E-FFBA2415BB99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEDDCFA-905B-4890-B18E-FFBA2415BB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEDDCFA-905B-4890-B18E-FFBA2415BB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEDDCFA-905B-4890-B18E-FFBA2415BB99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
