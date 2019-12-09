@@ -4,28 +4,9 @@ using System.Collections.Generic;
 
 namespace STP_Task6.Collections.Generics
 {
-    public sealed class LinkedList<TValue> : IList<TValue>
+    public sealed class LinkedList<TValue> : UnmutableList<TValue>, IList<TValue>
     {
-        public int Length { get; private set; }
-        private Node<TValue> pointerHead;
-        private class Node<T> 
-        {
-            public T data;
-            public Node<T> pointerNext;
 
-            public void Finalize()
-            {
-                data = default(T);
-                GC.Collect();
-            }
-
-            public Node(T data, Node<T> pointerNext = null)
-            {
-                this.data = data;
-                this.pointerNext = pointerNext;
-            }
-
-        }
         public LinkedList()
         {
             Length = 0;
@@ -53,7 +34,7 @@ namespace STP_Task6.Collections.Generics
         }
 
 
-        public void InsertAt(int index, TValue data)
+        public override void InsertAt(int index, TValue data)
         {
             // O(n)      
             if ((index > this.Length) || (index < 0))
@@ -91,7 +72,7 @@ namespace STP_Task6.Collections.Generics
 
 
         public void PopFront()
-        {     
+        {
             Node<TValue> temp = pointerHead;
             pointerHead = pointerHead.pointerNext;
             temp.data = default(TValue);
@@ -129,17 +110,17 @@ namespace STP_Task6.Collections.Generics
         }
 
 
-        public TValue this[int index] => ElementAt(index);
+        public override TValue this[int index] => ElementAt(index);
 
-        public int Count => this.Length;
+        public override int Count => this.Length;
 
-        public int Add(TValue value)
+        public override int Add(TValue value)
         {
             PushBack(value);
             return 0;
         }
 
-        public void Clear()
+        public override void Clear()
         {
             while (Length != 0) // size > 0
             {
@@ -147,18 +128,18 @@ namespace STP_Task6.Collections.Generics
             }
         }
 
-        public bool Contains(TValue value)
+        public override bool Contains(TValue value)
         {
 
             return IndexOf(value) != -1;
         }
 
-        public TValue ElementAt(int index)
+        public override TValue ElementAt(int index)
         {
             int counter = 0;
             Node<TValue> current = this.pointerHead;
 
-            if(index > Length || index < 0)
+            if (index > Length || index < 0)
             {
                 throw new OutOfBoundException(index + "th index is out of list range");
             }
@@ -176,7 +157,7 @@ namespace STP_Task6.Collections.Generics
             return default(TValue);
         }
 
-        public IEnumerator<TValue> GetEnumerator()
+        public override IEnumerator<TValue> GetEnumerator()
         {
             Node<TValue> temp = pointerHead;
             TValue tempData;
@@ -188,12 +169,12 @@ namespace STP_Task6.Collections.Generics
             }
         }
 
-        public int IndexOf(TValue value)
+        public override int IndexOf(TValue value)
         {
             Node<TValue> temp = pointerHead;
-            for(int i = 0; i < Length; i++)
+            for (int i = 0; i < Length; i++)
             {
-                if(temp.data.Equals(value))
+                if (temp.data.Equals(value))
                 {
                     return i;
                 }
@@ -205,7 +186,7 @@ namespace STP_Task6.Collections.Generics
             return -1;
         }
 
-        public void Remove(TValue value)
+        public override void Remove(TValue value)
         {
             PopFront();
         }
@@ -214,8 +195,7 @@ namespace STP_Task6.Collections.Generics
             return GetEnumerator();
         }
 
-        public void RemoveAt(int index) => RemoveAtWithData(index);
-
+        public override void RemoveAt(int index) => RemoveAtWithData(index);
 
     }
 }

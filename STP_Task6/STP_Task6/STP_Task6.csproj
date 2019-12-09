@@ -48,10 +48,11 @@
     <Compile Include="Collections\Generics\ArrayList.cs" />
     <Compile Include="Collections\Generics\IList.cs" />
     <Compile Include="Collections\Generics\LinkedList.cs" />
-    <Compile Include="Collections\Generics\ListUtils.cs" />
+    <Compile Include="Collections\Utils\ListUtils.cs" />
     <Compile Include="Collections\Generics\UnmutableList.cs" />
     <Compile Include="Collections\Exceptions\ListException.cs" />
     <Compile Include="Collections\Exceptions\OutOfBoundException.cs" />
+    <Compile Include="Collections\Utils\SortUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

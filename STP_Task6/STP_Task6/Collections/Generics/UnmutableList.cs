@@ -7,56 +7,42 @@ using System.Threading.Tasks;
 
 namespace STP_Task6.Collections.Generics
 {
-    public class UnmutableList<TValue> : IList<TValue>
+    public abstract class UnmutableList<TValue> : IList<TValue>
     {
-        public TValue this[int index] => throw new NotImplementedException();
+        public int Length { get; protected set; }
+        public abstract int Count { get; }
 
-        public int Count => throw new NotImplementedException();
+        public abstract TValue this[int index] { get; }
 
-        public int Add(TValue value)
+        protected Node<TValue> pointerHead;
+        protected class Node<T>
         {
-            throw new NotImplementedException();
+            public T data;
+            public Node<T> pointerNext;
+
+            public void Finalize()
+            {
+                data = default(T);
+                GC.Collect();
+            }
+
+            public Node(T data, Node<T> pointerNext = null)
+            {
+                this.data = data;
+                this.pointerNext = pointerNext;
+            }
+
         }
 
-        public void Clear()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(TValue value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ref TValue ElementAt(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<TValue> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int IndexOf(TValue value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertAt(int index, TValue value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(TValue value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract TValue ElementAt(int index);
+        public abstract int Add(TValue value);
+        public abstract void InsertAt(int index, TValue value);
+        public abstract void Remove(TValue value);
+        public abstract void RemoveAt(int index);
+        public abstract bool Contains(TValue value);
+        public abstract int IndexOf(TValue value);
+        public abstract void Clear();
+        public abstract IEnumerator<TValue> GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
         {
