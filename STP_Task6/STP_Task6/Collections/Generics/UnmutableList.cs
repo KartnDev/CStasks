@@ -43,7 +43,7 @@ namespace STP_Task6.Collections.Generics
             throw new NotImplementedException();
         }
 
-        public void Insert(int index, TValue value)
+        public void InsertAt(int index, TValue value)
         {
             throw new NotImplementedException();
         }

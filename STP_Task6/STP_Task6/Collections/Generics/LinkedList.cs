@@ -87,6 +87,19 @@ namespace STP_Task6.Collections.Generics
                 return default(TValue);
             }
         }
+
+
+        public void PopFront()
+        {     
+            Node<TValue> temp = pointerHead;
+            pointerHead = pointerHead.pointerNext;
+            temp.data = default(TValue);
+            temp.Finalize();
+            Length--;
+        }
+
+
+
         public TValue RemoveAt(int index)
         {
             if ((index > this.Length) || (index < 0))
@@ -127,7 +140,11 @@ namespace STP_Task6.Collections.Generics
 
         public void Clear()
         {
-            
+            while (Length != 0) // size > 0
+            {
+                PopFront();
+            }
+
         }
 
         public bool Contains(TValue value)

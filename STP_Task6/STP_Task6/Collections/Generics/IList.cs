@@ -17,7 +17,7 @@ namespace STP_Task6.Collections
 
         ref TValue ElementAt(int index);
         int Add(TValue value);
-        void Insert(int index, TValue value);
+        void InsertAt(int index, TValue value);
         void Remove(TValue value);
         void RemoveAt(int index);
 

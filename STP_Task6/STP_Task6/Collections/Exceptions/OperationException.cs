@@ -8,5 +8,8 @@ namespace STP_Task6.Collections.Exceptions
 {
     class OperationException : Exception
     {
+        public OperationException(string message) : base(message)
+        {
+        }
     }
 }
