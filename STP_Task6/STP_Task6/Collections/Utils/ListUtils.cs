@@ -116,7 +116,7 @@ namespace STP_Task6.Collections.Utils
 
         public static void ForEach(IList<TValue> list, ActionDelegate<TValue> actionDelegate)
         {
-            foreach (var item in list.Reverse())
+            foreach (var item in list)
             {
                 actionDelegate(item);
             }

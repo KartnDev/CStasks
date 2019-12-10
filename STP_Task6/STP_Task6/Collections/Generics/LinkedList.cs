@@ -22,7 +22,12 @@ namespace STP_Task6.Collections.Generics
             }
             else
             {
-                pointerHead = new Node<TValue>(data, pointerHead);
+                var temp = pointerHead;
+                while (temp.pointerNext != null) // size > 0
+                {
+                    temp = temp.pointerNext;
+                }
+                temp.pointerNext = new Node<TValue>(data, null);
                 Length++;
             }
         }
@@ -88,6 +93,13 @@ namespace STP_Task6.Collections.Generics
             {
                 throw new IndexOutOfRangeException(index + "th index is out of list range");
             }
+            if (index == 0)
+            {
+                var result = pointerHead.data;
+                pointerHead = pointerHead.pointerNext;
+                return result;
+            }
+
             Node<TValue> Temp = pointerHead;
             for (int i = 0; i != index - 1; i++)
             {

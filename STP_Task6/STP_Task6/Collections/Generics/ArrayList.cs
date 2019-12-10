@@ -41,7 +41,7 @@ namespace STP_Task6.Collections.Generics
         {
             if (Capacity <= Length)
             {
-                AppendCapacity(16);
+                AppendCapacity(Capacity * 2);
                 array[Length] = value;
                 Length++;
                 return 1;
@@ -127,12 +127,25 @@ namespace STP_Task6.Collections.Generics
 
         public void Remove(TValue value)
         {
-            throw new NotImplementedException();
+            for(int i =0; i < Length; i++)
+            {
+                if(value.Equals(array[i]))
+                {
+                    RemoveAt(i);
+                    return;
+                }
+            }
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            for(int i = index; i < Length; i++)
+            {
+                array[i] = array[i + 1];
+                //array[Length - 1] = default(TValue);
+                
+            }
+            Length--;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
