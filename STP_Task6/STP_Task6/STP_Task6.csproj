@@ -54,6 +54,7 @@
     <Compile Include="Collections\Exceptions\OutOfBoundException.cs" />
     <Compile Include="Collections\Utils\SortUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Random\Texting\RandomText.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,7 +6,18 @@ namespace STP_Task6.Collections.Utils
 {
     static public class Qsort
     {
+        public static IEnumerable<T> QuickSort<T>(this IEnumerable<T> list) where T : IComparable<T>
+        {
+            if (!list.Any())
+            {
+                return Enumerable.Empty<T>();
+            }
+            var pivot = list.First();
+            var smaller = list.Skip(1).Where(item => item.CompareTo(pivot) <= 0).QuickSort();
+            var larger = list.Skip(1).Where(item => item.CompareTo(pivot) > 0).QuickSort();
 
+            return smaller.Concat(new[] { pivot }).Concat(larger);
+        }
 
         public static IEnumerable<TValue> QuickSortWithDelegate<TValue>
             (this IEnumerable<TValue> list, 

@@ -1,0 +1,5 @@
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6\bin\Debug\STP_Task6.dll
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6\bin\Debug\STP_Task6.pdb
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6\obj\Debug\STP_Task6.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6\obj\Debug\STP_Task6.dll
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6\obj\Debug\STP_Task6.pdb

@@ -1,0 +1,9 @@
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\bin\Debug\STP_Task6_Console.exe.config
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\bin\Debug\STP_Task6_Console.exe
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\bin\Debug\STP_Task6_Console.pdb
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\bin\Debug\STP_Task6.dll
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\bin\Debug\STP_Task6.pdb
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\obj\Debug\STP_Task6_Console.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\obj\Debug\STP_Task6_Console.csproj.CopyComplete
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\obj\Debug\STP_Task6_Console.exe
+C:\Users\dmutp\source\repos\STP_Task6\STP_Task6_Console\obj\Debug\STP_Task6_Console.pdb
