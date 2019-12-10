@@ -15,7 +15,7 @@ namespace STP_Task6.Collections.Generics
         {
             this.array = new TValue[capacity];
             this.Capacity = capacity;
-            this.Length = 1;
+            this.Length = 0;
         }
 
         public void AppendCapacity(int capacity)
@@ -39,16 +39,16 @@ namespace STP_Task6.Collections.Generics
 
         public int Add(TValue value)
         {
-            if (Capacity <= Length - 1)
+            if (Capacity <= Length)
             {
-                AppendCapacity(Capacity * 2);
-                array[Length - 1] = value;
+                AppendCapacity(16);
+                array[Length] = value;
                 Length++;
                 return 1;
             }
             else
             {
-                array[Length - 1] = value;
+                array[Length] = value;
                 Length++;
                 return 0;
             }
