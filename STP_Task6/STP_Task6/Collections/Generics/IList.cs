@@ -13,6 +13,7 @@ namespace STP_Task6.Collections
         TValue this[int index]
         {
             get;
+            set;
         }
 
         TValue ElementAt(int index);

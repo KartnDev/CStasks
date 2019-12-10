@@ -14,7 +14,7 @@ namespace STP_Task6.Collections.Utils
 
         public delegate bool CheckDelegate<TValue>(TValue item);
         public delegate void ActionDelegate<TValue>(TValue item);
-        public delegate int CompareDelegate<TValue>(TValue item);
+        public delegate int CompareDelegate<TValue>(TValue item0, TValue item1);
         public delegate IList<TValue> ListConstructorDelegate<TValue>();
         public delegate TOutput ConvertDelegate<TInput, TOutput>(TInput item1);
 
@@ -127,7 +127,7 @@ namespace STP_Task6.Collections.Utils
             list.QuickSortWithDelegate(compareDelegate);
         }
 
-        public static bool CheckForAll<T>(IList<T> list, CheckDelegate<T> checkDelegate)
+        public static bool CheckForAll<TValue>(IList<TValue> list, CheckDelegate<TValue> checkDelegate)
         {
 
             foreach (var item in list.Reverse())

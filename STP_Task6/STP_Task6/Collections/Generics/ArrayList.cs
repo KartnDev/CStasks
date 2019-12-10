@@ -33,8 +33,11 @@ namespace STP_Task6.Collections.Generics
             }
         }
 
-        public TValue this[int index] => throw new NotImplementedException();
-
+        public TValue this[int index]
+        {
+            get => ValueOf(index);
+            set => array[index] = value;
+        }
         public int Count => Length;
 
         public int Add(TValue value)
@@ -84,7 +87,7 @@ namespace STP_Task6.Collections.Generics
         {
             for (int i = 0; i < Length; i++)
             {
-                yield return array[i];
+                yield return this[i];
             }
         }
 
@@ -99,6 +102,8 @@ namespace STP_Task6.Collections.Generics
             }
             return -1;
         }
+        public TValue ValueOf(int index) => array[index];
+
 
         public void InsertAt(int index, TValue value)
         {
@@ -116,7 +121,7 @@ namespace STP_Task6.Collections.Generics
 
                 TValue temp;
 
-                for (int i = index; i < Length + 1; i++)
+                for (int i = index; i < Length; i++)
                 {
                     temp = array[index];
                     array[index] = value;

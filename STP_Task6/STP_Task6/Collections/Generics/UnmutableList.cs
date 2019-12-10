@@ -12,8 +12,6 @@ namespace STP_Task6.Collections.Generics
         public int Length { get; protected set; }
         public abstract int Count { get; }
 
-        public abstract TValue this[int index] { get; }
-
         protected Node<TValue> pointerHead;
         protected class Node<T>
         {
@@ -33,7 +31,11 @@ namespace STP_Task6.Collections.Generics
             }
 
         }
-
+        public abstract TValue this[int index]
+        {
+            get;
+            set;
+        }
         public abstract TValue ElementAt(int index);
         public abstract int Add(TValue value);
         public abstract void InsertAt(int index, TValue value);

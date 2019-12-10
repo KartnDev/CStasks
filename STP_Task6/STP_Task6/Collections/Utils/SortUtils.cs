@@ -28,8 +28,8 @@ namespace STP_Task6.Collections.Utils
                 return Enumerable.Empty<TValue>();
             }
             var pivot = list.First();
-            var smaller = list.Skip(1).Where(item => compareDelegate(pivot) <= 0).QuickSortWithDelegate(compareDelegate);
-            var larger = list.Skip(1).Where(item => compareDelegate(pivot) > 0).QuickSortWithDelegate(compareDelegate);
+            var smaller = list.Skip(1).Where(item => compareDelegate(item, pivot) <= 0).QuickSortWithDelegate(compareDelegate);
+            var larger = list.Skip(1).Where(item => compareDelegate(item, pivot) > 0).QuickSortWithDelegate(compareDelegate);
 
             return smaller.Concat(new[] { pivot }).Concat(larger);
         }

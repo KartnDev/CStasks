@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.Values = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FillButton = new System.Windows.Forms.Button();
             this.InputDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClearButton = new System.Windows.Forms.Button();
             this.FillRandom = new System.Windows.Forms.Button();
             this.FillFileButton = new System.Windows.Forms.Button();
             this.FillFromDataGridButton = new System.Windows.Forms.Button();
-            this.Values = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InputDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +50,11 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(148, 426);
             this.dataGridView.TabIndex = 0;
+            // 
+            // Values
+            // 
+            this.Values.HeaderText = "Output Values";
+            this.Values.Name = "Values";
             // 
             // FillButton
             // 
@@ -70,6 +75,11 @@
             this.InputDataGridView.Name = "InputDataGridView";
             this.InputDataGridView.Size = new System.Drawing.Size(147, 426);
             this.InputDataGridView.TabIndex = 5;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Input Values";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
             // ClearButton
             // 
@@ -110,16 +120,6 @@
             this.FillFromDataGridButton.Text = "FeedFromDataGrid";
             this.FillFromDataGridButton.UseVisualStyleBackColor = true;
             this.FillFromDataGridButton.Click += new System.EventHandler(this.FillFromDataGridButton_Click);
-            // 
-            // Values
-            // 
-            this.Values.HeaderText = "Output Values";
-            this.Values.Name = "Values";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Input Values";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
             // Form1
             // 

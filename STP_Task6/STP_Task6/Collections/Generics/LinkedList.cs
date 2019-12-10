@@ -1,6 +1,8 @@
-﻿using System;
+﻿using STP_Task6.Collections.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace STP_Task6.Collections.Generics
 {
@@ -53,6 +55,22 @@ namespace STP_Task6.Collections.Generics
             }
             temp.pointerNext = new Node<TValue>(data, temp.pointerNext);
         }
+
+        public IEnumerable<TValue> QuickSortWithDelegate
+             (STP_Task6.Collections.Utils.ListUtils<TValue>.CompareDelegate<TValue> compareDelegate)
+        {
+            if (!this.Any())
+            {
+                return Enumerable.Empty<TValue>();
+            }
+            var pivot = this.First();
+            var smaller = this.Skip(1).Where(item => compareDelegate(item, pivot) <= 0).QuickSortWithDelegate(compareDelegate);
+            var larger = this.Skip(1).Where(item => compareDelegate(item, pivot) > 0).QuickSortWithDelegate(compareDelegate);
+
+            return smaller.Concat(new[] { pivot }).Concat(larger);
+        }
+
+
 
         public TValue PopBack()
         {
@@ -122,8 +140,20 @@ namespace STP_Task6.Collections.Generics
         }
 
 
-        public override TValue this[int index] => ElementAt(index);
-
+        public override TValue this[int index]
+        {
+            get => ElementAt(index);
+            set
+            {
+                var temp = pointerHead;
+                for (int i = 0; i != index; i++)
+                {
+                    temp = temp.pointerNext;
+                }
+                temp.data = value;
+                
+            }
+        }
         public override int Count => this.Length;
 
         public override int Add(TValue value)
@@ -171,13 +201,9 @@ namespace STP_Task6.Collections.Generics
 
         public override IEnumerator<TValue> GetEnumerator()
         {
-            Node<TValue> temp = pointerHead;
-            TValue tempData;
-            while (temp != null)
+            for(int i = 0; i < Length; i++)
             {
-                tempData = temp.data;
-                temp = temp.pointerNext;
-                yield return tempData;
+                yield return this[i];
             }
         }
 

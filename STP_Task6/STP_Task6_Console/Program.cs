@@ -31,13 +31,15 @@ namespace STP_Task6_Console
             list.Remove("1232");
             list.Remove("F");
             list.RemoveAt(3);
-
+            list.InsertAt(5, "GG");
+            Console.WriteLine("Index of \"ITEM7\": " + ListUtils<string>.FindIndex<string>(list, u => u == "ITEM7"));
+            Console.WriteLine("Index of \"ITEM7\": " + list.IndexOf("ITEM7"));
             ListUtils<string>.ForEach(list, (string item) => Console.WriteLine(item));
 
             Console.WriteLine("\n------------------- ARRAY_LIST -------------------\n");
 
 
-            ArrayList<string> arraylist = new ArrayList<string>(1024);
+            ArrayList<string> arraylist = new ArrayList<string>(10);
             arraylist.Add("1232");
             arraylist.Add("F");
 
@@ -54,12 +56,11 @@ namespace STP_Task6_Console
             arraylist.Remove("1232");
             arraylist.Remove("F");
             arraylist.RemoveAt(3);
-
+            arraylist.InsertAt(5, "GG");
+            arraylist[5] = "ggggggg"; 
 
             ListUtils<string>.ForEach(arraylist, (string item) => Console.WriteLine(item));
-            Console.WriteLine(arraylist.Length);
-
-
+            Console.WriteLine("Lenght: " + arraylist.Length);
 
             Console.ReadLine();
         }

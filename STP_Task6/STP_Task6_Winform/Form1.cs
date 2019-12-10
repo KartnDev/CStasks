@@ -1,4 +1,5 @@
 ﻿using STP_Task6.Collections.Generics;
+using STP_Task6.Collections.Utils;
 using STP_Task6.Random.Texting;
 using System;
 using System.ComponentModel;
@@ -25,7 +26,7 @@ namespace STP_Task5_Winform
         private void FillDataGridViewFromArray()
         {
             int iter = 0;
-            foreach (var item in list.Reverse())
+            foreach (var item in list)
             {
                 dataGridView.Rows.Add(new DataGridViewRow());
                 dataGridView.Rows[iter].Cells[0].Value = item;
