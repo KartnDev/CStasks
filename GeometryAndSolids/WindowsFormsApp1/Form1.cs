@@ -37,8 +37,11 @@ namespace WindowsFormsApp1
                         case "Tetrahedron":
                             solid = new Tetrahedron(0, 0, 0, 100);
                             break;
-                        case "Gexahedron":
-                            Console.WriteLine("Case 2");
+                        case "Hexahedron":
+                            solid = new Hexahedron(0, 0, 0, 100);
+                            break;
+                        case "Octahedron":
+                            solid = new Octahedron(0, 0, 0, 100);
                             break;
                         default:
                             MessageBox.Show("something wrong");

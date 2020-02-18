@@ -112,7 +112,7 @@
             this.solidComboBox.FormattingEnabled = true;
             this.solidComboBox.Items.AddRange(new object[] {
             "Tetrahedron",
-            "Gexahedron",
+            "Hexahedron",
             "Octahedron",
             "IcosaHedron",
             "Dodecahedron"});
@@ -221,7 +221,7 @@
             this.scaleBoxFy.Name = "scaleBoxFy";
             this.scaleBoxFy.Size = new System.Drawing.Size(36, 20);
             this.scaleBoxFy.TabIndex = 20;
-            this.scaleBoxFy.Text = "0.5";
+            this.scaleBoxFy.Text = "0,5";
             // 
             // scaleBoxFx
             // 
@@ -229,7 +229,7 @@
             this.scaleBoxFx.Name = "scaleBoxFx";
             this.scaleBoxFx.Size = new System.Drawing.Size(36, 20);
             this.scaleBoxFx.TabIndex = 19;
-            this.scaleBoxFx.Text = "0.5";
+            this.scaleBoxFx.Text = "0,5";
             // 
             // scaleBoxFz
             // 
@@ -237,7 +237,7 @@
             this.scaleBoxFz.Name = "scaleBoxFz";
             this.scaleBoxFz.Size = new System.Drawing.Size(36, 20);
             this.scaleBoxFz.TabIndex = 18;
-            this.scaleBoxFz.Text = "0.1";
+            this.scaleBoxFz.Text = "0,1";
             // 
             // label8
             // 
