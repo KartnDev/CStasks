@@ -55,7 +55,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solids\BasePlatonicSolid.cs" />
+    <Compile Include="Solids\Dodecahedron.cs" />
     <Compile Include="Solids\Hexahedron.cs" />
+    <Compile Include="Solids\Icosahedron.cs" />
     <Compile Include="Solids\ISolid.cs" />
     <Compile Include="Solids\Octahedron.cs" />
     <Compile Include="Solids\Tetrahedron.cs" />

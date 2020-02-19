@@ -43,6 +43,12 @@ namespace WindowsFormsApp1
                         case "Octahedron":
                             solid = new Octahedron(0, 0, 0, 100);
                             break;
+                        case "Icosahedron":
+                            solid = new Icosahedron(0, 0, 0, 100);
+                            break;
+                        case "Dodecahedron":
+                            solid = new Dodecahedron(0, 0, 0, 100);
+                            break;
                         default:
                             MessageBox.Show("something wrong");
                             return;

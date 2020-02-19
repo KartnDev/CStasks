@@ -114,7 +114,7 @@
             "Tetrahedron",
             "Hexahedron",
             "Octahedron",
-            "IcosaHedron",
+            "Icosahedron",
             "Dodecahedron"});
             this.solidComboBox.Location = new System.Drawing.Point(668, 136);
             this.solidComboBox.Name = "solidComboBox";
