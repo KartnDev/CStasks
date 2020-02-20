@@ -1,0 +1,27 @@
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\dmutp\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\bin\Debug\GeometryAndSolids.exe.config
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\bin\Debug\GeometryAndSolids.exe
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\bin\Debug\GeometryAndSolids.pdb
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\obj\Debug\GeometryAndSolids.exe
+C:\Users\dmutp\source\repos\GeometryAndSolids\WindowsFormsApp1\obj\Debug\GeometryAndSolids.pdb
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\bin\Debug\GeometryAndSolids.exe.config
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\bin\Debug\GeometryAndSolids.exe
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\bin\Debug\GeometryAndSolids.pdb
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\obj\Debug\GeometryAndSolids.exe
+C:\Users\dmutp\source\repos\GeometryAndSolids 3\WindowsFormsApp1\obj\Debug\GeometryAndSolids.pdb
