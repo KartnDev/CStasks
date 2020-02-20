@@ -321,7 +321,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(871, 566);
+            this.ClientSize = new System.Drawing.Size(819, 566);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.angularFrequencyBox);
             this.Controls.Add(this.vectorYBox);
