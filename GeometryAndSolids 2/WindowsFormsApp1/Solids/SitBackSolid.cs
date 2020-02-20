@@ -7,26 +7,23 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.Solids
 {
-
-    public class Hexahedron : BasePlatonicSolid, ISolid
+    class SitBackSolid : BasePlatonicSolid
     {
+
         private Pen solidPen = new Pen(new SolidBrush(Color.Blue), 2);
-        public Hexahedron(int centerPlateOfX, int centerPlateOfY, int centerPlateOfZ, int imaginaryRadius)
-                : base(centerPlateOfX, centerPlateOfY, centerPlateOfZ, imaginaryRadius)
+
+        public SitBackSolid(double height) : base(0, 0, 0, 0)
         {
+            matrix = new double[8, 3];
+            matrix[0, 0] = 0; matrix[0, 1] = 0; matrix[0, 2] = 50;
+            matrix[1, 0] = 50; matrix[1, 1] = 0; matrix[1, 2] = 50;
+            matrix[2, 0] = 50; matrix[2, 1] = 10; matrix[2, 2] = 50;
+            matrix[3, 0] = 0; matrix[3, 1] = 10; matrix[3, 2] = 50;
 
-            matrix = new double[8,3];
-
-
-            for (double teta = 0, i = 0; teta < Math.PI * 2; teta += Math.PI / 2, i++)
-            {
-                matrix[(int)i, 0] = centerPlateOfX + imaginaryRadius * Math.Cos(teta);
-                matrix[(int)i, 1] = centerPlateOfY + imaginaryRadius * Math.Sin(teta);
-                matrix[(int)i, 2] = centerPlateOfZ;
-                matrix[(int)i + 4, 0] = centerPlateOfX + imaginaryRadius * Math.Cos(teta);
-                matrix[(int)i + 4, 1] = centerPlateOfY + imaginaryRadius * Math.Sin(teta);
-                matrix[(int)i + 4, 2] = centerPlateOfX + Math.Sqrt(2) * imaginaryRadius;
-            }
+            matrix[4, 0] = 0; matrix[4, 1] = 0; matrix[4, 2] = 50 + height;
+            matrix[5, 0] = 50; matrix[5, 1] = 0; matrix[5, 2] = 50 + height;
+            matrix[6, 0] = 50; matrix[6, 1] = 10; matrix[6, 2] = 50 + height;
+            matrix[7, 0] = 0; matrix[7, 1] = 10; matrix[7, 2] = 50 + height;
         }
 
         public override void DrawSolid(Graphics g, double coef, double alpha)
@@ -50,7 +47,5 @@ namespace WindowsFormsApp1.Solids
             g.DrawLine(solidPen, points[3].X, points[3].Y, points[7].X, points[7].Y);
             g.DrawLine(solidPen, points[4].X, points[4].Y, points[7].X, points[7].Y);
         }
-
     }
 }
-

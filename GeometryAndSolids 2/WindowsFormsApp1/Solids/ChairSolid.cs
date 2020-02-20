@@ -55,6 +55,7 @@ namespace WindowsFormsApp1.Solids
 
             matrix[30, 0] = 40; matrix[30, 1] = 50; matrix[30, 2] = 40;
             matrix[31, 0] = 50; matrix[31, 1] = 40; matrix[31, 2] = 40;
+
         }
         public Point3D[] ToPoint3DArray()
         {

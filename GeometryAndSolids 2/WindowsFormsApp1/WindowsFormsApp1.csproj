@@ -56,13 +56,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solids\BasePlatonicSolid.cs" />
     <Compile Include="Solids\ChairSolid.cs" />
-    <Compile Include="Solids\Dodecahedron.cs" />
     <Compile Include="Solids\Hexahedron.cs" />
-    <Compile Include="Solids\Icosahedron.cs" />
     <Compile Include="Solids\ISolid.cs" />
-    <Compile Include="Solids\Octahedron.cs" />
+    <Compile Include="Solids\SitBackSolid.cs" />
     <Compile Include="Utils\Point3D.cs" />
-    <Compile Include="Solids\Tetrahedron.cs" />
     <Compile Include="Utils\Matrix\MatrixUtils.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

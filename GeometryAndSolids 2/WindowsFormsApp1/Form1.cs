@@ -25,33 +25,8 @@ namespace WindowsFormsApp1
 
         public async void RenderSolids()
         {
-            //var leftChairLeg = new Hexahedron(0, 0, 0, 30);
-            //leftChairLeg.Scale(1, 1, 5);
-            //leftChairLeg.RotateByX(Math.PI / 2);
-            //leftChairLeg.Shift(100, 300, 200);
-            //leftChairLeg.DrawSolid(graphics, 0.6, Math.PI / 4);
-            //var leftChairLeg3 = new Hexahedron(0, 0, 0, 30);
-            //leftChairLeg3.Scale(1, 1, 5);
-            //leftChairLeg3.RotateByX(Math.PI / 2);
-            //leftChairLeg3.Shift(200, 300, 100);
-            //leftChairLeg3.DrawSolid(graphics, 0.6, Math.PI / 4);
-            //var leftChairLeg1 = new Hexahedron(0, 0, 0, 30);
-            //leftChairLeg1.Scale(1, 1, 5);
-            //leftChairLeg1.RotateByX(Math.PI / 2);
-            //leftChairLeg1.Shift(300, 300, 200);
-            //leftChairLeg1.DrawSolid(graphics, 0.6, Math.PI / 4);
-            //var leftChairLeg2 = new Hexahedron(0, 0, 0, 30);
-            //leftChairLeg2.Scale(1, 1, 5);
-            //leftChairLeg2.RotateByX(Math.PI / 2);
-            //leftChairLeg2.Shift(200, 300, 300);
-            //leftChairLeg2.DrawSolid(graphics, 0.6, Math.PI / 4);
-            //var flat = new Hexahedron(0, 0, 0, 100);
-            //flat.Scale(1, 1, 1);
-            //flat.RotateByX(Math.PI / 2);
-            //flat.Shift(160, 221, 200);
-            //flat.DrawSolid(graphics, 0.6, Math.PI / 4);
             var delta = 1.0;
-
+            var backSit = 60.0;
             while (renderFlag)
             {
                 graphics.Clear(pictureBox1.BackColor);
@@ -59,12 +34,23 @@ namespace WindowsFormsApp1
                 chair.Scale(3, 3, 3);
                 chair.RotateByX(Math.PI / 2);
                 chair.Scale(delta, 1, 1);
+                chair.Shift(100, 300, 200);
+                chair.DrawSolid(graphics, 0.6, Math.PI / 4);
+                if (backSit > 0)
+                {
+                    var back = new SitBackSolid(backSit);
+                    back.Scale(3, 3, 3);
+                    back.RotateByX(Math.PI / 2);
+                    back.Scale(delta, 1, 1);
+                    back.Shift(100, 300, 200);
+                    back.DrawSolid(graphics, 0.6, Math.PI / 4);
+                    backSit -= 0.4;
+                }
+
                 if (delta < 2.5)
                 {
                     delta += 0.01;
                 }
-                chair.Shift(100, 200, 200);
-                chair.DrawSolid(graphics, 0.6, Math.PI / 4);
                 await Task.Delay(100);
             }
         }
