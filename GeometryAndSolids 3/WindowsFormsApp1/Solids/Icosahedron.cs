@@ -9,7 +9,7 @@ namespace WindowsFormsApp1.Solids
 {
     public class Icosahedron : BasePlatonicSolid, ISolid
     {
-
+        //todo rewrite it
         public Icosahedron(int centerPlateOfX, int centerPlateOfY, int centerPlateOfZ, int imaginaryRadius)
                 : base(centerPlateOfX, centerPlateOfY, centerPlateOfZ, imaginaryRadius)
         {
