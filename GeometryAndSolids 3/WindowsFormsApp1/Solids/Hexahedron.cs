@@ -22,10 +22,10 @@ namespace WindowsFormsApp1.Solids
             {
                 matrix[(int)i, 0] = centerPlateOfX + imaginaryRadius * Math.Cos(teta);
                 matrix[(int)i, 1] = centerPlateOfY + imaginaryRadius * Math.Sin(teta);
-                matrix[(int)i, 2] = centerPlateOfZ;
+                matrix[(int)i, 2] = centerPlateOfX - Math.Sqrt(2) * imaginaryRadius/2;
                 matrix[(int)i + 4, 0] = centerPlateOfX + imaginaryRadius * Math.Cos(teta);
                 matrix[(int)i + 4, 1] = centerPlateOfY + imaginaryRadius * Math.Sin(teta);
-                matrix[(int)i + 4, 2] = centerPlateOfX + Math.Sqrt(2) * imaginaryRadius;
+                matrix[(int)i + 4, 2] = centerPlateOfX + Math.Sqrt(2) * imaginaryRadius/2;
             }
         }
 
