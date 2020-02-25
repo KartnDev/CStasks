@@ -30,18 +30,19 @@ namespace Collections.Collections.Generics
 
         public int Count => lenght;
 
-        public TValue First { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public TValue Last { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public TValue First { get => headPtr.data; set => headPtr.data = value; }
+        public TValue Last { get => tailPtr.data; set => tailPtr.data = value; }
 
         public int AddFirst(TValue value)
         {
-            if(lenght == 0)
+            if (lenght == 0)
             {
                 headPtr = tailPtr = new Node(value);
             }
             else
             {
-                headPtr = new Node(value, null, headPtr); 
+                headPtr = new Node(value, null, headPtr);
+                headPtr.nextPrt.prevPtr = headPtr;
             }
             lenght++;
             return 1;
@@ -49,45 +50,99 @@ namespace Collections.Collections.Generics
 
         public int AddLast(TValue value)
         {
-            throw new NotImplementedException();
+            if (lenght == 0)
+            {
+                headPtr = tailPtr = new Node(value);
+            }
+            else
+            {
+                tailPtr = new Node(value, tailPtr, null);
+                tailPtr.prevPtr.nextPrt = tailPtr;
+            }
+            lenght++;
+            return 1;
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            this.headPtr = this.tailPtr = null;
+            this.lenght = 0;
+            GC.Collect();
         }
 
         public bool Contains(TValue value)
         {
-            throw new NotImplementedException();
+            foreach (var item in this)
+            {
+                if (item.Equals(value))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public TValue ElementAt(int index)
         {
-            throw new NotImplementedException();
+                
+            if(index < 0 || index >= lenght)
+            {
+                throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
+            }
+
+            var temp = headPtr;
+            for (int i = 0; i <= index; i++)
+            {
+                temp = temp.nextPrt;
+            }
+
+            return temp.data;
         }
 
         public IEnumerator<TValue> GetEnumerator()
         {
-            throw new NotImplementedException();
+            var temp = headPtr;
+            while (temp.nextPrt != null)
+            {
+                yield return temp.data;
+                temp = temp.nextPrt;
+            }
+            yield return temp.data;
         }
 
         public int IndexOf(TValue value)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            foreach (var item in this)
+            {
+                if (value.Equals(item))
+                {
+                    return i;
+                }
+                i++;
+            }
+            return -1;
         }
 
         public void InsertAt(int index, TValue value)
         {
             throw new NotImplementedException();
         }
-
-        public void Remove(TValue value)
+        public TValue RemoveLast()
+        {
+            throw new NotImplementedException();
+        }
+        public TValue RemoveFirst()
+        {
+            throw new NotImplementedException();
+        }
+        public TValue Remove(TValue value)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveAt(int index)
+
+        public TValue RemoveAt(int index)
         {
             throw new NotImplementedException();
         }
@@ -99,7 +154,7 @@ namespace Collections.Collections.Generics
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return this.GetEnumerator();
         }
 
         private class Node

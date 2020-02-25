@@ -24,8 +24,12 @@ namespace Collections.Collections.Generics
         int AddLast(TValue value);
 
         void InsertAt(int index, TValue value);
-        void Remove(TValue value);
-        void RemoveAt(int index);
+
+        TValue RemoveFirst();
+        TValue RemoveLast();
+
+        TValue Remove(TValue value);
+        TValue RemoveAt(int index);
 
         bool Contains(TValue value);
 
