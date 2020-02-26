@@ -20,7 +20,7 @@ namespace Collections.Collections.Generics
 
         }
 
-        public DoubleLinkedList(DoubleLinkedList<TValue> list)
+        public DoubleLinkedList(IList<TValue> list)
         {
             this.Clear();
             foreach(var item in list)
@@ -33,8 +33,8 @@ namespace Collections.Collections.Generics
         public TValue this[int index] { get => ElementAt(index); set => SetElementAt(value, index); }
 
         public int Count => lenght;
-
-        public TValue First { get => headPtr.data; set => headPtr.data = value; }
+        //TODO add throw here
+        public TValue First { get { return headPtr.data; } set => headPtr.data = value; }
         public TValue Last { get => tailPtr.data; set => tailPtr.data = value; }
 
         public int AddFirst(TValue value)
@@ -96,7 +96,7 @@ namespace Collections.Collections.Generics
             {
                 throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
             }
-            if (index < 0 || index >= lenght)
+            if (index < 0 || index > lenght)
             {
                 throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
             }
@@ -170,7 +170,7 @@ namespace Collections.Collections.Generics
                 temp.prevPtr.nextPrt = temp;
                 temp.nextPrt.prevPtr = temp;
             }
-
+            lenght++;
         }
         public TValue RemoveLast()
         {
@@ -183,6 +183,7 @@ namespace Collections.Collections.Generics
             tailPtr.nextPrt = null;
 
             temp.nextPrt = temp.nextPrt = null;
+            lenght--;
             return temp.data;
 
         }
@@ -198,6 +199,7 @@ namespace Collections.Collections.Generics
 
 
             temp.nextPrt = temp.prevPtr = null;
+            lenght--;
             return temp.data;
         }
         public TValue Remove(TValue value)
@@ -207,7 +209,7 @@ namespace Collections.Collections.Generics
                 throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
             }
             var resultIndex = IndexOf(value);
-
+            
             if (resultIndex == -1)
             {
                 return default(TValue);
@@ -231,7 +233,7 @@ namespace Collections.Collections.Generics
             {
                 throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
             }
-            if (index == lenght)
+            if (index == lenght - 1)
             {
                 return RemoveLast();
             }
@@ -251,7 +253,8 @@ namespace Collections.Collections.Generics
                 temp.prevPtr.nextPrt = temp.nextPrt;
 
                 temp.nextPrt = temp.prevPtr = null;
-
+                lenght--;
+                GC.Collect();
                 return temp.data;
             }
         }

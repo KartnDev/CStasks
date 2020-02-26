@@ -8,7 +8,7 @@ namespace Collection.Test.UnitTests
     [TestClass]
     public class DoubleLinkedListTest
     {
-
+        //TODO count Assert everywhere!
 
         [TestMethod]
         public void IndexatorTest()
@@ -74,6 +74,7 @@ namespace Collection.Test.UnitTests
                 Assert.AreEqual(list[i], envList[i]);
             }
         }
+
         [TestMethod]
         public void AddLastTest()
         {
@@ -91,6 +92,7 @@ namespace Collection.Test.UnitTests
                 Assert.AreEqual(list[i], envList[i]);
             }
         }
+
         [TestMethod]
         public void ClearTest()
         {
@@ -187,6 +189,7 @@ namespace Collection.Test.UnitTests
             });
             
         }
+
         [TestMethod]
         public void IndexOfTest()
         {
@@ -204,7 +207,6 @@ namespace Collection.Test.UnitTests
                 list.IndexOf(100);
             });
         }
-
 
         [TestMethod]
         public void InsertAtTest()
@@ -229,6 +231,7 @@ namespace Collection.Test.UnitTests
             list = new DoubleLinkedList<int>();
             Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(2, 1); });
         }
+
         [TestMethod]
         public void RemoveLastTest()
         {
@@ -248,6 +251,7 @@ namespace Collection.Test.UnitTests
             Assert.ThrowsException<InvalidOperationException>(() => { list.RemoveLast(); });
         }
 
+        [TestMethod]
         public void RemoveFirstTest()
         {
             DoubleLinkedList<int> list = new DoubleLinkedList<int>();
@@ -255,16 +259,116 @@ namespace Collection.Test.UnitTests
             {
                 list.AddLast(i * 1000);
             }
-            list.RemoveLast();
-            list.RemoveLast();
-            for (int i = 0; i < 98; i++)
+            list.RemoveFirst();
+            list.RemoveFirst();
+            for (int i = 2; i < 100; i++)
             {
-                Assert.AreEqual(i * 1000, list[i]);
+                Assert.AreEqual(i * 1000, list[i-2]);
             }
 
             list = new DoubleLinkedList<int>();
             Assert.ThrowsException<InvalidOperationException>(() => { list.RemoveFirst(); });
         }
+
+        [TestMethod]
+        public void RemoveTest()
+        {
+            DoubleLinkedList<int> list = new DoubleLinkedList<int>();
+            for (int i = 0; i < 100; i++)
+            {
+                list.AddLast(i * 1000);
+            }
+            list.Remove(0);
+            list.Remove(1000);
+            list.Remove(99000);
+            list.Remove(98000);
+            for (int i = 2; i < 98; i++)
+            {
+                Assert.AreEqual(i * 1000, list[i - 2]);
+            }
+
+            Assert.AreEqual(list.Remove(1000), 0);
+
+            list = new DoubleLinkedList<int>();
+            Assert.ThrowsException<InvalidOperationException>(() => { list.Remove(100); });
+        }
+
+        [TestMethod]
+        public void RemoveAtTest()
+        {
+            DoubleLinkedList<int> list = new DoubleLinkedList<int>();
+            for (int i = 0; i < 100; i++)
+            {
+                list.AddLast(i * 1000);
+            }
+            list.RemoveAt(0);
+            list.RemoveAt(0);
+            list.RemoveAt(0);
+            list.RemoveAt(0);
+            list.RemoveAt(list.Count - 1);
+            list.RemoveAt(list.Count - 1);
+            for (int i = 4; i < 96; i++)
+            {
+
+                Assert.AreEqual(i * 1000, list[i - 4]);
+            }
+
+            list = new DoubleLinkedList<int>();
+            Assert.ThrowsException<InvalidOperationException>(() => { list.RemoveAt(100); });
+        }
+
+        [TestMethod]
+        public void SetElementAtrTest()
+        {
+            DoubleLinkedList<int> list = new DoubleLinkedList<int>();
+            var envList = new List<int>();
+            for (int i = 0; i < 100; i++)
+            {
+                var randItem = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
+
+                envList.Add(randItem);
+                list.AddLast(randItem);
+            }
+
+
+            for (int i = 0; i < 100; i++)
+            {
+                var temp = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
+
+                list.SetElementAt(temp, i);
+                envList[i] = temp;
+
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(list[i], envList[i]);
+            }
+            Assert.ThrowsException<IndexOutOfRangeException>(() => { list.SetElementAt(100, 100); });
+            Assert.ThrowsException<IndexOutOfRangeException>(() => { list.SetElementAt(100, -1); });
+
+            list = new DoubleLinkedList<int>();
+            Assert.ThrowsException<InvalidOperationException>(() => { list.SetElementAt(1, 2); });
+        }
+
+        [TestMethod]
+        public void CopyConstructorTest()
+        {
+            var list = new DoubleLinkedList<int>();
+
+            for (int i = 0; i < 100; i++)
+            {
+                list.AddLast(i);
+            }
+
+            var newList = new DoubleLinkedList<int>(list);
+
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(newList[i], list[i]);
+            }
+
+        }
+
 
 
 
