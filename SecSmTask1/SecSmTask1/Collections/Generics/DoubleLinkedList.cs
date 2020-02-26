@@ -22,11 +22,15 @@ namespace Collections.Collections.Generics
 
         public DoubleLinkedList(DoubleLinkedList<TValue> list)
         {
-
+            this.Clear();
+            foreach(var item in list)
+            {
+                this.AddLast(item);
+            }
         }
 
 
-        public TValue this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public TValue this[int index] { get => ElementAt(index); set => SetElementAt(value, index); }
 
         public int Count => lenght;
 
@@ -72,6 +76,10 @@ namespace Collections.Collections.Generics
 
         public bool Contains(TValue value)
         {
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
             foreach (var item in this)
             {
                 if (item.Equals(value))
@@ -84,14 +92,17 @@ namespace Collections.Collections.Generics
 
         public TValue ElementAt(int index)
         {
-                
-            if(index < 0 || index >= lenght)
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
+            if (index < 0 || index >= lenght)
             {
                 throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
             }
 
             var temp = headPtr;
-            for (int i = 0; i <= index; i++)
+            for (int i = 0; i != index; i++)
             {
                 temp = temp.nextPrt;
             }
@@ -101,6 +112,10 @@ namespace Collections.Collections.Generics
 
         public IEnumerator<TValue> GetEnumerator()
         {
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
             var temp = headPtr;
             while (temp.nextPrt != null)
             {
@@ -112,6 +127,10 @@ namespace Collections.Collections.Generics
 
         public int IndexOf(TValue value)
         {
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
             int i = 0;
             foreach (var item in this)
             {
@@ -126,36 +145,162 @@ namespace Collections.Collections.Generics
 
         public void InsertAt(int index, TValue value)
         {
-            throw new NotImplementedException();
+            if (index < 0 || index > lenght)
+            {
+                throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
+            }
+            if (index == lenght)
+            {
+                AddLast(value);
+            }
+            else if (index == 0)
+            {
+                AddFirst(value);
+            }
+            else
+            {
+                var temp = headPtr;
+
+                for (int i = 0; i != index; i++)
+                {
+                    temp = temp.nextPrt;
+                }
+
+                temp = new Node(value, temp.prevPtr, temp);
+                temp.prevPtr.nextPrt = temp;
+                temp.nextPrt.prevPtr = temp;
+            }
+
         }
         public TValue RemoveLast()
         {
-            throw new NotImplementedException();
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
+            var temp = tailPtr;
+            tailPtr.prevPtr = tailPtr;
+            tailPtr.nextPrt = null;
+
+            temp.nextPrt = temp.nextPrt = null;
+            return temp.data;
+
         }
         public TValue RemoveFirst()
         {
-            throw new NotImplementedException();
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
+            var temp = headPtr;
+            headPtr = headPtr.nextPrt;
+            headPtr.prevPtr = null;
+
+
+            temp.nextPrt = temp.prevPtr = null;
+            return temp.data;
         }
         public TValue Remove(TValue value)
         {
-            throw new NotImplementedException();
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
+            var resultIndex = IndexOf(value);
+
+            if (resultIndex == -1)
+            {
+                return default(TValue);
+            }
+            else
+            {
+                var temp = ElementAt(resultIndex);
+                RemoveAt(resultIndex);
+                return temp;
+            }
         }
 
 
         public TValue RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            if(lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
+            if (index < 0 || index > lenght)
+            {
+                throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
+            }
+            if (index == lenght)
+            {
+                return RemoveLast();
+            }
+            else if (index == 0)
+            {
+                return RemoveFirst();
+            }
+            else
+            {
+                var temp = headPtr;
+                for (int i = 0; i != index; i++)
+                {
+                    temp = temp.nextPrt;
+                }
+
+                temp.nextPrt.prevPtr = temp.prevPtr;
+                temp.prevPtr.nextPrt = temp.nextPrt;
+
+                temp.nextPrt = temp.prevPtr = null;
+
+                return temp.data;
+            }
         }
 
-        public void SetElementAt(TValue data, int index)
+        public void SetElementAt(TValue value, int index)
         {
-            throw new NotImplementedException();
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
+            }
+            if (index < 0 || index >= lenght)
+            {
+                throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
+            }
+            if (index == lenght-1)
+            {
+                tailPtr.data = value;
+            }
+            else if (index == 0)
+            {
+                headPtr.data = value;
+            }
+            else
+            {
+                var temp = headPtr;
+                for (int i = 0; i != index; i++)
+                {
+                    temp = temp.nextPrt;
+                }
+                temp.data = value;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder(2 * lenght);
+            foreach(var item in this)
+            {
+                stringBuilder.Append($"{item}  ");
+            }
+            stringBuilder.Append(Environment.NewLine);
+            return stringBuilder.ToString();
+        }
+
 
         private class Node
         {
@@ -170,7 +315,5 @@ namespace Collections.Collections.Generics
             public Node nextPrt;
             public TValue data;
         }
-
-
     }
 }
