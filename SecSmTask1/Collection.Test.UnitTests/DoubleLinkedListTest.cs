@@ -52,6 +52,16 @@ namespace Collection.Test.UnitTests
             Assert.IsTrue(list.Contains(4) && list.Contains(1) && list.Contains(55) && list.Contains(13) && list.Contains(4) && list.Contains(45345) && !list.Contains(5) && !list.Contains(37));
         }
 
-
+        [TestMethod]
+        public void InsertAtTest()
+        {
+            DoubleLinkedList<int> list = new DoubleLinkedList<int>();
+            for (int i = 0; i < 10; i++)
+            {
+                list.AddLast(i);
+            }
+            list.InsertAt(10, 1337);
+            list.InsertAt(2, 228);
+        }
     }
 }
