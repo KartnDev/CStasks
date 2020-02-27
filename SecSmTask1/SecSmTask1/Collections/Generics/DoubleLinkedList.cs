@@ -20,7 +20,7 @@ namespace Collections.Collections.Generics
 
         }
 
-        public DoubleLinkedList(IList<TValue> list)
+        public DoubleLinkedList(IEnumerable<TValue> list)
         {
             this.Clear();
             foreach(var item in list)
@@ -178,14 +178,22 @@ namespace Collections.Collections.Generics
             {
                 throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
             }
-            var temp = tailPtr;
-            tailPtr.prevPtr = tailPtr;
-            tailPtr.nextPrt = null;
-
-            temp.nextPrt = temp.nextPrt = null;
-            lenght--;
-            return temp.data;
-
+            if (lenght == 1)
+            {
+                lenght--;
+                var result = tailPtr.data;
+                headPtr = tailPtr = null;
+                return result;
+            }
+            else
+            {
+                var temp = tailPtr;
+                tailPtr = tailPtr.prevPtr;
+                tailPtr.nextPrt = null;
+                temp.nextPrt = temp.nextPrt = null;
+                lenght--;
+                return temp.data;
+            }
         }
         public TValue RemoveFirst()
         {

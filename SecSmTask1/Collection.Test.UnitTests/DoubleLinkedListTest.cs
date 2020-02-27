@@ -246,6 +246,9 @@ namespace Collection.Test.UnitTests
             {
                 Assert.AreEqual(i*1000, list[i]);
             }
+            Assert.AreEqual(list.Count, 98);
+
+
 
             list = new DoubleLinkedList<int>();
             Assert.ThrowsException<InvalidOperationException>(() => { list.RemoveLast(); });
