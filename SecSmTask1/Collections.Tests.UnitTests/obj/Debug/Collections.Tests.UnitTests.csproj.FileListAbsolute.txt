@@ -1,0 +1,1 @@
+C:\Users\dmutp\source\CStasks\SecSmTask1\Collections.Tests.UnitTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
