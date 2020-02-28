@@ -12,7 +12,7 @@ namespace CG_task2
 {
     public partial class Form1 : Form
     {
-        private const int accretion = 2;
+        private const int accretion = 10;
 
 
         private static readonly int WIDTH = accretion;
