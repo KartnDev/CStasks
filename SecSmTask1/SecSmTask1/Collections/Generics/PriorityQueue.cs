@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Collections.Collections.Utils.Sorts;
+using static Collections.Collections.Utils.Searches;
+
 
 namespace Collections.Collections.Generics
 {
@@ -27,7 +29,16 @@ namespace Collections.Collections.Generics
         public void Add(TValue value)
         {
             list.AddFirst(value);
-            list = new DoubleLinkedList<TValue>(list.InsertionSortWithDelegate(new CompareDelegate<TValue>((value1, value2) => PriorityDelegate(value1, value2))));
+            if(list.Contains(value))
+            {
+                int index = list.BinarySearch(value, (value1, value2) => PriorityDelegate(value1, value2));
+                list.InsertAt(index, value);
+            }
+            else
+            {
+                list.AddLast(value);
+                list.InsertionSortWithDelegate((value1, value2) => PriorityDelegate(value1, value2));
+            }
         }
 
         public TValue Remove()

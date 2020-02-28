@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Collections.Collections.Utils.Sorts;
 
 namespace Collections.Collections.Generics
 {
@@ -76,10 +77,6 @@ namespace Collections.Collections.Generics
 
         public bool Contains(TValue value)
         {
-            if (lenght == 0)
-            {
-                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
-            }
             foreach (var item in this)
             {
                 if (item.Equals(value))
@@ -312,6 +309,22 @@ namespace Collections.Collections.Generics
             return stringBuilder.ToString();
         }
 
+        public void InsertionSortWithDelegate(CompareDelegate<TValue> compareDelegate)
+        {
+            int i, j;
+
+            for (i = 1; i < this.Count; i++)
+            {
+                TValue value = this[i];
+                j = i - 1;
+                while ((j >= 0) && (compareDelegate(this[j], value) > 0))
+                {
+                    this[j + 1] = this[j];
+                    j = j - 1;
+                }
+                this[j + 1] = value;
+            }
+        }
 
         private class Node
         {
