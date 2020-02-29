@@ -77,11 +77,14 @@ namespace Collections.Collections.Generics
 
         public bool Contains(TValue value)
         {
-            foreach (var item in this)
+            if (lenght > 0)
             {
-                if (item.Equals(value))
+                foreach (var item in this)
                 {
-                    return true;
+                    if (item.Equals(value))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -93,7 +96,7 @@ namespace Collections.Collections.Generics
             {
                 throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
             }
-            if (index < 0 || index > lenght)
+            if (index < 0 || index >= lenght)
             {
                 throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
             }
@@ -166,8 +169,9 @@ namespace Collections.Collections.Generics
                 temp = new Node(value, temp.prevPtr, temp);
                 temp.prevPtr.nextPrt = temp;
                 temp.nextPrt.prevPtr = temp;
+                lenght++;
             }
-            lenght++;
+            
         }
         public TValue RemoveLast()
         {

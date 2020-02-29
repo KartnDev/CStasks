@@ -232,7 +232,7 @@ namespace Collections.Tests.UnitTests
                 Assert.AreEqual(123, list[55]);
 
 
-                Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(102, 1); });
+                Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(103, 1); });
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(-1, 1); });
                 list = new DoubleLinkedList<int>();
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(2, 1); });
