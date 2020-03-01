@@ -28,7 +28,7 @@ namespace Collections.Collections.Generics
 
         public void Add(TValue value)
         {
-            list.AddFirst(value);
+            
             if(list.Contains(value))
             {
                 int index = list.BinarySearch(value, (value1, value2) => PriorityDelegate(value1, value2));

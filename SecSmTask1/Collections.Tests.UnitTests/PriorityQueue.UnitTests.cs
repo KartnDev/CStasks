@@ -34,7 +34,7 @@ namespace Collections.Tests.UnitTests
             Assert.AreEqual("fgxyumnqrstvabwhijkopcdelz".Length, queue.Count);
             foreach (var value in "abcdefghijklmnopqrstuvwxyz".ReverseString())
             {
-                Assert.AreEqual(value, queue.Remove());
+                Assert.AreEqual(value.ToString(), queue.Remove());
             }
 
         }
@@ -50,7 +50,7 @@ namespace Collections.Tests.UnitTests
             }
             foreach (var value in "abcdefghijklmnopqrstuvwxyz".ReverseString())
             {
-                Assert.AreEqual(value, queue.Remove());
+                Assert.AreEqual(value.ToString(), queue.Remove());
             }
             Assert.AreEqual(0, queue.Count);
             Assert.ThrowsException<InvalidOperationException>(() => queue.Remove());

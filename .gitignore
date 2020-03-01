@@ -3,3 +3,6 @@ SecSmTask1/Collections.Tests.UnitTests/bin/Debug/Microsoft.VisualStudio.TestPlat
 *.dll
 *.pdb
 *.cache
+*.dll
+*.cache
+*.pdb
