@@ -18,26 +18,22 @@ namespace Collections.Tests.UnitTests
             public void IndexatorTest()
             {
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
-                var envList = new List<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    var randItem = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
-
-                    envList.Add(randItem);
-                    list.AddLast(randItem);
+                    list.AddLast(i);
                 }
 
                 for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(list[i], envList[i]);
+                    Assert.AreEqual(list[i], i);
                 }
                 for (int i = 0; i < 100; i++)
                 {
-                    list[i] = envList[i] = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
+                    list[i] = 1001 * i;
                 }
                 for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(list[i], envList[i]);
+                    Assert.AreEqual(list[i], 1001*i);
                 }
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { list[100] = 100; });
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { list[-1] = 100; });
@@ -46,6 +42,20 @@ namespace Collections.Tests.UnitTests
                 list = new DoubleLinkedList<int>();
                 Assert.ThrowsException<InvalidOperationException>(() => { list[2] = 1; });
                 Assert.ThrowsException<InvalidOperationException>(() => { Console.WriteLine(list[2]); });
+
+                DoubleLinkedList<string> strList = new DoubleLinkedList<string>();
+
+                foreach (char item in "zxcvbnm,./asdfghjkl;'qwertyuiop[]1234567890-=")
+                {
+                    strList.AddLast(item.ToString());
+                }
+
+                for(int i = 0; i < "zxcvbnm,./asdfghjkl;'qwertyuiop[]1234567890-=".Length; i++)
+                {
+                    Assert.AreEqual(strList[i], "zxcvbnm,./asdfghjkl;'qwertyuiop[]1234567890-="[i].ToString());
+                }
+
+
             }
 
             [TestMethod]
@@ -54,7 +64,7 @@ namespace Collections.Tests.UnitTests
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    list.AddLast((new Random(DateTime.Now.Millisecond)).Next());
+                    list.AddLast(i);
                 }
                 Assert.AreEqual(list.Count, 100);
                 list = new DoubleLinkedList<int>();
@@ -65,17 +75,15 @@ namespace Collections.Tests.UnitTests
             public void AddFirstTest()
             {
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
-                var envList = new List<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    var randItem = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
+                    var randItem = i;
 
-                    envList.Insert(0, randItem);
                     list.AddFirst(randItem);
                 }
                 for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(list[i], envList[i]);
+                    Assert.AreEqual(list[i], i);
                 }
             }
 
@@ -83,17 +91,15 @@ namespace Collections.Tests.UnitTests
             public void AddLastTest()
             {
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
-                var envList = new List<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    var randItem = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
+                    var randItem = i;
 
-                    envList.Add(randItem);
                     list.AddLast(randItem);
                 }
                 for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(list[i], envList[i]);
+                    Assert.AreEqual(list[i], i);
                 }
             }
 
@@ -103,7 +109,7 @@ namespace Collections.Tests.UnitTests
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    list.AddLast((new Random(DateTime.Now.Millisecond)).Next(0, 1000));
+                    list.AddLast(i);
                 }
                 list.Clear();
                 Assert.AreEqual(list.Count, 0);
@@ -129,26 +135,22 @@ namespace Collections.Tests.UnitTests
             public void ElementAtTest()
             {
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
-                var envList = new List<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    var randItem = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
-
-                    envList.Add(randItem);
-                    list.AddLast(randItem);
+                    list.AddLast(i);
                 }
 
                 for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(list.ElementAt(i), envList[i]);
+                    Assert.AreEqual(list.ElementAt(i), i);
                 }
                 for (int i = 0; i < 100; i++)
                 {
-                    list[i] = envList[i] = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
+                    list[i]  = 1001 * i;
                 }
                 for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(list.ElementAt(i), envList[i]);
+                    Assert.AreEqual(list.ElementAt(i), 1001*i);
                 }
 
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { Console.WriteLine(list.ElementAt(-1)); });
@@ -161,29 +163,25 @@ namespace Collections.Tests.UnitTests
             public void EnumeratorTest()
             {
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
-                var envList = new List<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    var randItem = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
-
-                    envList.Add(randItem);
-                    list.AddLast(randItem);
+                    list.AddLast(i);
                 }
 
                 for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(list.ElementAt(i), envList[i]);
+                    Assert.AreEqual(list.ElementAt(i), i);
                 }
 
                 for (int i = 0; i < 100; i++)
                 {
-                    envList[i] = list[i] = (new Random(DateTime.Now.Millisecond)).Next(-1000, 1000);
+                    list[i] = i;
                 }
 
                 int index = 0;
-                foreach (var item in list)
+                for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(item, envList[index]);
+                    Assert.AreEqual(list[i], i);
                     index++;
                 }
                 list.Clear();
@@ -232,10 +230,17 @@ namespace Collections.Tests.UnitTests
                 Assert.AreEqual(123, list[55]);
 
 
-                Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(103, 1); });
+                
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(-1, 1); });
                 list = new DoubleLinkedList<int>();
-                Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(2, 1); });
+
+                DoubleLinkedList<string> strList = new DoubleLinkedList<string>();
+                strList.InsertAt(100, "abc");
+                for(int i = 0;i < 100; i++)
+                {
+                    Assert.IsNull(strList[i]);
+                }
+                Assert.AreEqual(strList[100], "abc");
             }
 
             [TestMethod]
@@ -330,27 +335,19 @@ namespace Collections.Tests.UnitTests
             public void SetElementAtrTest()
             {
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
-                var envList = new List<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    var randItem = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
-
-                    envList.Add(randItem);
-                    list.AddLast(randItem);
+                    list.AddLast(i);
                 }
 
 
                 for (int i = 0; i < 100; i++)
                 {
-                    var temp = (new Random(DateTime.Now.Millisecond)).Next(0, 1000);
-
-                    list.SetElementAt(temp, i);
-                    envList[i] = temp;
-
+                    list.SetElementAt(list[i], i);
                 }
                 for (int i = 0; i < 100; i++)
                 {
-                    Assert.AreEqual(list[i], envList[i]);
+                    Assert.AreEqual(list[i], i);
                 }
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { list.SetElementAt(100, 100); });
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { list.SetElementAt(100, -1); });

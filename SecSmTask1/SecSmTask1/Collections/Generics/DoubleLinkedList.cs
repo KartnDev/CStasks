@@ -24,7 +24,7 @@ namespace Collections.Collections.Generics
         public DoubleLinkedList(IEnumerable<TValue> list)
         {
             this.Clear();
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 this.AddLast(item);
             }
@@ -145,11 +145,23 @@ namespace Collections.Collections.Generics
 
         public void InsertAt(int index, TValue value)
         {
-            if (index < 0 || index > lenght)
+            if (index < 0)
             {
                 throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
             }
-            if (index == lenght)
+            if (index > lenght)
+            {
+                var temp = headPtr;
+
+
+                for (int i = lenght; i < index; i++)
+                {
+                    Object o = null;
+                    AddLast((TValue)o);
+                }
+                AddLast(value);
+            }
+            else if (index == lenght)
             {
                 AddLast(value);
             }
@@ -171,7 +183,7 @@ namespace Collections.Collections.Generics
                 temp.nextPrt.prevPtr = temp;
                 lenght++;
             }
-            
+
         }
         public TValue RemoveLast()
         {
@@ -218,7 +230,7 @@ namespace Collections.Collections.Generics
                 throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
             }
             var resultIndex = IndexOf(value);
-            
+
             if (resultIndex == -1)
             {
                 return default(TValue);
@@ -234,7 +246,7 @@ namespace Collections.Collections.Generics
 
         public TValue RemoveAt(int index)
         {
-            if(lenght == 0)
+            if (lenght == 0)
             {
                 throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
             }
@@ -278,7 +290,7 @@ namespace Collections.Collections.Generics
             {
                 throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
             }
-            if (index == lenght-1)
+            if (index == lenght - 1)
             {
                 tailPtr.data = value;
             }
@@ -305,7 +317,7 @@ namespace Collections.Collections.Generics
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder(2 * lenght);
-            foreach(var item in this)
+            foreach (var item in this)
             {
                 stringBuilder.Append($"{item}  ");
             }
