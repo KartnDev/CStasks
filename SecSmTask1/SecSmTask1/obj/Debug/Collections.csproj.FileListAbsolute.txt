@@ -1,13 +1,3 @@
-C:\Users\dmutp\source\repos\SecSmTask1\SecSmTask1\bin\Debug\Collections.dll
-C:\Users\dmutp\source\repos\SecSmTask1\SecSmTask1\bin\Debug\Collections.pdb
-C:\Users\dmutp\source\repos\SecSmTask1\SecSmTask1\obj\Debug\Collections.csprojAssemblyReference.cache
-C:\Users\dmutp\source\repos\SecSmTask1\SecSmTask1\obj\Debug\Collections.dll
-C:\Users\dmutp\source\repos\SecSmTask1\SecSmTask1\obj\Debug\Collections.pdb
-C:\Users\dmutp\Desktop\SecSmTask1\SecSmTask1\bin\Debug\Collections.dll
-C:\Users\dmutp\Desktop\SecSmTask1\SecSmTask1\bin\Debug\Collections.pdb
-C:\Users\dmutp\Desktop\SecSmTask1\SecSmTask1\obj\Debug\Collections.csprojAssemblyReference.cache
-C:\Users\dmutp\Desktop\SecSmTask1\SecSmTask1\obj\Debug\Collections.dll
-C:\Users\dmutp\Desktop\SecSmTask1\SecSmTask1\obj\Debug\Collections.pdb
 C:\Users\dmutp\source\CStasks\SecSmTask1\SecSmTask1\bin\Debug\Collections.dll
 C:\Users\dmutp\source\CStasks\SecSmTask1\SecSmTask1\bin\Debug\Collections.pdb
 C:\Users\dmutp\source\CStasks\SecSmTask1\SecSmTask1\obj\Debug\Collections.csprojAssemblyReference.cache
