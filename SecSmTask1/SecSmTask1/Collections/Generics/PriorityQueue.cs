@@ -31,7 +31,7 @@ namespace Collections.Collections.Generics
             
             if(list.Contains(value))
             {
-                int index = list.BinarySearch(value, (value1, value2) => PriorityDelegate(value1, value2));
+                int index = list.BinarySearch(value, (value1, value2) => PriorityDelegate(value1, value2)); 
                 list.InsertAt(index, value);
             }
             else

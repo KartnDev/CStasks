@@ -156,8 +156,7 @@ namespace Collections.Collections.Generics
 
                 for (int i = lenght; i < index; i++)
                 {
-                    Object o = null;
-                    AddLast((TValue)o);
+                    AddLast(default(TValue));
                 }
                 AddLast(value);
             }
@@ -214,14 +213,24 @@ namespace Collections.Collections.Generics
             {
                 throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
             }
-            var temp = headPtr;
-            headPtr = headPtr.nextPrt;
-            headPtr.prevPtr = null;
+            if (lenght == 1)
+            {
+                lenght--;
+                var result = headPtr.data;
+                headPtr = tailPtr = null;
+                return result;
+            }
+            else
+            {
+                var temp = headPtr;
+                headPtr = headPtr.nextPrt;
+                headPtr.prevPtr = null;
 
 
-            temp.nextPrt = temp.prevPtr = null;
-            lenght--;
-            return temp.data;
+                temp.nextPrt = temp.prevPtr = null;
+                lenght--;
+                return temp.data;
+            }
         }
         public TValue Remove(TValue value)
         {

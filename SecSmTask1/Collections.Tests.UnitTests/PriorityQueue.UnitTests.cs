@@ -36,7 +36,29 @@ namespace Collections.Tests.UnitTests
             {
                 Assert.AreEqual(value.ToString(), queue.Remove());
             }
-
+            PriorityQueue<int> queueInt = new PriorityQueue<int>((value1, value2) =>
+            {
+                if (value1 > value2)
+                {
+                    return -1;
+                }
+                else if (value1 == value2)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            });
+            for (int i = 0; i < 100; i++)
+            {
+                queueInt.Add(i);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(i, queueInt.Remove());
+            }
         }
 
         [TestMethod]
@@ -54,6 +76,31 @@ namespace Collections.Tests.UnitTests
             }
             Assert.AreEqual(0, queue.Count);
             Assert.ThrowsException<InvalidOperationException>(() => queue.Remove());
+
+
+            PriorityQueue<int> queueInt = new PriorityQueue<int>((value1, value2) =>
+                {
+                    if (value1 > value2)
+                    {
+                        return 1;
+                    }
+                    else if (value1 == value2)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                });
+            for(int i =0; i < 100; i++)
+            {
+                queueInt.Add(i);
+            }
+            for (int i = 99; i >= 0; i--)
+            {
+                Assert.AreEqual(i, queueInt.Remove());
+            }
         }
 
         [TestMethod]
@@ -77,7 +124,6 @@ namespace Collections.Tests.UnitTests
         {
             PriorityQueue<string> queue = new PriorityQueue<string>((value1, value2) => string.Compare(value1, value2));
 
-
             queue.Add("ABC");
             Assert.AreEqual("ABC", queue.TopItem);
 
@@ -86,5 +132,45 @@ namespace Collections.Tests.UnitTests
             queue.Add("AAA");
             Assert.AreEqual("ADA", queue.TopItem);
         }
+
+        [TestMethod]
+        public void TopFuncTest()
+        {
+            PriorityQueue<string> queue = new PriorityQueue<string>((value1, value2) => string.Compare(value1, value2));
+
+            queue.Add("ABC");
+
+            Assert.AreEqual("ABC", queue.Top());
+
+            queue.Add("ADA");
+            Assert.AreEqual("ADA", queue.Top());
+            queue.Add("AAA");
+            Assert.AreEqual("ADA", queue.Top());
+        }
+
+        [TestMethod]
+        public void PriorityDelegateTest()
+        {
+            PriorityQueue<string> queue = new PriorityQueue<string>((value1, value2) => string.Compare(value1, value2));
+            queue.Add("ABC");
+
+            Assert.AreEqual("ABC", queue.Top());
+
+            queue.Add("ADA");
+            Assert.AreEqual("ADA", queue.Top());
+            queue.Add("AAA");
+            Assert.AreEqual("ADA", queue.Top());
+
+
+            queue = new PriorityQueue<string>((value1, value2) => -1 * string.Compare(value1, value2));
+            queue.Add("ABC");
+
+            Assert.AreEqual("ABC", queue.Top());
+            queue.Add("ADA");
+            Assert.AreEqual("ABC", queue.Top());
+            queue.Add("AAA");
+            Assert.AreEqual("AAA", queue.Top());
+        }
+
     }
 }

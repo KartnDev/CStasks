@@ -77,14 +77,26 @@ namespace Collections.Tests.UnitTests
                 DoubleLinkedList<int> list = new DoubleLinkedList<int>();
                 for (int i = 0; i < 100; i++)
                 {
-                    var randItem = i;
-
-                    list.AddFirst(randItem);
+                    list.AddFirst(i);
                 }
-                for (int i = 0; i < 100; i++)
+                for (int i = 100; i < 0; i--)
                 {
-                    Assert.AreEqual(list[i], i);
+                    Assert.AreEqual(list[100 - i], i);
                 }
+
+                DoubleLinkedList<string> listStr = new DoubleLinkedList<string>();
+                foreach (var item in "asdfghjkl;'qwertyuiop[]zxcvbnm,./")
+                {
+
+                    listStr.AddFirst(item.ToString());
+                }
+                for (int i = 0; i < "asdfghjkl;'qwertyuiop[]zxcvbnm,./".Length; i++)
+                {
+                    Assert.AreEqual(listStr[i], "asdfghjkl;'qwertyuiop[]zxcvbnm,./".ReverseString()[i].ToString());
+                }
+
+
+
             }
 
             [TestMethod]
@@ -101,6 +113,18 @@ namespace Collections.Tests.UnitTests
                 {
                     Assert.AreEqual(list[i], i);
                 }
+
+                DoubleLinkedList<string> listStr = new DoubleLinkedList<string>();
+                foreach (var item in "asdfghjkl;'qwertyuiop[]zxcvbnm,./")
+                {
+
+                    listStr.AddLast(item.ToString());
+                }
+                for (int i = 0; i < "asdfghjkl;'qwertyuiop[]zxcvbnm,./".Length; i++)
+                {
+                    Assert.AreEqual(listStr[i], "asdfghjkl;'qwertyuiop[]zxcvbnm,./"[i].ToString());
+                }
+
             }
 
             [TestMethod]
@@ -129,6 +153,19 @@ namespace Collections.Tests.UnitTests
                 Assert.IsFalse(list.Contains(37));
                 list = new DoubleLinkedList<int>();
                 Assert.IsFalse(list.Contains(1000));
+
+                DoubleLinkedList<string> listStr = new DoubleLinkedList<string>();
+                foreach (var item in "asdfghjkl;'qwertyuiop[]zxcvbnm,./")
+                {
+
+                    listStr.AddLast(item.ToString());
+                }
+                foreach (var item in "asdfghjkl;'qwertyuiop[]zxcvbnm,./")
+                {
+
+                    Assert.IsTrue(listStr.Contains(item.ToString()));
+                }
+                
             }
 
             [TestMethod]
@@ -157,6 +194,15 @@ namespace Collections.Tests.UnitTests
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { Console.WriteLine(list.ElementAt(100)); });
                 list = new DoubleLinkedList<int>();
                 Assert.ThrowsException<InvalidOperationException>(() => { Console.WriteLine(list.ElementAt(2)); });
+
+
+                DoubleLinkedList<string> listStr = new DoubleLinkedList<string>();
+                foreach (var item in "asdfghjkl;'qwertyuiop[]zxcvbnm,./")
+                {
+                    listStr.AddLast(item.ToString());
+                }
+                Assert.AreEqual(listStr.ElementAt(12), "w".ToString());
+
             }
 
             [TestMethod]
@@ -191,7 +237,17 @@ namespace Collections.Tests.UnitTests
 
                     }
                 });
-
+                DoubleLinkedList<string> listStr = new DoubleLinkedList<string>();
+                foreach (var item in "asdfghjkl;'qwertyuiop[]zxcvbnm,./")
+                {
+                    listStr.AddLast(item.ToString());
+                }
+                int indx = 0;
+                foreach (var item in listStr)
+                {
+                    Assert.AreEqual(item, "asdfghjkl;'qwertyuiop[]zxcvbnm,./"[indx].ToString());
+                    indx++;
+                }
             }
 
             [TestMethod]
@@ -210,6 +266,14 @@ namespace Collections.Tests.UnitTests
                 Assert.ThrowsException<InvalidOperationException>(() => {
                     list.IndexOf(100);
                 });
+
+                DoubleLinkedList<string> listStr = new DoubleLinkedList<string>();
+                foreach (var item in "asdfghjkl;'qwertyuiop[]zxcvbnm,./")
+                {
+                    listStr.AddLast(item.ToString());
+                }
+                Assert.AreEqual(listStr.IndexOf("d".ToString()), 2);
+
             }
 
             [TestMethod]
@@ -229,10 +293,32 @@ namespace Collections.Tests.UnitTests
                 Assert.AreEqual(1337, list[0]);
                 Assert.AreEqual(123, list[55]);
 
-
                 
                 Assert.ThrowsException<IndexOutOfRangeException>(() => { list.InsertAt(-1, 1); });
                 list = new DoubleLinkedList<int>();
+
+                list.InsertAt(100, 131232131);
+                for (int i = 0; i < 100; i++)
+                {
+                    Assert.AreEqual(list[i], default(int));
+                }
+                Assert.AreEqual(list[100], 131232131);
+
+
+                DoubleLinkedList<string> listOfString = new DoubleLinkedList<string>();
+                foreach (var item in "asdfghjkl;'qwertyuiop[]zxcvbnm,./")
+                {
+                    listOfString.AddLast(item.ToString());
+                }
+                listOfString.InsertAt(2, "Z");
+                listOfString.InsertAt(6, "T");
+                int indx = 0;
+                foreach (var item in listOfString)
+                {
+                    Assert.AreEqual(item, "asZdfgThjkl;'qwertyuiop[]zxcvbnm,./"[indx].ToString());
+                    indx++;
+                }
+
 
                 DoubleLinkedList<string> strList = new DoubleLinkedList<string>();
                 strList.InsertAt(100, "abc");
@@ -375,9 +461,55 @@ namespace Collections.Tests.UnitTests
 
             }
 
+            [TestMethod]
+            public void InsertionSortTest()
+            {
+                var list = new DoubleLinkedList<int>();
 
+                list.AddLast(4);
+                list.AddLast(2);
+                list.AddLast(3); 
+                list.AddLast(9);
+                list.AddLast(0);
+                list.AddLast(5);
+                list.AddLast(7);
+                list.AddLast(6);
+                list.AddLast(1);
+                list.AddLast(8);
 
+                list.InsertionSortWithDelegate((value1, value2) =>
+                {
+                    if (value1 > value2)
+                    {
+                        return 1;
+                    }
+                    else if (value1 == value2)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                });
 
+                for (int i = 0; i < 10; i++)
+                {
+                    Assert.AreEqual(i, list[i]);
+                }
+
+                DoubleLinkedList<string> listStr = new DoubleLinkedList<string>();
+
+                foreach (var value in "fgxyumnqrstvabwhijkopcdelz")
+                {
+                    listStr.AddLast(value.ToString());
+                }
+                listStr.InsertionSortWithDelegate((value1, value2) => string.Compare(value1, value2));
+                foreach (var value in "abcdefghijklmnopqrstuvwxyz")
+                {
+                    Assert.AreEqual(value.ToString(), listStr.RemoveFirst());
+                }
+            }
         }
     }
 }
