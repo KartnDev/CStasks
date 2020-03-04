@@ -6,3 +6,7 @@ SecSmTask1/Collections.Tests.UnitTests/bin/Debug/Microsoft.VisualStudio.TestPlat
 *.dll
 *.cache
 *.pdb
+SecSmTask1/.vs/SecSmTask1/v16/Server/sqlite3/storage.ide-wal
+SecSmTask1/.vs/SecSmTask1/v16/Server/sqlite3/storage.ide-shm
+SecSmTask1/.vs/SecSmTask1/v16/Server/sqlite3/storage.ide
+SecSmTask1/.vs/SecSmTask1/v16/.suo
