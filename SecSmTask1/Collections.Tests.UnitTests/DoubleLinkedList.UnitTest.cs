@@ -504,11 +504,25 @@ namespace Collections.Tests.UnitTests
                 {
                     listStr.AddLast(value.ToString());
                 }
+
                 listStr.InsertionSortWithDelegate((value1, value2) => string.Compare(value1, value2));
                 foreach (var value in "abcdefghijklmnopqrstuvwxyz")
                 {
                     Assert.AreEqual(value.ToString(), listStr.RemoveFirst());
                 }
+                listStr = new DoubleLinkedList<string>();
+                listStr.AddLast("BBB");
+                listStr.AddLast("aaa");
+                listStr.AddLast(null);
+                listStr.AddLast("abc");
+
+
+                listStr.InsertionSortWithDelegate((value1, value2) => string.Compare(value1, value2));
+
+                Assert.AreEqual(null, listStr[0]);
+                Assert.AreEqual("aaa", listStr[1]);
+                Assert.AreEqual("abc", listStr[2]);
+                Assert.AreEqual("BBB", listStr[3]);
             }
         }
     }
