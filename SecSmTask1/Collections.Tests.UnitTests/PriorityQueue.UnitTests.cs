@@ -1,10 +1,6 @@
 ﻿using Collections.Collections.Generics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Collections.Tests.UnitTests
 {
@@ -38,6 +34,7 @@ namespace Collections.Tests.UnitTests
             }
             PriorityQueue<int> queueInt = new PriorityQueue<int>((value1, value2) =>
             {
+               
                 if (value1 > value2)
                 {
                     return -1;

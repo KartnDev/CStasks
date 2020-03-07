@@ -92,13 +92,13 @@ namespace Collections.Collections.Generics
 
         public TValue ElementAt(int index)
         {
-            if (lenght == 0)
-            {
-                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
-            }
             if (index < 0 || index >= lenght)
             {
                 throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
+            }
+            if (lenght == 0)
+            {
+                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
             }
 
             var temp = headPtr;
@@ -291,13 +291,13 @@ namespace Collections.Collections.Generics
 
         public void SetElementAt(TValue value, int index)
         {
-            if (lenght == 0)
-            {
-                throw new InvalidOperationException("Cannot invoke this method while list have zero elements");
-            }
-            if (index < 0 || index >= lenght)
+            if (index < 0)
             {
                 throw new IndexOutOfRangeException($"Taken index '{index}' is out of range");
+            }
+            if(index >= lenght)
+            {
+                this.InsertAt(index, value);
             }
             if (index == lenght - 1)
             {
