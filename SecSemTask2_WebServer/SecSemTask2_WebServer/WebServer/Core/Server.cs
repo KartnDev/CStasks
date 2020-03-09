@@ -190,9 +190,9 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
             SendResponse(clientSocket, "<html><head><meta" +
                 "http - equiv =\"Content-Type\" content=\"text/html;" +
-                "charset = utf - 8\"></head><body><h2>Atasoy Simple Web" +
-                "Server </ h2 >< div > 404 - Not" +
-                "Found </ div ></ body ></ html > ",
+                "charset = utf - 8\"></head><body><h2>Bad gateway!" +
+                "Server </h2><div> 404 - Not" +
+                "Found </div></body></html> ",
 
                 "404 Not Found",        "text/html");
         }
