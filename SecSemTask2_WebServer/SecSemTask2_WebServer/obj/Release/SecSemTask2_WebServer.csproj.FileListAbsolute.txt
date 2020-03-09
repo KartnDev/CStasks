@@ -1,0 +1,4 @@
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\bin\Release\SecSemTask2_WebServer.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\bin\Release\SecSemTask2_WebServer.pdb
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\obj\Release\SecSemTask2_WebServer.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\obj\Release\SecSemTask2_WebServer.pdb

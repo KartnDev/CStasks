@@ -1,0 +1,9 @@
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\Release\ServerMain.exe.config
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\Release\ServerMain.exe
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\Release\ServerMain.pdb
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\Release\SecSemTask2_WebServer.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\Release\SecSemTask2_WebServer.pdb
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\obj\Release\ServerMain.csprojAssemblyReference.cache
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\obj\Release\ServerMain.csproj.CopyComplete
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\obj\Release\ServerMain.exe
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\obj\Release\ServerMain.pdb
