@@ -140,7 +140,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
             string requestedFile;
             if (httpMethod.Equals("GET") || httpMethod.Equals("POST"))
                 requestedFile = requestedUrl.Split('?')[0];
-            else // Вы можете реализовать другие методы
+            else 
             {
                 NotImplemented(clientSocket);
                 return;
@@ -217,7 +217,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
             {
                 byte[] bHeader = charEncoder.GetBytes(
                                     "HTTP/1.1 " + responseCode + "\r\n"
-                                  + "Server: Atasoy Simple Web Server\r\n"
+                                  + "Server: Cherkasov Simple Web Server\r\n"
                                   + "Content-Length: " + bContent.Length.ToString() + "\r\n"
                                   + "Connection: close\r\n"
                                   + "Content-Type: " + contentType + "\r\n\r\n");
