@@ -65,9 +65,15 @@ namespace SecSemTask2_WebServer.WebServer.Core
                 serverSocket.SendTimeout = timeout;
                 running = true;
             }
-            catch
+            catch (SocketException e)
             {
+                // LOG EXCEPTION
                 return false;
+            }
+            catch (Exception e)
+            {
+                // LOG EXCEPTION
+                throw;
             }
 
             // Наш поток ждет новые подключения и создает новые потоки.
@@ -84,27 +90,35 @@ namespace SecSemTask2_WebServer.WebServer.Core
                         {
                             clientSocket.ReceiveTimeout = timeout;
                             clientSocket.SendTimeout = timeout;
+
                             try
                             {
                                 HandleTheRequest(clientSocket);
                             }
-                            catch
+                            catch (SocketException e)
                             {
-                                try
-                                {
-                                    clientSocket.Close();
-                                }
-                                catch(Exception e)
-                                {
-                                    Console.WriteLine(e.Message + "\n\n\n\n" + e.StackTrace);
-                                }
+                                // LOG EXCEPTION   
+                            }
+                            catch (Exception e)
+                            {
+                                // LOG EXCEPTION
+                                throw;
+                            }
+                            finally
+                            {
+                                clientSocket.Close();
                             }
                         });
                         requestHandler.Start();
                     }
-                    catch(Exception e)
+                    catch (SocketException e)
                     {
-                        Console.WriteLine(e.Message + "\n\n\n\n" + e.StackTrace);
+                        // LOG EXCEPTION  
+                    }
+                    catch (Exception e)
+                    {
+                        // LOG EXCEPTION
+                        throw;
                     }
                 }
             });
@@ -118,29 +132,48 @@ namespace SecSemTask2_WebServer.WebServer.Core
             if (running)
             {
                 running = false;
-                try { serverSocket.Close(); }
-                catch { }
+                try
+                {
+                    serverSocket.Close();
+                }
+                catch (SocketException e)
+                {
+                    // LOG EXCEPTION
+                }
+                catch (Exception e)
+                {
+                    // LOG EXCEPTION
+                    throw;
+                }
                 serverSocket = null;
             }
         }
 
         private void HandleTheRequest(Socket clientSocket)
         {
-            byte[] buffer = new byte[10240]; // 10 kb, just in case
-            int receivedBCount = clientSocket.Receive(buffer); // Получаем запрос
+            byte[] buffer = new byte[10240];
+            int receivedBCount = clientSocket.Receive(buffer);
             string strReceived = charEncoder.GetString(buffer, 0, receivedBCount);
 
-            // Парсим запрос
+
+
+            // Parse the request
             string httpMethod = strReceived.Substring(0, strReceived.IndexOf(" "));
+
+
 
             int start = strReceived.IndexOf(httpMethod) + httpMethod.Length + 1;
             int length = strReceived.LastIndexOf("HTTP") - start - 1;
             string requestedUrl = strReceived.Substring(start, length);
 
+
+
             string requestedFile;
             if (httpMethod.Equals("GET") || httpMethod.Equals("POST"))
+            {
                 requestedFile = requestedUrl.Split('?')[0];
-            else 
+            }
+            else
             {
                 NotImplemented(clientSocket);
                 return;
@@ -152,25 +185,39 @@ namespace SecSemTask2_WebServer.WebServer.Core
             {
                 length = requestedFile.Length - start;
                 string extension = requestedFile.Substring(start, length);
-                if (extensions.ContainsKey(extension)) // Мы поддерживаем это расширение?
-                    if (File.Exists(contentPath + requestedFile)) // Если да
-                                                                  // ТО отсылаем запрашиваемы контент:
+
+                if (extensions.ContainsKey(extension))
+                {
+                    if (File.Exists(contentPath + requestedFile))
+                    {
                         SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile), extensions[extension]);
+                    }
                     else
-                        NotFound(clientSocket); // Мы не поддерживаем данный контент.
+                    {
+                        NotFound(clientSocket);
+                    }
+                }
             }
             else
             {
                 // Если файл не указан, пробуем послать index.html
                 // Вы можете добавить больше(например "default.html")
                 if (requestedFile.Substring(length - 1, 1) != "\\")
+                {
                     requestedFile += "\\";
+                }
                 if (File.Exists(contentPath + requestedFile + "index.htm"))
+                {
                     SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile + "\\index.htm"), "text/html");
+                }
                 else if (File.Exists(contentPath + requestedFile + "index.html"))
+                {
                     SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile + "\\index.html"), "text/html");
+                }
                 else
+                {
                     NotFound(clientSocket);
+                }
             }
         }
         private void NotImplemented(Socket clientSocket)
@@ -182,7 +229,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
                     "Server </h2><div> 501 - Method Not" +
                     "Implemented </div></body></html>",
 
-                    "501 Not Implemented",      "text/html");
+                    "501 Not Implemented", "text/html");
         }
 
         private void NotFound(Socket clientSocket)
@@ -194,7 +241,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
                 "Server </h2><div> 404 - Not" +
                 "Found </div></body></html> ",
 
-                "404 Not Found",        "text/html");
+                "404 Not Found", "text/html");
         }
 
         private void SendOkResponse(Socket clientSocket, byte[] bContent, string contentType)
@@ -225,7 +272,15 @@ namespace SecSemTask2_WebServer.WebServer.Core
                 clientSocket.Send(bContent);
                 clientSocket.Close();
             }
-            catch { }
+            catch (SocketException e)
+            {
+                // LOG EXCEPTION
+            }
+            catch (Exception e)
+            {
+                // LOG EXCEPTION
+                throw;
+            }
         }
     }
 }
