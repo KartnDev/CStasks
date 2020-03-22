@@ -1,0 +1,11 @@
+﻿{
+  "htm": "text/html",
+  "html": "text/html",
+  "xml": "text/xml",
+  "txt": "text/plain",
+  "css": "text/css",
+  "png": "image/png",
+  "gif": "image/gif",
+  "jpg": "image/jpg",
+  "jpeg": "image/jpeg"
+}

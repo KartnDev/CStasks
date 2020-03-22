@@ -93,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Configuration\Config.JSON" />
+    <None Include="Configuration\ContentTypesMap.JSON" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SecSemTask2_WebServer\SecSemTask2_WebServer.csproj">
@@ -103,7 +105,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Content\edit.html" />
-    <Content Include="Content\home.html" />
+    <Content Include="Content\Home\home.html" />
     <Content Include="Content\Index.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

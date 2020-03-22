@@ -100,13 +100,11 @@
     <Compile Include="WebServer\Core\Handlers\HttpGetHandler.cs" />
     <Compile Include="WebServer\Core\Handlers\IHandler.cs" />
     <Compile Include="WebServer\Core\Server.cs" />
+    <Compile Include="WebServer\Utils\ConfigModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WebServer\Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Configuration\Config.JSON" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SecSemTask2_WebServer.WebServer.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 namespace SecSemTask2_WebServer.WebServer.Core
 {
     public class Server
-    {
+    { 
         private readonly IPAddress ipAddress;
         private readonly int port;
         private readonly int connectionsNum;
@@ -27,21 +29,24 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private Dictionary<string, string> extensions = new Dictionary<string, string>()
         { 
             //{ "extension", "content type" }
-            { "htm", "text/html" },
-            { "html", "text/html" },
-            { "xml", "text/xml" },
-            { "txt", "text/plain" },
-            { "css", "text/css" },
-            { "png", "image/png" },
-            { "gif", "image/gif" },
-            { "jpg", "image/jpg" },
-            { "jpeg", "image/jpeg" },
-            { "zip", "application/zip"}
+            
         };
 
 
         public Server(string contentPath, int port = 1337, string ipAddr = "127.0.0.1", int numConnections = 255)
         {
+            string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+            projectDir = projectDir.Substring(0, projectDir.Length - 4);
+
+            ConfigModel jsonConfig;
+
+            using (StreamReader r = new StreamReader(projectDir + "\\Configuration\\Config.JSON"))
+            {
+                string json = r.ReadToEnd();
+                jsonConfig = JsonConvert.DeserializeObject<ConfigModel>(json);
+            }
+
+
             this.ipAddress = IPAddress.Parse(ipAddr);
             this.port = port;
             this.connectionsNum = numConnections;
