@@ -15,7 +15,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
         private string contentPath;
         private readonly Encoding charEncoder = Encoding.UTF8;
 
-
         public RequestController(string contentPath)
         {
             this.contentPath = contentPath;
@@ -28,16 +27,22 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
             return charEncoder.GetString(buffer, 0, receivedBCount);
         }
 
-        public async void HandleAsync(Socket clientSocket)
+
+
+
+
+        public void HandleAsync(Socket clientSocket)
         {
             var strRecieved = this.ParseReqString(clientSocket, 10240);
 
             HttpStringParser httpMsgParser = new HttpStringParser(strRecieved);
 
             var httpMethod = httpMsgParser.GetHttpMethod();
-            var requestedFile = httpMsgParser.GetRequestedFile();
+            var requestedFile = contentPath + httpMsgParser.GetRequestedFile();
 
             IWebHandler handler = null;
+
+
 
             if (httpMethod.Equals("GET"))
             {
@@ -52,7 +57,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
                 handler = new ServerErrorHandler(clientSocket, requestedFile);
             }
 
-            await handler.Handle();
+            handler.Handle();
 
         }
     }

@@ -26,8 +26,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private Socket serverSocket;
 
 
-
-        public Server(string contentPath, int port = 1337, string ipAddr = "127.0.0.1", int numConnections = 255)
+        public Server()
         {
             string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
             projectDir = projectDir.Substring(0, projectDir.Length - 4);

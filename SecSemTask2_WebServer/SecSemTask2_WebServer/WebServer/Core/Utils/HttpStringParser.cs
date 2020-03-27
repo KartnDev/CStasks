@@ -35,5 +35,9 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             return requestedFile.Replace("/", "\\").Replace("\\..", "");   
         }
 
+        public bool isCorrect()
+        {
+            return clientReq.Contains("HTTP/1.1") && (clientReq.Split(' ')[1].ToString()[1] == '/');
+        }
     }
 }

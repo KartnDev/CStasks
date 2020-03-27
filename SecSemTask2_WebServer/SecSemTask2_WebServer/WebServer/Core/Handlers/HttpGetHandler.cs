@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -15,7 +16,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
         public override void Handle()
         {
-            this.SendOkResponse(clientSocket, null, )
+            File.ReadAllBytes(filePath);
+
+
+            this.SendOkResponse(clientSocket, null, "text/html");
         }
     }
 }

@@ -15,25 +15,14 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
         public override void Handle()
         {
-            throw new NotImplementedException();
-        }
-
-
-
-        private void NotImplemented(Socket clientSocket)
-        {
             SendResponse(clientSocket, "<html><head><meta" +
-                    "http - equiv =\"Content-Type\" content=\"text/html;" +
-                    "charset = utf - 8\">" +
-                    "</head><body><h2> Hello Web!" +
-                    "Server </h2><div> 501 - Method Not" +
-                    "Implemented </div></body></html>",
+                     "http - equiv =\"Content-Type\" content=\"text/html;" +
+                     "charset = utf - 8\">" +
+                     "</head><body><h2> Hello Web!" +
+                     "Server </h2><div> 501 - Method Not" +
+                     "Implemented </div></body></html>",
 
-                    "501 Not Implemented", "text/html");
+                     "501 Not Implemented", "text/html");
         }
-
-
-
-
     }
 }
