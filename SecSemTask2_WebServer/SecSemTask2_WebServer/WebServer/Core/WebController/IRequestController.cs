@@ -8,7 +8,5 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 {
     public interface IRequestController
     {
-
-
     }
 }

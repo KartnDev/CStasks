@@ -1,4 +1,5 @@
 ﻿using SecSemTask2_WebServer.WebServer.Core.Handlers;
+using SecSemTask2_WebServer.WebServer.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
     {
 
         private string contentPath;
-        private Encoding charEncoder = Encoding.UTF8;
+        private readonly Encoding charEncoder = Encoding.UTF8;
 
 
         public RequestController(string contentPath)
@@ -20,78 +21,39 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
             this.contentPath = contentPath;
         }
 
-        public void HandleTheRequest(Socket clientSocket)
+        private string ParseReqString(Socket clientSocket, int reqLen)
         {
-            byte[] buffer = new byte[10240];
+            byte[] buffer = new byte[reqLen];
             int receivedBCount = clientSocket.Receive(buffer);
-            string strReceived = charEncoder.GetString(buffer, 0, receivedBCount);
+            return charEncoder.GetString(buffer, 0, receivedBCount);
+        }
 
-            string httpMethod = strReceived.Substring(0, strReceived.IndexOf(" "));
+        public async void HandleAsync(Socket clientSocket)
+        {
+            var strRecieved = this.ParseReqString(clientSocket, 10240);
 
-            int start = strReceived.IndexOf(httpMethod) + httpMethod.Length + 1;
-            int length = strReceived.LastIndexOf("HTTP") - start - 1;
-            string requestedUrl = strReceived.Substring(start, length);
+            HttpStringParser httpMsgParser = new HttpStringParser(strRecieved);
 
-            string requestedFile;
+            var httpMethod = httpMsgParser.GetHttpMethod();
+            var requestedFile = httpMsgParser.GetRequestedFile();
 
-            IWebHandler handler = null; 
+            IWebHandler handler = null;
 
             if (httpMethod.Equals("GET"))
             {
-                handler = new HttpGetHandler();
-                requestedFile = requestedUrl.Split('?')[0];
+                handler = new HttpGetHandler(clientSocket, requestedFile);
             }
             if (httpMethod.Equals("POST"))
             {
-                handler = new HttpPostHandler();
+                handler = new HttpPostHandler(clientSocket, requestedFile);
             }
             else
             {
-                handler = new ServerErrorHandler()
-
-                NotImplemented(clientSocket);
-                return;
+                handler = new ServerErrorHandler(clientSocket, requestedFile);
             }
 
-            requestedFile = requestedFile.Replace("/", "\\").Replace("\\..", ""); // Not to go back
-            start = requestedFile.LastIndexOf('.') + 1;
-            if (start > 0)
-            {
-                length = requestedFile.Length - start;
-                string extension = requestedFile.Substring(start, length);
+            await handler.Handle();
 
-                if (extensions.ContainsKey(extension))
-                {
-                    if (File.Exists(contentPath + requestedFile))
-                    {
-                        SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile), extensions[extension]);
-                    }
-                    else
-                    {
-                        NotFound(clientSocket);
-                    }
-                }
-            }
-            else
-            {
-                // Если файл не указан, пробуем послать index.html
-                // Вы можете добавить больше(например "default.html")
-                if (requestedFile.Substring(length - 1, 1) != "\\")
-                {
-                    requestedFile += "\\";
-                }
-                if (File.Exists(contentPath + requestedFile + "index.html"))
-                {
-                    SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile + "\\index.htm"), "text/html");
-                }
-                else if (File.Exists(contentPath + requestedFile + "index.html"))
-                {
-                    SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile + "\\index.html"), "text/html");
-                }
-                else
-                {
-                    NotFound(clientSocket);
-                }
-            }
         }
+    }
 }
