@@ -1,6 +1,6 @@
 ﻿{
   "port": 1337,
-  "ip": "localhost",
+  "ip": "127.0.0.1",
   "numConnections": 60,
   "secretToken": "d4nse2igrp807s3zuiuy34uove6fgsdrefawqdkifd7f970gfyh2re3qw78hgf0pffqjfhda83tr",
   "localPath": true,

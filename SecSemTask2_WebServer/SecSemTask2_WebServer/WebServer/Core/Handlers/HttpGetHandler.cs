@@ -16,10 +16,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
         public override void Handle()
         {
-            File.ReadAllBytes(filePath);
-
-
-            this.SendOkResponse(clientSocket, null, "text/html");
+            this.SendOkResponse(File.ReadAllBytes(filePath), "text/html");
         }
     }
 }

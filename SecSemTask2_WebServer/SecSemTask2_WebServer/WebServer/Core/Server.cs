@@ -22,7 +22,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
         public bool running = false;
 
-        private int timeout = 8;
+        private int timeout = 200;
         private Socket serverSocket;
 
 
@@ -84,34 +84,20 @@ namespace SecSemTask2_WebServer.WebServer.Core
             {
                 while (running)
                 {
-                    Socket clientSocket;
+                    Socket clientSocket = null;
                     try
                     {
                         clientSocket = serverSocket.Accept();
-                        // Создаем новый поток для нового клиента и продолжаем слушать сокет.
+
                         Thread requestHandler = new Thread(() =>
                         {
                             clientSocket.ReceiveTimeout = timeout;
                             clientSocket.SendTimeout = timeout;
 
-                            try
-                            {
-                                var controller = new RequestController(contentPath);
-                                controller.HandleAsync(clientSocket);
-                            }
-                            catch (SocketException e)
-                            {
-                                // LOG EXCEPTION   
-                            }
-                            catch (Exception e)
-                            {
-                                // LOG EXCEPTION
-                                throw;
-                            }
-                            finally
-                            {
-                                clientSocket.Close();
-                            }
+
+                            var controller = new RequestController(contentPath);
+                            controller.HandleAsync(clientSocket);
+
                         });
                         requestHandler.Start();
                     }

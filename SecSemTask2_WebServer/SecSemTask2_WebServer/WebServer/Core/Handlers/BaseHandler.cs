@@ -25,19 +25,19 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
 
 
-        protected void SendOkResponse(Socket clientSocket, byte[] bContent, string contentType)
+        protected void SendOkResponse(byte[] bContent, string contentType)
         {
-            SendResponse(clientSocket, bContent, "200 OK", contentType);
+            SendResponse(bContent, "200 OK", contentType);
         }
 
-        protected void SendResponse(Socket clientSocket, string strContent, string responseCode,
+        protected void SendResponse(string strContent, string responseCode,
                                   string contentType)
         {
             byte[] bContent = charEncoder.GetBytes(strContent);
-            SendResponse(clientSocket, bContent, responseCode, contentType);
+            SendResponse( bContent, responseCode, contentType);
         }
 
-        protected void SendResponse(Socket clientSocket, byte[] bContent, string responseCode, string contentType)
+        protected void SendResponse(byte[] bContent, string responseCode, string contentType)
         {
             try
             {
@@ -48,7 +48,18 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                                   + "Connection: close\r\n"
                                   + "Content-Type: " + contentType + "\r\n\r\n");
                 clientSocket.Send(bHeader);
-                clientSocket.Send(bContent);
+                if(bContent.Length > 10240)
+                {
+                    for (int i = 0; i < bContent.Length; i += 10240)
+                    {
+                        clientSocket.Send(bContent.Skip(0).Take(10240).ToArray());
+                    }
+                }
+                else
+                {
+                    clientSocket.Send(bContent);
+                }
+                
                 clientSocket.Close();
             }
             catch (SocketException e)

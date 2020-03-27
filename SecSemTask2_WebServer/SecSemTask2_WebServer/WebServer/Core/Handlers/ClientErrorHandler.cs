@@ -9,20 +9,13 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
     public class ClientErrorHandler : BaseHandler
     {
-        public ClientErrorHandler(Socket clientSocket, string filePath) : base(clientSocket, filePath)
+        public ClientErrorHandler(Socket clientSocket) : base(clientSocket, null)
         {
         }
 
         public override void Handle()
         {
-            throw new NotImplementedException();
-        }
-
-
-        private void NotFound(Socket clientSocket)
-        {
-
-            SendResponse(clientSocket, "<html><head><meta" +
+            SendResponse("<html><head><meta" +
                 "http - equiv =\"Content-Type\" content=\"text/html;" +
                 "charset = utf - 8\"></head><body><h2>Bad gateway!" +
                 "Server </h2><div> 404 - Not" +

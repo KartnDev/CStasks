@@ -22,13 +22,11 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 
         private string ParseReqString(Socket clientSocket, int reqLen)
         {
+
             byte[] buffer = new byte[reqLen];
             int receivedBCount = clientSocket.Receive(buffer);
             return charEncoder.GetString(buffer, 0, receivedBCount);
         }
-
-
-
 
 
         public void HandleAsync(Socket clientSocket)
@@ -37,26 +35,29 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 
             HttpStringParser httpMsgParser = new HttpStringParser(strRecieved);
 
-            var httpMethod = httpMsgParser.GetHttpMethod();
-            var requestedFile = contentPath + httpMsgParser.GetRequestedFile();
-
             IWebHandler handler = null;
-
-
-
-            if (httpMethod.Equals("GET"))
+            if (httpMsgParser.isCorrect(new string[] { "GET", "POST" }))
             {
-                handler = new HttpGetHandler(clientSocket, requestedFile);
-            }
-            if (httpMethod.Equals("POST"))
-            {
-                handler = new HttpPostHandler(clientSocket, requestedFile);
+
+                var httpMethod = httpMsgParser.GetHttpMethod();
+                var requestedFile = contentPath + httpMsgParser.GetRequestedFile();
+                if (httpMethod.Equals("GET"))
+                {
+                    handler = new HttpGetHandler(clientSocket, requestedFile);
+                }
+                if (httpMethod.Equals("POST"))
+                {
+                    handler = new HttpPostHandler(clientSocket, requestedFile);
+                }
+                else
+                {
+                    handler = new ServerErrorHandler(clientSocket, requestedFile);
+                }
             }
             else
             {
-                handler = new ServerErrorHandler(clientSocket, requestedFile);
+                handler = new ClientErrorHandler(clientSocket);
             }
-
             handler.Handle();
 
         }

@@ -12,7 +12,7 @@ namespace ServerMain
     {
         public static void Main(string[] args)
         {
-            Server server = new Server(@"C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\Content");
+            Server server = new Server();
             server.Start();
         }
     }

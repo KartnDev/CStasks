@@ -36,5 +36,4 @@ C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\bin\De
 C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\obj\Debug\SecSemTask2_WebServer.csprojAssemblyReference.cache
 C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\SecSemTask2_WebServer\obj\Debug\SecSemTask2_WebServer.csproj.CopyComplete
