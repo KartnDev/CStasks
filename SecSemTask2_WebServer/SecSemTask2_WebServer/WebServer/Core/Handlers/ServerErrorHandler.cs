@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
-    public class HttpGetHandler : IWebHandler
+    class ServerErrorHandler : IWebHandler
     {
     }
 }

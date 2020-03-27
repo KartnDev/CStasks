@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecSemTask2_WebServer.WebServer.Core.Handlers
+namespace SecSemTask2_WebServer.WebServer.Core.WebController
 {
-    public class HttpGetHandler : IWebHandler
+    public interface IRequestController
     {
+
+
     }
 }

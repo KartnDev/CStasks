@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
-    class IHandler
+    public abstract class BaseHandler
     {
     }
 }

@@ -19,26 +19,19 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private readonly int connectionsNum;
         private readonly string contentPath;
 
-        public bool running = false; //Запущено ли?
+        public bool running = false; 
 
-        private int timeout = 8; // Лиммт времени на приём данных.
-        private Encoding charEncoder = Encoding.UTF8; // Кодировка
-        private Socket serverSocket; // Нащ сокет
+        private int timeout = 8; 
+        private Socket serverSocket; 
 
-        // Поодерживаемый контент нашим сервером
-        private Dictionary<string, string> extensions = new Dictionary<string, string>()
-        { 
-            //{ "extension", "content type" }
-            
-        };
-
+       
 
         public Server(string contentPath, int port = 1337, string ipAddr = "127.0.0.1", int numConnections = 255)
         {
             string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
             projectDir = projectDir.Substring(0, projectDir.Length - 4);
 
-            ConfigModel jsonConfig;
+            ConfigModel jsonConfig; // == null ?? throw Exception 
 
             using (StreamReader r = new StreamReader(projectDir + "\\Configuration\\Config.JSON"))
             {
@@ -47,10 +40,18 @@ namespace SecSemTask2_WebServer.WebServer.Core
             }
 
 
-            this.ipAddress = IPAddress.Parse(ipAddr);
-            this.port = port;
-            this.connectionsNum = numConnections;
-            this.contentPath = contentPath;
+            this.ipAddress = IPAddress.Parse(jsonConfig.ip);
+            this.port = jsonConfig.port;
+            this.connectionsNum = jsonConfig.numConnections;
+            if (jsonConfig.localPath)
+            {
+                this.contentPath = projectDir + jsonConfig.contentPath;
+            }
+            else
+            {
+                this.contentPath = jsonConfig.contentPath;
+            }
+            
         }
 
         public bool Start()
@@ -132,7 +133,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
             return true;
         }
 
-        public void stop()
+        public void Stop()
         {
             if (running)
             {
@@ -154,76 +155,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
             }
         }
 
-        private void HandleTheRequest(Socket clientSocket)
-        {
-            byte[] buffer = new byte[10240];
-            int receivedBCount = clientSocket.Receive(buffer);
-            string strReceived = charEncoder.GetString(buffer, 0, receivedBCount);
-
-
-
-            // Parse the request
-            string httpMethod = strReceived.Substring(0, strReceived.IndexOf(" "));
-
-
-
-            int start = strReceived.IndexOf(httpMethod) + httpMethod.Length + 1;
-            int length = strReceived.LastIndexOf("HTTP") - start - 1;
-            string requestedUrl = strReceived.Substring(start, length);
-
-
-
-            string requestedFile;
-            if (httpMethod.Equals("GET") || httpMethod.Equals("POST"))
-            {
-                requestedFile = requestedUrl.Split('?')[0];
-            }
-            else
-            {
-                NotImplemented(clientSocket);
-                return;
-            }
-
-            requestedFile = requestedFile.Replace("/", "\\").Replace("\\..", ""); // Not to go back
-            start = requestedFile.LastIndexOf('.') + 1;
-            if (start > 0)
-            {
-                length = requestedFile.Length - start;
-                string extension = requestedFile.Substring(start, length);
-
-                if (extensions.ContainsKey(extension))
-                {
-                    if (File.Exists(contentPath + requestedFile))
-                    {
-                        SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile), extensions[extension]);
-                    }
-                    else
-                    {
-                        NotFound(clientSocket);
-                    }
-                }
-            }
-            else
-            {
-                // Если файл не указан, пробуем послать index.html
-                // Вы можете добавить больше(например "default.html")
-                if (requestedFile.Substring(length - 1, 1) != "\\")
-                {
-                    requestedFile += "\\";
-                }
-                if (File.Exists(contentPath + requestedFile + "index.htm"))
-                {
-                    SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile + "\\index.htm"), "text/html");
-                }
-                else if (File.Exists(contentPath + requestedFile + "index.html"))
-                {
-                    SendOkResponse(clientSocket, File.ReadAllBytes(contentPath + requestedFile + "\\index.html"), "text/html");
-                }
-                else
-                {
-                    NotFound(clientSocket);
-                }
-            }
+        
         }
         private void NotImplemented(Socket clientSocket)
         {
