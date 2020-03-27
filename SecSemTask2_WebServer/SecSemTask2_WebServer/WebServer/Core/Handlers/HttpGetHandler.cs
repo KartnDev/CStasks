@@ -16,7 +16,14 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
         public override void Handle()
         {
-            this.SendOkResponse(File.ReadAllBytes(filePath), "text/html");
+            if (filePath.Contains('.'))
+            {
+                this.SendOkResponse(File.ReadAllBytes(filePath), "text/" + filePath.Split('.')[1]);
+            }
+            else
+            {
+                this.SendOkResponse(File.ReadAllBytes(filePath + "index.html"), "text/html");
+            }
         }
     }
 }

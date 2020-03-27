@@ -22,7 +22,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
         public bool running = false;
 
-        private int timeout = 200;
+        private int timeout = -1;
         private Socket serverSocket;
 
 

@@ -17,7 +17,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         {
             SendResponse("<html><head><meta" +
                 "http - equiv =\"Content-Type\" content=\"text/html;" +
-                "charset = utf - 8\"></head><body><h2>Bad gateway!" +
+                "charset = utf - 8\"></head><body><h2>Bad gateway! " +
                 "Server </h2><div> 404 - Not" +
                 "Found </div></body></html> ",
 

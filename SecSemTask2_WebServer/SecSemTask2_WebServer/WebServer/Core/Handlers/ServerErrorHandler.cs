@@ -9,7 +9,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
     public class ServerErrorHandler : BaseHandler
     {
-        public ServerErrorHandler(Socket clientSocket, string filePath) : base(clientSocket, filePath)
+        public ServerErrorHandler(Socket clientSocket) : base(clientSocket, null)
         {
         }
 

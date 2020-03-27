@@ -105,6 +105,7 @@
   <ItemGroup>
     <Content Include="Content\edit.html" />
     <Content Include="Content\Home\home.html" />
+    <Content Include="Content\index.css" />
     <Content Include="Content\Index.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

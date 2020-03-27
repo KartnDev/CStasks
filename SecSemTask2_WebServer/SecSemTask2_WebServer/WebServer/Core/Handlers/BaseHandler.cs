@@ -52,7 +52,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                 {
                     for (int i = 0; i < bContent.Length; i += 10240)
                     {
-                        clientSocket.Send(bContent.Skip(0).Take(10240).ToArray());
+                        clientSocket.Send(bContent.Skip(i).Take(10240).ToArray());
                     }
                 }
                 else
@@ -60,7 +60,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                     clientSocket.Send(bContent);
                 }
                 
-                clientSocket.Close();
             }
             catch (SocketException e)
             {
@@ -70,6 +69,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             {
                 // LOG EXCEPTION
                 throw;
+            }
+            finally
+            {
+                Interrupt();
             }
         }
 

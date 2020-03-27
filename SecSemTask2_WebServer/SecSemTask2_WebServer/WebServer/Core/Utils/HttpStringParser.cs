@@ -17,30 +17,20 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
 
         public string GetHttpMethod()
         {
-            string httpMethod = clientReq.Substring(0, clientReq.IndexOf(" "));
-
-            int start = clientReq.IndexOf(httpMethod) + httpMethod.Length + 1;
-            int length = clientReq.LastIndexOf("HTTP") - start - 1;
-
-            return clientReq.Substring(start, length);
+            return clientReq.Split(' ')[0];
         }
 
         public string GetRequestedFile()
         {
-            int start = clientReq.IndexOf(GetHttpMethod()) + GetHttpMethod().Length + 1;
-            int length = clientReq.LastIndexOf("HTTP") - start - 1;
-            string requestedUrl = clientReq.Substring(start, length);
-
-            string requestedFile = requestedUrl.Split('?')[0];
-            return requestedFile.Replace("/", "\\").Replace("\\..", "");   
+            return clientReq.Split(' ')[1];   
         }
 
         public bool isCorrect(string[] methods)
         {
             var words = clientReq.Split(' ');
-            if(words.Length > 3)
+            if(words.Length >= 3)
             {
-                return methods.Contains(words[0]) && words[1][1] == '/' && words[2].Contains("HTTP");
+                return methods.Contains(words[0]) && words[1].Contains('/') && words[2].Contains("HTTP");
             }
             else
             {

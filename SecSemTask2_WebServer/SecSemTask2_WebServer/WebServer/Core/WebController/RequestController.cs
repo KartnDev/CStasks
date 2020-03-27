@@ -2,6 +2,7 @@
 using SecSemTask2_WebServer.WebServer.Core.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -36,30 +37,49 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
             HttpStringParser httpMsgParser = new HttpStringParser(strRecieved);
 
             IWebHandler handler = null;
+
             if (httpMsgParser.isCorrect(new string[] { "GET", "POST" }))
             {
 
                 var httpMethod = httpMsgParser.GetHttpMethod();
-                var requestedFile = contentPath + httpMsgParser.GetRequestedFile();
-                if (httpMethod.Equals("GET"))
+                var requestedFile = contentPath + httpMsgParser.GetRequestedFile().Replace('/', '\\');
+
+                bool fileExists = File.Exists(requestedFile) || (httpMsgParser.GetRequestedFile() == '/'.ToString());
+
+                if (!fileExists)
+                {
+                    handler = new ClientErrorHandler(clientSocket);
+                }
+                else if (httpMethod.Equals("GET") && fileExists)
                 {
                     handler = new HttpGetHandler(clientSocket, requestedFile);
                 }
-                if (httpMethod.Equals("POST"))
+                else if (httpMethod.Equals("POST") && fileExists)
                 {
                     handler = new HttpPostHandler(clientSocket, requestedFile);
                 }
                 else
                 {
-                    handler = new ServerErrorHandler(clientSocket, requestedFile);
+                    handler = new ServerErrorHandler(clientSocket);
                 }
             }
             else
             {
                 handler = new ClientErrorHandler(clientSocket);
             }
-            handler.Handle();
 
+            try
+            {
+                handler.Handle();
+            } 
+            catch (SocketException e)
+            {
+
+            }
+            catch (FileNotFoundException e)
+            {
+
+            }
         }
     }
 }
