@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,9 +15,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         protected string filePath;
 
         private readonly Encoding charEncoder = Encoding.UTF8;
-
-        public BaseHandler(Socket clientSocket, string filePath)
+        protected readonly Logger logger;
+        public BaseHandler(Socket clientSocket, string filePath, Logger logger)
         {
+            this.logger = logger;
             this.clientSocket = clientSocket;
             this.filePath = filePath;
         }

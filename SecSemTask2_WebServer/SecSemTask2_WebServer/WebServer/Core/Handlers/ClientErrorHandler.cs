@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -9,7 +10,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
     public class ClientErrorHandler : BaseHandler
     {
-        public ClientErrorHandler(Socket clientSocket) : base(clientSocket, null)
+        public ClientErrorHandler(Socket clientSocket, Logger logger) : base(clientSocket, null, logger)
         {
         }
 

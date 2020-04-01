@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using NLog;
 using SecSemTask2_WebServer.WebServer.Configuration;
 using SecSemTask2_WebServer.WebServer.Core.WebController;
 using System;
@@ -19,13 +20,14 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private readonly int port;
         private readonly int connectionsNum;
         private readonly string contentPath;
+        private readonly string token;
 
         public bool running = false;
 
         private int timeout = -1;
         private Socket serverSocket;
 
-
+        private readonly Logger logger = LogManager.GetCurrentClassLogger();
         public Server()
         {
             string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
@@ -39,10 +41,10 @@ namespace SecSemTask2_WebServer.WebServer.Core
                 jsonConfig = JsonConvert.DeserializeObject<ConfigModel>(json);
             }
 
-
             this.ipAddress = IPAddress.Parse(jsonConfig.ip);
             this.port = jsonConfig.port;
             this.connectionsNum = jsonConfig.numConnections;
+            this.token = jsonConfig.secretToken;
             if (jsonConfig.localPath)
             {
                 this.contentPath = projectDir + jsonConfig.contentPath;
@@ -52,7 +54,26 @@ namespace SecSemTask2_WebServer.WebServer.Core
                 this.contentPath = jsonConfig.contentPath;
             }
 
+            ConfigLogger("log.txt");
         }
+
+
+        private void ConfigLogger(string filename)
+        {
+            var config = new NLog.Config.LoggingConfiguration();
+
+            // Targets where to log to: File and Console
+            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = filename};
+            var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
+
+            // Rules for mapping loggers to targets            
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logconsole);
+            config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);
+
+            // Apply config           
+            NLog.LogManager.Configuration = config;
+        }
+
 
         public bool Start()
         {
@@ -72,11 +93,12 @@ namespace SecSemTask2_WebServer.WebServer.Core
             }
             catch (SocketException e)
             {
-                // LOG EXCEPTION
+                logger.Error(e, "server socket init error..");
                 return false;
             }
             catch (Exception e)
             {
+                logger.Error(e, "unhandled server socket itit error..");
                 throw;
             }
 
@@ -95,19 +117,22 @@ namespace SecSemTask2_WebServer.WebServer.Core
                             clientSocket.SendTimeout = timeout;
 
 
-                            var controller = new RequestController(contentPath);
-                            controller.HandleAsync(clientSocket);
+                            var controller = new RequestController(contentPath, token);
+                            if (controller.RedirectToHttpHandler(clientSocket) == 1)
+                            {
+                                Stop();
+                            }
 
                         });
                         requestHandler.Start();
                     }
                     catch (SocketException e)
                     {
-                        // LOG EXCEPTION  
+                        logger.Error(e, "accept the client serversocket-error..");
                     }
                     catch (Exception e)
                     {
-                        // LOG EXCEPTION
+                        logger.Error(e, "accept the client  unhandled-error..");
                         throw;
                     }
                 }
@@ -128,11 +153,11 @@ namespace SecSemTask2_WebServer.WebServer.Core
                 }
                 catch (SocketException e)
                 {
-                    // LOG EXCEPTION
+                    logger.Error(e, "close server socket error..");
                 }
                 catch (Exception e)
                 {
-                    // LOG EXCEPTION
+                    logger.Error(e, "unhandled stop command error..");
                     throw;
                 }
                 serverSocket = null;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
     public class HttpGetHandler : BaseHandler
     {
-        public HttpGetHandler(Socket clientSocket, string fileName) : base(clientSocket, fileName)
+        public HttpGetHandler(Socket clientSocket, string fileName, Logger logger) : base(clientSocket, fileName, logger)
         {
         }
 
