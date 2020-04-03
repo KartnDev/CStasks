@@ -111,15 +111,16 @@
     <Compile Include="WebServer\Core\Handlers\HttpPostHandler.cs" />
     <Compile Include="WebServer\Core\Handlers\IWebHandler.cs" />
     <Compile Include="WebServer\Core\Handlers\ServerErrorHandler.cs" />
+    <Compile Include="WebServer\Core\Routers\ContentTypes.cs" />
+    <Compile Include="WebServer\Core\Routers\HttpMethodTypes.cs" />
+    <Compile Include="WebServer\Core\Routers\Router.cs" />
     <Compile Include="WebServer\Core\Server.cs" />
     <Compile Include="WebServer\Core\Utils\HttpStringParser.cs" />
     <Compile Include="WebServer\Core\WebController\IRequestController.cs" />
     <Compile Include="WebServer\Core\WebController\RequestController.cs" />
     <Compile Include="WebServer\Core\Models\ConfigModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WebServer\Core\Routers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
