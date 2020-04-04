@@ -28,6 +28,9 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private Socket serverSocket;
 
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        private readonly Dictionary<string, IEnumerable<string>> mapRoutes = Preloader.MapRoutePreloader.Load();
+
         public Server()
         {
             string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
@@ -116,7 +119,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
                             clientSocket.SendTimeout = timeout;
 
 
-                            var controller = new RequestController(contentPath, token, logger);
+                            var controller = new RequestController(contentPath, token, logger, mapRoutes);
                             if (controller.RedirectToHttpHandler(clientSocket) == 1)
                             {
                                 Stop();

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
-    public abstract class BaseHandler : IWebHandler
+    public abstract class BaseHandler
     {
         protected Socket clientSocket;
         protected string filePath;

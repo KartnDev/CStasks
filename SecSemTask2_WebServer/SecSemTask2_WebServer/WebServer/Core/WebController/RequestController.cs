@@ -18,12 +18,13 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
         private string secretToken;
         private readonly Encoding charEncoder = Encoding.UTF8;
         private readonly Logger logger;
-
-        public RequestController(string contentPath, string secretToken, Logger instanceLogger)
+        private Dictionary<string, IEnumerable<string>> routeMap;
+        public RequestController(string contentPath, string secretToken, Logger instanceLogger, Dictionary<string, IEnumerable<string>> routeMap)
         {
             this.logger = instanceLogger;
             this.contentPath = contentPath;
             this.secretToken = secretToken;
+            this.routeMap = routeMap;
         }
 
         private string ParseReqString(Socket clientSocket, int reqLen)
@@ -45,38 +46,14 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 
             HttpStringParser httpMsgParser = new HttpStringParser(strRecieved);
 
-            IWebHandler handler = null;
 
-            if (httpMsgParser.isCorrect(new string[] { "GET", "POST" }))
+            if (httpMsgParser.isCorrect(new string[] { "GET", "POST" }) && httpMsgParser.HavingRoute(routeMap))
             {
 
                 var httpMethod = httpMsgParser.GetHttpMethod();
-                var requestedFile = contentPath + httpMsgParser.GetRequestedFile().Replace('/', '\\');
-
-                bool fileExists = File.Exists(requestedFile) || (httpMsgParser.GetRequestedFile() == '/'.ToString());
-
-                if (!fileExists)
-                {
-                    handler = new ClientErrorHandler(clientSocket, logger);
-                }
-                else if (httpMethod.Equals("GET") && fileExists)
-                {
-                    handler = new HttpGetHandler(clientSocket, requestedFile, logger);
-                }
-                else if (httpMethod.Equals("POST") && fileExists)
-                {
-                    handler = new HttpPostHandler(clientSocket, requestedFile, logger);
-                }
-                else
-                {
-                    handler = new ServerErrorHandler(clientSocket, logger);
-                }
+                ResponseHandler handler = new ResponseHandler(clientSocket, httpMsgParser.GetRequestedFile(), logger, routeMap, httpMethod);
+                handler.InvokeRouteHandler();
             }
-            else
-            {
-                handler = new ClientErrorHandler(clientSocket, logger);
-            }
-            handler.Handle();
 
             return 0;
         }

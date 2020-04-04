@@ -17,12 +17,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
 
         public bool HavingRoute(Dictionary<string, IEnumerable<string>> routeMap)
         {
-            var path = GetRequestedFile().Split(' ');
-            if(path.Length == 2)
+            var path = GetRequestedFile().Split('/');
+            if(path.Length == 3)
             {
                 foreach(var item in routeMap)
                 {
-                    if(item.Key == path[0] && item.Value.Contains(path[1]))
+                    if(item.Key == path[1].ToLower() + "controller" && item.Value.Contains(path[2].Split('.')[0].ToLower()))
                     {
                         return true;
                     }

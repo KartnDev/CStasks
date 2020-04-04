@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static SecSemTask2_WebServer.WebServer.Core.Utils.Helper;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
@@ -34,10 +35,8 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
         public void InvokeRouteHandler()
         {
-            Type Controller = null;
-            
 
-            string projectDir = FileHelper.GetProjectDir();
+            string projectDir = Helper.GetProjectDir();
 
             string assemblyName = (new FileInfo(projectDir + "\\bin\\server\\ServerMain.exe")).FullName;
             byte[] assemblyBytes = File.ReadAllBytes(assemblyName);
@@ -47,9 +46,15 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                 .Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller))).ToArray();
 
 
-            Controller = contollers.First(contr => contr.Name  == filePath.Split('\\')[0] + "Controller");
+            var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
+            var methodName = filePath.Split('/')[2].Split('.')[0].FirstCharToUpper();
 
-            Controller.GetMethod(filePath.Split('\\')[1]).Invoke(Controller, null);
+            var controller = contollers.First(contr => contr.Name  == controllerName);
+
+            Object instance = Activator.CreateInstance(controller);
+
+
+            controller.GetMethod(methodName).Invoke(instance, null);
         }
     }
 

@@ -118,8 +118,9 @@
     <Compile Include="WebServer\Core\Handlers\ResponseHandler.cs" />
     <Compile Include="WebServer\Core\Handlers\ServerErrorHandler.cs" />
     <Compile Include="WebServer\Core\Engine\IActionResult.cs" />
+    <Compile Include="WebServer\Core\Preloader\MapRoutePreloader.cs" />
     <Compile Include="WebServer\Core\Utils\ContentTypes.cs" />
-    <Compile Include="WebServer\Core\Utils\FileHelper.cs" />
+    <Compile Include="WebServer\Core\Utils\Helper.cs" />
     <Compile Include="WebServer\Core\Utils\HttpMethodTypes.cs" />
     <Compile Include="WebServer\Core\Server.cs" />
     <Compile Include="WebServer\Core\Utils\HttpStringParser.cs" />

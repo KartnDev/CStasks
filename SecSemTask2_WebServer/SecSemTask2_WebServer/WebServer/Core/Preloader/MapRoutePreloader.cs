@@ -21,9 +21,9 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
         {
             var mapPath = new Dictionary<string, IEnumerable<string>>();
 
-            string projectDir = FileHelper.GetProjectDir();
+            string projectDir = Helper.GetProjectDir();
 
-            string assemblyName = (new FileInfo(projectDir + "\\bin\\server\\ServerMain.exe")).FullName;
+            string assemblyName = (new FileInfo(projectDir + "\\bin\\Debug\\ServerMain.exe")).FullName;
             byte[] assemblyBytes = File.ReadAllBytes(assemblyName);
             Assembly assembly = Assembly.Load(assemblyBytes);
 
@@ -40,10 +40,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
 
                     foreach (var item in contoller.GetMethods())
                     {
-                        methodsOfController.Add(item.Name);
+                        methodsOfController.Add(item.Name.ToLower());
                     }
 
-                    mapPath.Add(contoller.Name, methodsOfController);
+                    mapPath.Add(contoller.Name.ToLower(), methodsOfController);
                 }
                 return mapPath;
             }
