@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Routers
 {
-    public class HomeRouter
+    public interface IActionResult
     {
-        [Router("/home/index.html", HttpMethodTypes.HttpGet)]
-        public string Route()
-        {
-            return "HelloWorld";
-        }
-
+        string GetHtmlName();
     }
 }

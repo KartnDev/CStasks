@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecSemTask2_WebServer.WebServer.Core.Routers
+namespace SecSemTask2_WebServer.WebServer.Core.Engine
 {
-    public interface IActionResult
+    public class HttpGetAttribute : Attribute
     {
+
     }
 }

@@ -14,7 +14,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         {
         }
 
-        public override void Handle()
+        public override void Handle(List<string> avaliableRoots = null)
         {
             SendResponse("<html><head><meta" +
                      "http - equiv =\"Content-Type\" content=\"text/html;" +

@@ -23,7 +23,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             this.filePath = filePath;
         }
 
-        public abstract void Handle();
+        public abstract void Handle(List<string> avaliableRoots = null);
 
 
 

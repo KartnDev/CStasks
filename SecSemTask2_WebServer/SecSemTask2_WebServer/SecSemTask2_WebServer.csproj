@@ -111,17 +111,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebServer\Core\Engine\ActionResult.cs" />
+    <Compile Include="WebServer\Core\Engine\Controller.cs" />
+    <Compile Include="WebServer\Core\Engine\HttpGet.cs" />
     <Compile Include="WebServer\Core\Handlers\BaseHandler.cs" />
-    <Compile Include="WebServer\Core\Handlers\ClientErrorHandler.cs" />
-    <Compile Include="WebServer\Core\Handlers\HttpGetHandler.cs" />
-    <Compile Include="WebServer\Core\Handlers\HttpPostHandler.cs" />
-    <Compile Include="WebServer\Core\Handlers\IWebHandler.cs" />
+    <Compile Include="WebServer\Core\Handlers\ResponseHandler.cs" />
     <Compile Include="WebServer\Core\Handlers\ServerErrorHandler.cs" />
-    <Compile Include="WebServer\Core\Routers\IActionResult.cs" />
+    <Compile Include="WebServer\Core\Engine\IActionResult.cs" />
     <Compile Include="WebServer\Core\Utils\ContentTypes.cs" />
     <Compile Include="WebServer\Core\Utils\FileHelper.cs" />
     <Compile Include="WebServer\Core\Utils\HttpMethodTypes.cs" />
-    <Compile Include="WebServer\Core\Routers\Router.cs" />
     <Compile Include="WebServer\Core\Server.cs" />
     <Compile Include="WebServer\Core\Utils\HttpStringParser.cs" />
     <Compile Include="WebServer\Core\WebController\IRequestController.cs" />

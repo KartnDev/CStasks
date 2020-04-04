@@ -93,7 +93,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Routes\HomeRouter.cs" />
+    <Compile Include="Controllers\EditController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="ServerMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,12 +109,14 @@
       <Name>SecSemTask2_WebServer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Content\edit.html" />
-    <Content Include="Content\Home\home.html" />
-    <Content Include="Content\index.css" />
-    <Content Include="Content\Index.html" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="View\Home\edit.html" />
+    <Content Include="View\Home\home.html" />
+    <Content Include="View\Home\index.css" />
+    <Content Include="View\Home\Index.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
