@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SecSemTask2_WebServer.WebServer.Core.Routers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,10 +15,29 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             this.clientReq = reqeast;
         }
 
-
-        public string GetHttpMethod()
+        public bool HavingRoute(Dictionary<string, IEnumerable<string>> routeMap)
         {
-            return clientReq.Split(' ')[0];
+            var path = GetRequestedFile().Split(' ');
+            if(path.Length == 2)
+            {
+                foreach(var item in routeMap)
+                {
+                    if(item.Key == path[0] && item.Value.Contains(path[1]))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+            
+        }
+
+
+        public HttpMethodTypes GetHttpMethod()
+        {
+            //return clientReq.Split(' ')[0];
+            return HttpMethodTypes.HttpGet;
         }
 
         public string GetRequestedFile()
