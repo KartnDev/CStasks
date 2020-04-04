@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Routers
 {
-    class ContentTypes
+    public enum ContentTypes
     {
+        text, // string (text/plain)
+        html, // /html
+        css, // 
     }
 }

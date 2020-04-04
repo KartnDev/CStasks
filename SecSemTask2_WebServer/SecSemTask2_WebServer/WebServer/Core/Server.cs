@@ -31,7 +31,6 @@ namespace SecSemTask2_WebServer.WebServer.Core
         public Server()
         {
             string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-            projectDir = projectDir.Substring(0, projectDir.Length - 4);
 
             ConfigModel jsonConfig; // == null ?? throw Exception 
 
@@ -117,7 +116,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
                             clientSocket.SendTimeout = timeout;
 
 
-                            var controller = new RequestController(contentPath, token);
+                            var controller = new RequestController(contentPath, token, logger);
                             if (controller.RedirectToHttpHandler(clientSocket) == 1)
                             {
                                 Stop();

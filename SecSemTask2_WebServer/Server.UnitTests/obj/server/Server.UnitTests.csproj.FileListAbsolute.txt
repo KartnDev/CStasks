@@ -1,0 +1,14 @@
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\ru\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\ru\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\ru\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\Server.UnitTests.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\bin\server\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\obj\server\Server.UnitTests.csprojAssemblyReference.cache
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\obj\server\Server.UnitTests.csproj.CopyComplete
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\Server.UnitTests\obj\server\Server.UnitTests.dll

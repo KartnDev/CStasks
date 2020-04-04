@@ -1,0 +1,11 @@
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\server\ServerMain.exe.config
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\server\ServerMain.exe
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\server\SecSemTask2_WebServer.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\server\NLog.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\server\Newtonsoft.Json.dll
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\server\SecSemTask2_WebServer.dll.config
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\server\NLog.xml
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\bin\server\Newtonsoft.Json.xml
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\obj\server\ServerMain.csprojAssemblyReference.cache
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\obj\server\ServerMain.csproj.CopyComplete
+C:\Users\dmutp\source\CStasks\SecSemTask2_WebServer\ServerMain\obj\server\ServerMain.exe
