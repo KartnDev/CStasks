@@ -9,11 +9,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.Engine
 {
     public class Controller
     {
-        protected IActionResult View()
+        protected IActionResult View(object[] args = null)
         {
-            var controllerName = this.GetType().Name.Replace("Controller", "");
-
-            return new ActionResult("", controllerName);
+       
+            return new ActionResult(args);
         }
     }
 

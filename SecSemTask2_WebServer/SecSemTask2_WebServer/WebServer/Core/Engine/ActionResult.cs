@@ -9,19 +9,15 @@ namespace SecSemTask2_WebServer.WebServer.Core.Engine
 {
     internal class ActionResult : IActionResult
     {
-        internal string CurrentMethodName { get; private set; }
-        internal string CurrentControllerName { get; private set; }
-
-        internal ActionResult(string currentMethodName, string currentControllerName)
+        public Object[] Params { get; private set; } = null;
+        internal ActionResult(object[] args = null)
         {
-            this.CurrentMethodName = currentMethodName;
-            this.CurrentControllerName = currentControllerName;
+            Params = args;
         }
 
-        public string GetHtmlName()
+        public object[] GetParams()
         {
-            return CurrentControllerName + "\\" + CurrentMethodName + ".html";
+            return Params;
         }
-
     }
 }

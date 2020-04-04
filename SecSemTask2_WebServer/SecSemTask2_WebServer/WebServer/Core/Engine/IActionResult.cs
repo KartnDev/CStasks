@@ -8,6 +8,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.Routers
 {
     public interface IActionResult
     {
-        string GetHtmlName();
+        Object[] GetParams();
     }
 }

@@ -113,7 +113,7 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="View\Home\edit.html" />
+    <Content Include="View\Edit\edit.html" />
     <Content Include="View\Home\home.html" />
     <Content Include="View\Home\index.css" />
     <Content Include="View\Home\Index.html" />

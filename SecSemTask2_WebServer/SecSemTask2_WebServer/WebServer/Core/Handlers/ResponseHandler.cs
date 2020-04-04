@@ -38,7 +38,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             string projectDir = Helper.GetProjectDir();
 
-            string assemblyName = (new FileInfo(projectDir + "\\bin\\server\\ServerMain.exe")).FullName;
+            string assemblyName = (new FileInfo(projectDir + "\\bin\\Debug\\ServerMain.exe")).FullName;
             byte[] assemblyBytes = File.ReadAllBytes(assemblyName);
             Assembly assembly = Assembly.Load(assemblyBytes);
 
@@ -53,8 +53,68 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             Object instance = Activator.CreateInstance(controller);
 
+            //var HttpMethod = controller.GetMethod(methodName).CustomAttributes.First().AttributeType.;
+            
+            IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, null);
 
-            controller.GetMethod(methodName).Invoke(instance, null);
+
+            SendResponse(File.ReadAllBytes(projectDir + "\\View\\" + filePath), "200 OK", "text/" + filePath.Split('.')[1]);
+
+        }
+
+
+
+        protected void SendResponse(string strContent, string responseCode,
+                                  string contentType)
+        {
+            byte[] bContent = charEncoder.GetBytes(strContent);
+            SendResponse(bContent, responseCode, contentType);
+        }
+
+        protected void SendResponse(byte[] bContent, string responseCode, string contentType)
+        {
+            try
+            {
+                byte[] bHeader = charEncoder.GetBytes(
+                                    "HTTP/1.1 " + responseCode + "\r\n"
+                                  + "Server: Cherkasov Simple Web Server\r\n"
+                                  + "Content-Length: " + bContent.Length.ToString() + "\r\n"
+                                  + "Connection: close\r\n"
+                                  + "Content-Type: " + contentType + "\r\n\r\n");
+                clientSocket.Send(bHeader);
+                if (bContent.Length > 10240)
+                {
+                    for (int i = 0; i < bContent.Length; i += 10240)
+                    {
+                        clientSocket.Send(bContent.Skip(i).Take(10240).ToArray());
+                    }
+                }
+                else
+                {
+                    clientSocket.Send(bContent);
+                }
+
+            }
+            catch (SocketException e)
+            {
+                // LOG EXCEPTION
+            }
+            catch (Exception e)
+            {
+                // LOG EXCEPTION
+                throw;
+            }
+            finally
+            {
+                Interrupt();
+            }
+        }
+
+        public void Interrupt()
+        {
+            clientSocket.Disconnect(true);
+            clientSocket.Close();
+            clientSocket.Dispose();
         }
     }
 
