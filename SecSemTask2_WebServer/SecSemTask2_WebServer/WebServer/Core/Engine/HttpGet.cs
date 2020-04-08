@@ -8,6 +8,5 @@ namespace SecSemTask2_WebServer.WebServer.Core.Engine
 {
     public class HttpGetAttribute : Attribute
     {
-
     }
 }
