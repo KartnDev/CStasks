@@ -1,0 +1,9 @@
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\bin\Debug\Task6BouncingBall.exe.config
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\bin\Debug\Task6BouncingBall.exe
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\bin\Debug\Task6BouncingBall.pdb
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\obj\Debug\Task6BouncingBall.csprojAssemblyReference.cache
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\obj\Debug\Task6BouncingBall.Properties.Resources.resources
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\obj\Debug\Task6BouncingBall.csproj.GenerateResource.cache
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\obj\Debug\Task6BouncingBall.exe
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\obj\Debug\Task6BouncingBall.pdb
+C:\Users\dmutp\source\repos\Task6BouncingBall\Task6BouncingBall\obj\Debug\Task6BouncingBall.Form1.resources
