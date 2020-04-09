@@ -1,9 +1,0 @@
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\bin\Debug\STP_Task3_WinForm.exe.config
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\bin\Debug\STP_Task3_WinForm.exe
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\bin\Debug\STP_Task3_WinForm.pdb
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\obj\Debug\STP_Task3_WinForm.csprojAssemblyReference.cache
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\obj\Debug\STP_Task3_WinForm.Form1.resources
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\obj\Debug\STP_Task3_WinForm.Properties.Resources.resources
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\obj\Debug\STP_Task3_WinForm.csproj.GenerateResource.cache
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\obj\Debug\STP_Task3_WinForm.exe
-C:\Users\Dima\source\repos\STP_Task3_WinForm\STP_Task3_WinForm\obj\Debug\STP_Task3_WinForm.pdb

@@ -21,3 +21,5 @@ CG_Task1/CG_Task1/obj/Debug/CG_Task1.exe
 *.resources
 *.cache
 *.txt
+*.exe
+*.dll

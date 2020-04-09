@@ -1,4 +1,0 @@
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\STP_Task6_Sorts\bin\Debug\STP_Task6_Sorts.dll
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\STP_Task6_Sorts\bin\Debug\STP_Task6_Sorts.pdb
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\STP_Task6_Sorts\obj\Debug\STP_Task6_Sorts.dll
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\STP_Task6_Sorts\obj\Debug\STP_Task6_Sorts.pdb

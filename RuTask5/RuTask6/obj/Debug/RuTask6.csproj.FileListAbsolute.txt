@@ -1,7 +1,0 @@
-C:\Users\dmutp\source\repos\RuTask5\RuTask6\bin\Debug\RuTask6.exe.config
-C:\Users\dmutp\source\repos\RuTask5\RuTask6\bin\Debug\RuTask6.exe
-C:\Users\dmutp\source\repos\RuTask5\RuTask6\bin\Debug\RuTask6.pdb
-C:\Users\dmutp\source\repos\RuTask5\RuTask6\obj\Debug\RuTask6.csprojAssemblyReference.cache
-C:\Users\dmutp\source\repos\RuTask5\RuTask6\obj\Debug\RuTask6.csproj.CoreCompileInputs.cache
-C:\Users\dmutp\source\repos\RuTask5\RuTask6\obj\Debug\RuTask6.exe
-C:\Users\dmutp\source\repos\RuTask5\RuTask6\obj\Debug\RuTask6.pdb

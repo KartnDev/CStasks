@@ -1,9 +1,0 @@
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\bin\Debug\STP_Task5_Winform.exe.config
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\bin\Debug\STP_Task5_Winform.exe
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\bin\Debug\STP_Task5_Winform.pdb
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\obj\Debug\STP_Task5_Winform.csprojAssemblyReference.cache
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\obj\Debug\STP_Task5_Winform.Properties.Resources.resources
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\obj\Debug\STP_Task5_Winform.csproj.GenerateResource.cache
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\obj\Debug\STP_Task5_Winform.exe
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\obj\Debug\STP_Task5_Winform.pdb
-C:\Users\dmutp\source\repos\STP_Task5_Winform\STP_Task5_Winform\obj\Debug\STP_Task5_Winform.Form1.resources

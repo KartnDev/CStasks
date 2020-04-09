@@ -1,6 +1,0 @@
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\ConsoleApp\bin\Debug\ConsoleApp.exe.config
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\ConsoleApp\bin\Debug\ConsoleApp.exe
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\ConsoleApp\bin\Debug\ConsoleApp.pdb
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\ConsoleApp\obj\Debug\ConsoleApp.csprojAssemblyReference.cache
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\ConsoleApp\obj\Debug\ConsoleApp.exe
-C:\Users\dmutp\source\repos\STP_Task6_Sorts\ConsoleApp\obj\Debug\ConsoleApp.pdb
