@@ -49,10 +49,19 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 
             if (httpMsgParser.isCorrect(new string[] { "GET", "POST" }) && httpMsgParser.HavingRoute(routeMap))
             {
-
                 var httpMethod = httpMsgParser.GetHttpMethod();
                 ResponseHandler handler = new ResponseHandler(clientSocket, httpMsgParser.GetRequestedFile(), logger, routeMap, httpMethod);
-                handler.InvokeRouteHandler();
+                
+
+                if (httpMsgParser.IsContainsParams())
+                {
+                    var urlParams = httpMsgParser.GetParams();
+                    handler.InvokeRouteHandler(urlParams);
+                }
+                else
+                {
+                    handler.InvokeRouteHandler();
+                } 
             }
 
             return 0;

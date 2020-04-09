@@ -11,8 +11,9 @@ namespace ServerMain.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public IActionResult Home()
+        public IActionResult Home(string name, string surname)
         {
+            Console.WriteLine($"Зашел на Home/home с параметрами name-{name} и surname-{surname}" );
             return View();
         }
 

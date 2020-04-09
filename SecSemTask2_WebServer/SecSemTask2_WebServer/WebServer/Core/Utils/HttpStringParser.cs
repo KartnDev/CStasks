@@ -22,9 +22,19 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             {
                 foreach(var item in routeMap)
                 {
-                    if(item.Key == path[1].ToLower() + "controller" && item.Value.Contains(path[2].Split('.')[0].ToLower()))
+                    if (!IsContainsParams())
                     {
-                        return true;
+                        if (item.Key == path[1].ToLower() + "controller" && item.Value.Contains(path[2].Split('.')[0].ToLower()))
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        if (item.Key == path[1].ToLower() + "controller" && item.Value.Contains(path[2].Split('.')[0].ToLower()))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -33,16 +43,42 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             
         }
 
+        public Dictionary<string, object> GetParams()
+        {
+            var paramStr = clientReq.Split(' ')[1].Split('?')[1];
+
+            var resultParamDict = new Dictionary<string, object>();
+
+            if (paramStr.Contains('&'))
+            {
+                foreach (var item in paramStr.Split('&'))
+                {
+                    resultParamDict.Add(item.Split('=')[0], item.Split('=')[1]);
+                }
+            }
+            else
+            {
+                resultParamDict.Add(paramStr.Split('=')[0], paramStr.Split('=')[1]);
+            }
+
+            return resultParamDict;
+        }
+
+        public bool IsContainsParams()
+        {
+            return clientReq.Split(' ')[1].Contains('?');
+        }
+
 
         public HttpMethodTypes GetHttpMethod()
         {
-            //return clientReq.Split(' ')[0];
+            //TODO other http methods return clientReq.Split(' ')[0];
             return HttpMethodTypes.HttpGet;
         }
 
         public string GetRequestedFile()
         {
-            return clientReq.Split(' ')[1];   
+            return IsContainsParams() ? clientReq.Split(' ')[1].Split('?')[0] : clientReq.Split(' ')[1];   
         }
 
         public bool isCorrect(string[] methods)
@@ -56,10 +92,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             {
                 return false;
             }
-
-
-
-            
         }
     }
 }

@@ -11,7 +11,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.Engine
     {
         protected IActionResult View(object[] args = null)
         {
-       
             return new ActionResult(args);
         }
     }
