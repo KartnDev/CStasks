@@ -56,9 +56,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ServerTest.cs" />
+    <Compile Include="Server.IntegrationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HttpStringParserUnitTest.cs" />
+    <Compile Include="ParsersAndPreloades.UnitTest.cs" />
+    <Compile Include="HttpWriter.UnitTest.cs" />
+    <Compile Include="Responsehandler.UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -15,20 +15,22 @@ using static SecSemTask2_WebServer.WebServer.Core.Utils.Helper;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
-    public class ResponseHandler
+    public class ResponseHandler : IReqHandler
     {
         private string filePath;
         private readonly Logger logger;
 
         private IHttpWriter httpWriter;
 
-        public ResponseHandler(Socket clientSocket, string filePath, Logger logger,
-            Dictionary<string, IEnumerable<string>> contollerMethodPathes, HttpMethodTypes httpMethod)
+        public ResponseHandler(Socket clientSocket, string filePath, Logger logger)
         {
             this.logger = logger;
             this.filePath = filePath;
             httpWriter = new HttpWriter(clientSocket, logger);
         }
+
+
+        //TODO Simplify Code 
 
 
         public void InvokeRouteHandler()
@@ -100,8 +102,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
         }
 
-
-
+        public void Abort()
+        {
+            
+        }
     }
 
 }
