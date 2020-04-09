@@ -48,3 +48,7 @@ SecSemTask2_WebServer/ServerMain/bin/Debug/Newtonsoft.Json.xml
 SecSemTask2_WebServer/ServerMain/bin/Debug/SecSemTask2_WebServer.dll.config
 SecSemTask2_WebServer/ServerMain/bin/Debug/ServerMain.exe.config
 SecSemTask2_WebServer/ServerMain/obj/Debug/ServerMain.csproj.CopyComplete
+SecSemTask2_WebServer/Server.UnitTests/bin/Release/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+SecSemTask2_WebServer/Server.UnitTests/bin/Release/Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+SecSemTask2_WebServer/Server.UnitTests/obj/Release/Server.UnitTests.csproj.CopyComplete
+SecSemTask2_WebServer/.vs/SecSemTask2_WebServer/v16/.suo
