@@ -1,9 +1,0 @@
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\bin\Debug\CG_Task4_.exe.config
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\bin\Debug\CG_Task4_.exe
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\bin\Debug\CG_Task4_.pdb
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\obj\Debug\CG_Task4_.csprojAssemblyReference.cache
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\obj\Debug\CG_Task4_.Form1.resources
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\obj\Debug\CG_Task4_.Properties.Resources.resources
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\obj\Debug\CG_Task4_.csproj.GenerateResource.cache
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\obj\Debug\CG_Task4_.exe
-C:\Users\Dima\source\repos\CG_Task4_\CG_Task4_\obj\Debug\CG_Task4_.pdb
