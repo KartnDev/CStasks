@@ -29,22 +29,19 @@ namespace NumMethods1
             }
         }
 
-        public void DrawInterpolation(LambdaFunc func, float step, InterpolationTypes interpolationTypes)
+        public void DrawInterpolation(LambdaFunc func, float step)
         {
             DrawFunction((x) => (float)(50 * func(x / 100) + 100), 
                 Color.Black);
 
-            double[] pointsX = new double[] { 0, Math.PI / 2, Math.PI, Math.PI * 3 / 2, Math.PI * 2 };
-            double[] pointsY = new double[] { func(pointsX[0]), func(pointsX[1]), func(pointsX[2]), func(pointsX[3]), func(pointsX[4]) };
+            double[] pointsX = new double[] { 0, Math.PI / 2, Math.PI, Math.PI * 3 / 2, Math.PI * 2};
+            double[] pointsY = new double[] { func(pointsX[0]), func(pointsX[1]), func(pointsX[2]), func(pointsX[3]), func(pointsX[4])};
 
-            if (interpolationTypes == InterpolationTypes.Newton)
-            {
-                DrawFunction((x) => (float)(50 * NewtonMethod.Newton(x / 100, pointsX, pointsY, (float)step) + 100), Color.Red);
-            }
-            else if (interpolationTypes == InterpolationTypes.Lagrange)
-            {
-                DrawFunction((x) => (float)(50 * LagrangeMethod.Langrange(x / 100, pointsX, pointsY, 4, (float)step) + 100), Color.Red);
-            }
+
+           DrawFunction((x) => (float)(50 * NewtonMethod.Newton(x / 100, pointsX, pointsY, (float)step) + 100), Color.Red);
+
+           DrawFunction((x) => (float)(50 * LagrangeMethod.Langrange(x / 100, pointsX, pointsY, (float)step - 0.6f) + 100), Color.Green);
+            
         }
     }
 }

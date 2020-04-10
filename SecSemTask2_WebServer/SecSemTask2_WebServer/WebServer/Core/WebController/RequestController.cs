@@ -50,7 +50,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
             if (httpMsgParser.isCorrect(new string[] { "GET", "POST" }) && httpMsgParser.HavingRoute(routeMap))
             {
                 var httpMethod = httpMsgParser.GetHttpMethod();
-                ResponseHandler handler = new ResponseHandler(clientSocket, httpMsgParser.GetRequestedFile(), logger, routeMap, httpMethod);
+                ResponseHandler handler = new ResponseHandler(clientSocket, httpMsgParser.GetRequestedFile(), logger);
                 
 
                 if (httpMsgParser.IsContainsParams())

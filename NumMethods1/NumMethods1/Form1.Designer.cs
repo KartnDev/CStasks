@@ -31,8 +31,8 @@
             this.canvasBox = new System.Windows.Forms.PictureBox();
             this.canvasTextlabel = new System.Windows.Forms.Label();
             this.renderButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.canvasBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
@@ -66,20 +66,9 @@
             this.renderButton.UseVisualStyleBackColor = true;
             this.renderButton.Click += new System.EventHandler(this.RenderButtonOnClick);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Lagruange",
-            "Newton"});
-            this.comboBox1.Location = new System.Drawing.Point(690, 76);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(98, 21);
-            this.comboBox1.TabIndex = 3;
-            // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(690, 104);
+            this.trackBar1.Location = new System.Drawing.Point(689, 65);
             this.trackBar1.Maximum = 200;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
@@ -88,13 +77,25 @@
             this.trackBar1.Value = 16;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(690, 116);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(98, 322);
+            this.textBox1.TabIndex = 5;
+            this.textBox1.Text = "Black - \r\n\r\nx > Math.PI ? \r\nMath.Sqrt(x) : Math.Sin(x +1)\r\n\r\n\r\n\r\nRed - Newton\r\n\r\n" +
+    "Green - Lagrange";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.renderButton);
             this.Controls.Add(this.canvasTextlabel);
             this.Controls.Add(this.canvasBox);
@@ -112,8 +113,8 @@
         private System.Windows.Forms.PictureBox canvasBox;
         private System.Windows.Forms.Label canvasTextlabel;
         private System.Windows.Forms.Button renderButton;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

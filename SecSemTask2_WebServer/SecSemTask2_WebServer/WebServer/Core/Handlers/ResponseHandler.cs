@@ -55,7 +55,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             //var HttpMethod = controller.GetMethod(methodName).CustomAttributes.First().AttributeType.;
 
-            IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, null);
+            IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, new Object[] { });
 
 
             httpWriter.SendResponse(File.ReadAllBytes(projectDir + "\\View\\" + filePath), "200 OK", "text/" + filePath.Split('.')[1]);
@@ -83,7 +83,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             Object instance = Activator.CreateInstance(controller);
 
-
+            
             try
             {
                 IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, urlParams.Values.ToArray());

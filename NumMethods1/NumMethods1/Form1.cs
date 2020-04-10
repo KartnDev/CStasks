@@ -24,14 +24,9 @@ namespace NumMethods1
         private void RenderButtonOnClick(object sender, EventArgs e)
         {
             _graphics.Clear(this.BackColor);
-            if (comboBox1.SelectedItem.Equals("Newton"))
-            {
-                interpolationGraphics.DrawInterpolation((x) => (float)(Math.Sin(x)), (float)trackBar1.Value / 10, InterpolationTypes.Newton);
-            }
-            else
-            {
-                interpolationGraphics.DrawInterpolation((x) => (float)(Math.Sin(x)), (float)trackBar1.Value / 10, InterpolationTypes.Lagrange);
-            }
+            //TODO OR                                (x) => (float)(Math.Sin(x))
+            interpolationGraphics.DrawInterpolation((x) => (float)(x > Math.PI ? Math.Sqrt(x) : Math.Sin(x +1)), (float)trackBar1.Value / 10);
+
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
