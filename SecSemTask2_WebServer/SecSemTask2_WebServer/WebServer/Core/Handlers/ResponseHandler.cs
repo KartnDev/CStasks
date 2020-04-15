@@ -61,7 +61,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
         }
 
-
+        // TOO BIG 
         public void InvokeRouteHandler(IDictionary<string, object> urlParams)
         {
 
@@ -82,6 +82,9 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             Object instance = Activator.CreateInstance(controller);
             
+            // TODO REWRITE THIS SHIT 
+            // FCK WTF PARAMS
+            
             // Check for params in uri
             
             if (urlParams.Keys.Count() == controller.GetMethod(methodName).GetParameters().Length)
@@ -100,19 +103,21 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                 httpWriter.WriteClientError("You used wrong count params", "405 Method Not Allowed");
                 return;
             }
-            List<object> parameters = new List<object>();
+            var parameters = new object[urlParams.Count];
             
             //creating sequence of parameters 
+            int iter = 0;
             foreach (var param in controller.GetMethod(methodName).GetParameters())
             {
                 var key = urlParams.Keys.First(u => u.Equals(param.Name));
-                parameters.Insert(parameters.Count, urlParams[key]);
+                parameters[iter] = urlParams[key];
+                iter++;
             }
 
             
             try
             {
-                IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, parameters.ToArray());
+                IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, parameters);
             }
             catch (ArgumentException e)
             {
