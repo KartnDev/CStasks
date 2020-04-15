@@ -1,11 +1,6 @@
 ﻿using SecSemTask2_WebServer.WebServer.Core.Routers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
-namespace SecSemTask2_WebServer.WebServer.Core.Engine
+namespace SecSemTask2_WebServer.WebServer.SDK
 {
     public class Controller
     {

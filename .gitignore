@@ -52,3 +52,4 @@ SecSemTask2_WebServer/Server.UnitTests/bin/Release/Microsoft.VisualStudio.TestPl
 SecSemTask2_WebServer/Server.UnitTests/bin/Release/Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 SecSemTask2_WebServer/Server.UnitTests/obj/Release/Server.UnitTests.csproj.CopyComplete
 SecSemTask2_WebServer/.vs/SecSemTask2_WebServer/v16/.suo
+*.xml

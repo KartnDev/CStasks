@@ -16,9 +16,13 @@ namespace NumMethods1.InterpolationMethods
                 for (int j = 0; j < argArrayY.Length; j++)
                 {
                     if (i == 0)
+                    {
                         matriix[i, j] = argArrayX[j];
+                    }
                     else if (i == 1)
+                    {
                         matriix[i, j] = argArrayY[j];
+                    }
                 }
             }
             int temp = argArrayY.Length -1;
