@@ -21,7 +21,10 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private readonly int connectionsNum;
         private readonly string contentPath;
         private readonly string token;
-
+        private readonly string defaultClientErrorPath;
+        private readonly string defaultServerErrorPath;
+        private readonly string defaultRedirectPath;
+        
         public bool running = false;
 
         private int timeout = -1;
