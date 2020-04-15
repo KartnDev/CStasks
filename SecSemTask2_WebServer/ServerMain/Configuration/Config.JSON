@@ -5,5 +5,7 @@
   "secretToken": "d4nse2igrp807s3zuiuy34uove6fgsdrefawqdkifd7f970gfyh2re3qw78hgf0pffqjfhda83tr",
   "localPath": true,
   "contentPath": "\\Content",
-  "logPath":  "/Logs"
+  "logPath":  "/Logs",
+  "defaultErrorPage": null,
+  "defaultRedirectPage": null
 }

@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Controllers\EditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\StudentModel.cs" />
     <Compile Include="ServerMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,9 +109,6 @@
       <Project>{3911F419-3A15-4F13-8EC0-856F5671B923}</Project>
       <Name>SecSemTask2_WebServer</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="View\Edit\edit.html" />

@@ -10,7 +10,9 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
     {
         void Interrupt();
         void WriteServerError();
+        void WriteServerError(string exceptionMessage, string responseCode);
         void WriteClientError();
+        void WriteClientError(string exceptionMessage, string responseCode);
         void SendResponse(byte[] bContent, string responseCode, string contentType);
     }
 }

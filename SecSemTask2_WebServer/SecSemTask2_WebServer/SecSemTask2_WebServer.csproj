@@ -126,9 +126,9 @@
     <Compile Include="WebServer\Core\Models\ConfigModel.cs" />
     <Compile Include="WebServer\SDK\ActionResult.cs" />
     <Compile Include="WebServer\SDK\Controller.cs" />
-    <Compile Include="WebServer\SDK\HttpMethods\HttpGetAttribute.cs" />
-    <Compile Include="WebServer\SDK\HttpMethods\HttpPostAttribute.cs" />
-    <Compile Include="WebServer\SDK\HttpMethods\RequireUriParamsAttribute.cs" />
+    <Compile Include="WebServer\SDK\HttpMethodAttributes\HttpGetAttribute.cs" />
+    <Compile Include="WebServer\SDK\HttpMethodAttributes\HttpPostAttribute.cs" />
+    <Compile Include="WebServer\SDK\HttpMethodAttributes\RequireUriParamsAttribute.cs" />
     <Compile Include="WebServer\SDK\IActionResult.cs" />
   </ItemGroup>
   <ItemGroup>

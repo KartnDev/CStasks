@@ -29,6 +29,19 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
             SendResponse(bContent, responseCode, contentType);
         }
 
+
+        public void WriteClientError(string exceptionMessage, string responseCode)
+        {
+            SendResponse("<html><head><meta" +
+                         "http - equiv =\"Content-Type\" content=\"text/html;" +
+                         "charset = utf - 8\">" +
+                         "</head><body><h2> Hello Web!" +
+                         "Client Error </h2><div>" + exceptionMessage +
+                         "</div></body></html>",
+
+                responseCode, "text/html");
+        }
+
         public void SendResponse(byte[] bContent, string responseCode, string contentType)
         {
             try
@@ -74,11 +87,26 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
                      "http - equiv =\"Content-Type\" content=\"text/html;" +
                      "charset = utf - 8\">" +
                      "</head><body><h2> Hello Web!" +
-                     "Server </h2><div> 501 - Method Not" +
+                     "Server Error </h2><div> 501 - Method Not" +
                      "Implemented </div></body></html>",
 
                      "501 Not Implemented", "text/html");
         }
+
+        public void WriteServerError(string exceptionMessage, string responseCode)
+        {
+            SendResponse("<html><head><meta" +
+                         "http - equiv =\"Content-Type\" content=\"text/html;" +
+                         "charset = utf - 8\">" +
+                         "</head><body><h2> Hello Web!" +
+                         "Server </h2><div>" + exceptionMessage +
+                         "</div></body></html>",
+
+                responseCode, "text/html");
+        }
+
+        
+
         public void WriteClientError()
         {
             SendResponse("<html><head><meta" +
