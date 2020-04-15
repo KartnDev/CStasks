@@ -29,6 +29,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         }
 
 
+        
+        private 
+        
+        
+        
+        
         //TODO Simplify Code 
 
 
@@ -52,7 +58,13 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             Object instance = Activator.CreateInstance(controller);
 
-            //var HttpMethod = controller.GetMethod(methodName).CustomAttributes.First().AttributeType.;
+            //will reject unparametrized request to paramerized method
+
+            if (controller.GetMethod(methodName).GetParameters().Length != 0)
+            {
+                httpWriter.WriteClientError("This request must have params!", "405 Method Not Allowed");
+                return;
+            }
 
             IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, new Object[] { });
 
@@ -131,11 +143,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             }
             httpWriter.SendResponse(File.ReadAllBytes(projectDir + "\\View\\" + filePath), "200 OK", "text/" + filePath.Split('.')[1]);
         }
-
-        public void Abort()
-        {
-            
-        }
+        
     }
 
 }

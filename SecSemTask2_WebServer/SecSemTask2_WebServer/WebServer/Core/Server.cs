@@ -43,17 +43,17 @@ namespace SecSemTask2_WebServer.WebServer.Core
                 jsonConfig = JsonConvert.DeserializeObject<ConfigModel>(json);
             }
 
-            this.ipAddress = IPAddress.Parse(jsonConfig.ip);
-            this.port = jsonConfig.port;
-            this.connectionsNum = jsonConfig.numConnections;
-            this.token = jsonConfig.secretToken;
-            if (jsonConfig.localPath)
+            this.ipAddress = IPAddress.Parse(jsonConfig.Ip);
+            this.port = jsonConfig.Port;
+            this.connectionsNum = jsonConfig.NumConnections;
+            this.token = jsonConfig.SecretToken;
+            if (jsonConfig.LocalPath)
             {
-                this.contentPath = projectDir + jsonConfig.contentPath;
+                this.contentPath = projectDir + jsonConfig.ContentPath;
             }
             else
             {
-                this.contentPath = jsonConfig.contentPath;
+                this.contentPath = jsonConfig.ContentPath;
             }
 
             ConfigLogger("log.txt");

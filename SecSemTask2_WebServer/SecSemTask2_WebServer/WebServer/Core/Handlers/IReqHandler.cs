@@ -10,6 +10,5 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
     {
         void InvokeRouteHandler();
         void InvokeRouteHandler(IDictionary<string, object> urlParams);
-        void Abort();
     }
 }

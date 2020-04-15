@@ -8,12 +8,14 @@ namespace SecSemTask2_WebServer.WebServer.Configuration
 {
     public class ConfigModel
     {
-        public int port;
-        public string ip;
-        public ushort numConnections;
-        public string secretToken;
-        public bool localPath;
-        public string contentPath;
-        public string logPath;
+        public int Port;
+        public string Ip;
+        public ushort NumConnections;
+        public string SecretToken;
+        public bool LocalPath;
+        public string ContentPath;
+        public string LogPath;
+        public string DefaultErrorPage;
+        public string DefaultRedirectPage;
     }
 }
