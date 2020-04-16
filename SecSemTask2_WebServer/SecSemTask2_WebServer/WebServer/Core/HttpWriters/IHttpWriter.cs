@@ -14,5 +14,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
         void WriteClientError();
         void WriteClientError(string exceptionMessage, string responseCode);
         void SendResponse(byte[] bContent, string responseCode, string contentType);
+        void Redirect(string url);
     }
 }

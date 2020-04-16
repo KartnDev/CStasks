@@ -62,7 +62,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 
             if (httpMsgParser.IsCorrect(new string[] {"GET", "POST"}))
             {
-                var requestedUrl = redirectionMap["DefaultRedirectPage"];
+                var requestedUrl = "/" + redirectionMap["DefaultRedirectPage"];
                 //var httpMethod = HttpMethodTypes.HttpGet;
                 if (isHavingRoute)
                 {
@@ -70,9 +70,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
                     //httpMethod = httpMsgParser.GetHttpMethod();
                 }
                 
-                ResponseHandler handler =
-                    new ResponseHandler(clientSocket, requestedUrl, logger);
+                ResponseHandler handler = new ResponseHandler(clientSocket, requestedUrl, logger);
+                
                 handler.SetRedirectionMapWithCheckParams(redirectionMap);
+                
                 if (isHavingRoute)
                 {
                     if (httpMsgParser.IsContainsParams())
@@ -87,7 +88,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
                 }
                 else
                 {
-                    handler.RedirectToDefPage();
+                    handler.RedirectToDefPage(requestedUrl);
                 }
             }
 

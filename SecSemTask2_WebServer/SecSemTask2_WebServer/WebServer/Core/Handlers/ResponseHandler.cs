@@ -73,11 +73,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             }
         }
 
-        public void RedirectToDefPage()
+        public void RedirectToDefPage(string url)
         {
             if (redirectMap["DefaultRedirectPage"] != null)
             {
-                SendPage("200 OK", redirectMap["DefaultRedirectPage"]);
+                //SendPage("200 OK", redirectMap["DefaultRedirectPage"]);
+                httpWriter.Redirect(url);
             }
             else
             {

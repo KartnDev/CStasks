@@ -85,6 +85,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
 
         public bool IsCorrectUrl()
         {
+            var file = GetRequestedFile();
             return GetRequestedFile().Contains('/') &&
                    GetRequestedFile().Split('/').Length == 2 &&
                    GetRequestedFile().Contains(".html");

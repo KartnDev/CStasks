@@ -105,7 +105,31 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
                 responseCode, "text/html");
         }
 
-        
+        public void Redirect(string url)
+        {
+            try
+            {
+                byte[] bHeader = charEncoder.GetBytes(
+                    "HTTP/1.1 " + "301	Moved Permanently" + "\r\n"
+                    + "Location: "+ url + "\r\n" 
+                    + "Server: Cherkasov Simple Web Server\r\n"
+                    + "Connection: close\r\n");
+                clientSocket.Send(bHeader);
+            }
+            catch (SocketException e)
+            {
+                logger.Error(e, "Send response error..");
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Send response unhandled error..");
+                throw;
+            }
+            finally
+            {
+                Interrupt();
+            }
+        }
 
         public void WriteClientError()
         {
