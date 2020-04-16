@@ -6,7 +6,7 @@
   "LocalPath": true,
   "ContentPath": "\\Content",
   "LogPath":  "/Logs",
-  "DefaultClientErrorPage": "/error/clienterrorpage",
-  "DefaultServerErrorPage": "/error/servererrorpage",
-  "DefaultRedirectPage": "home/index"
+  "DefaultClientErrorPage": null,
+  "DefaultServerErrorPage": null,
+  "DefaultRedirectPage": "home/index.html"
 }

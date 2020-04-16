@@ -10,6 +10,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
     public class HttpStringParser
     {
         private string clientReq;
+
         public HttpStringParser(string reqeast)
         {
             this.clientReq = reqeast;
@@ -18,20 +19,22 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
         public bool HavingRoute(IDictionary<string, IEnumerable<string>> routeMap)
         {
             var path = GetRequestedFile().Split('/');
-            if(path.Length == 3)
+            if (path.Length == 3)
             {
-                foreach(var item in routeMap)
+                foreach (var item in routeMap)
                 {
                     if (!IsContainsParams())
                     {
-                        if (item.Key == path[1].ToLower() + "controller" && item.Value.Contains(path[2].Split('.')[0].ToLower()))
+                        if (item.Key == path[1].ToLower() + "controller" &&
+                            item.Value.Contains(path[2].Split('.')[0].ToLower()))
                         {
                             return true;
                         }
                     }
                     else
                     {
-                        if (item.Key == path[1].ToLower() + "controller" && item.Value.Contains(path[2].Split('.')[0].ToLower()))
+                        if (item.Key == path[1].ToLower() + "controller" &&
+                            item.Value.Contains(path[2].Split('.')[0].ToLower()))
                         {
                             return true;
                         }
@@ -40,7 +43,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             }
 
             return false;
-            
         }
 
         public IDictionary<string, object> GetParams()
@@ -78,15 +80,24 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
 
         public string GetRequestedFile()
         {
-            return IsContainsParams() ? clientReq.Split(' ')[1].Split('?')[0] : clientReq.Split(' ')[1];   
+            return IsContainsParams() ? clientReq.Split(' ')[1].Split('?')[0] : clientReq.Split(' ')[1];
         }
 
-        public bool isCorrect(string[] methods)
+        public bool IsCorrectUrl()
+        {
+            return GetRequestedFile().Contains('/') &&
+                   GetRequestedFile().Split('/').Length == 2 &&
+                   GetRequestedFile().Contains(".html");
+        }
+        
+        public bool IsCorrect(string[] methods)
         {
             var words = clientReq.Split(' ');
-            if(words.Length >= 3)
+            if (words.Length >= 3)
             {
-                return methods.Contains(words[0]) && words[1].Contains('/') && words[2].Contains("HTTP");
+                return methods.Contains(words[0])
+                       && words[1].Contains('/')
+                       && words[2].Contains("HTTP");
             }
             else
             {

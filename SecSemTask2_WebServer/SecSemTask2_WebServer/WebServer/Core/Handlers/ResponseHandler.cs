@@ -53,7 +53,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         {
             if (redirectMap["DefaultClientErrorPage"] != null)
             {
-                SendPage("405 Method not allowed", redirectMap["ClientErrorPage"]);
+                SendPage("405 Method not allowed", redirectMap["DefaultClientErrorPage"]);
             }
             else
             {
@@ -73,7 +73,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             }
         }
 
-        private void RedirectToDefPage()
+        public void RedirectToDefPage()
         {
             if (redirectMap["DefaultRedirectPage"] != null)
             {
@@ -85,7 +85,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             }
         }
 
-        private void SetRedirectionMapWithCheckParams(IDictionary<string, string> redirectMap)
+        public void SetRedirectionMapWithCheckParams(IDictionary<string, string> redirectMap)
         {
             this.redirectMap = redirectMap;
         }
@@ -123,7 +123,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, new Object[] { });
 
 
-            SendPage(filePath, "200 OK");
+            SendPage("200 OK", filePath);
 
         }
 
@@ -188,7 +188,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                 logger.Error(e, "Unhandled error while handling reques - created 500 response ");
                 HandleServerError("Server cannot response it");
             }
-            SendPage(filePath, "200 OK");
+            SendPage("200 OK", filePath);
         }
         
     }
