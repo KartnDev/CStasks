@@ -116,7 +116,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             if (controller.GetMethod(methodName).GetParameters().Length != 0)
             {
-                httpWriter.WriteClientError("This request must have params!", "405 Method Not Allowed");
+                HandleClientError("This request must have params!");
                 return;
             }
 
@@ -152,14 +152,14 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                 {
                     if (!urlParams.Keys.Contains(parameter.Name))
                     {
-                        httpWriter.WriteClientError("Wrong names of params", "405 Method Not Allowed");
+                        HandleClientError("Wrong names of params");
                         return;
                     }
                 }
             }
             else
             {
-                httpWriter.WriteClientError("You used wrong count params", "405 Method Not Allowed");
+                HandleClientError("You used wrong count params");
                 return;
             }
             var parameters = new object[urlParams.Count];
@@ -181,12 +181,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             catch (ArgumentException e)
             {
                 logger.Error(e, "Handle error - 404 error - created 400 response");
-                httpWriter.WriteClientError();
+                HandleClientError("");
             }
             catch (Exception e)
             {
                 logger.Error(e, "Unhandled error while handling reques - created 500 response ");
-                httpWriter.WriteServerError();
+                HandleServerError("Server cannot response it");
             }
             SendPage(filePath, "200 OK");
         }

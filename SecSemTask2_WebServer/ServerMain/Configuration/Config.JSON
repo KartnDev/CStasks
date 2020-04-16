@@ -8,5 +8,5 @@
   "LogPath":  "/Logs",
   "DefaultClientErrorPage": "/error/clienterrorpage",
   "DefaultServerErrorPage": "/error/servererrorpage",
-  "DefaultRedirectPage": null
+  "DefaultRedirectPage": "home/index"
 }
