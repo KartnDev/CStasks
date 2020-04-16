@@ -57,6 +57,11 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 
             HttpStringParser httpMsgParser = new HttpStringParser(strRecieved);
 
+            if (strRecieved.Equals("") || strRecieved == null)
+            {
+                return 0;
+            }
+            
 
             bool isHavingRoute = httpMsgParser.HavingRoute(routeMap) && httpMsgParser.IsCorrectUrl();
 
@@ -88,7 +93,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
                 }
                 else
                 {
-                    handler.RedirectToDefPage(requestedUrl);
+                    handler.RedirectToDefPage();
                 }
             }
 

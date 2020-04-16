@@ -87,8 +87,8 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
         {
             var file = GetRequestedFile();
             return GetRequestedFile().Contains('/') &&
-                   GetRequestedFile().Split('/').Length == 2 &&
-                   GetRequestedFile().Contains(".html");
+                   GetRequestedFile().Split('/').Length == 3 &&
+                   (GetRequestedFile().Contains(".html") || GetRequestedFile().Contains(".css"));
         }
         
         public bool IsCorrect(string[] methods)

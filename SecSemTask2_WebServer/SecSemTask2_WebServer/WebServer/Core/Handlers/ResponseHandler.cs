@@ -42,9 +42,9 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         }
         public void SendPage(string response, string pageUrl)
         {
-            httpWriter.SendResponse(File.ReadAllBytes(projectDir + "\\View\\" + pageUrl), 
+            httpWriter.SendResponse(File.ReadAllBytes(projectDir + "\\View\\" + pageUrl.Replace('/', '\\')), 
                 response, 
-                "text/" + filePath.Split('.')[1]);
+                "text/" + pageUrl.Split('.')[1]);
         }
 
         
@@ -73,12 +73,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             }
         }
 
-        public void RedirectToDefPage(string url)
+        public void RedirectToDefPage()
         {
             if (redirectMap["DefaultRedirectPage"] != null)
             {
                 //SendPage("200 OK", redirectMap["DefaultRedirectPage"]);
-                httpWriter.Redirect(url);
+                httpWriter.Redirect("/" + redirectMap["DefaultRedirectPage"]);
             }
             else
             {
