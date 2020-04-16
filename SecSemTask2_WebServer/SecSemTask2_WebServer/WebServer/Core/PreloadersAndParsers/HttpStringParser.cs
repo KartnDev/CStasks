@@ -15,7 +15,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             this.clientReq = reqeast;
         }
 
-        public bool HavingRoute(Dictionary<string, IEnumerable<string>> routeMap)
+        public bool HavingRoute(IDictionary<string, IEnumerable<string>> routeMap)
         {
             var path = GetRequestedFile().Split('/');
             if(path.Length == 3)
@@ -43,7 +43,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             
         }
 
-        public Dictionary<string, object> GetParams()
+        public IDictionary<string, object> GetParams()
         {
             var paramStr = clientReq.Split(' ')[1].Split('?')[1];
 

@@ -15,7 +15,8 @@ namespace SecSemTask2_WebServer.WebServer.Configuration
         public bool LocalPath;
         public string ContentPath;
         public string LogPath;
-        public string DefaultErrorPage;
+        public string DefaultClientErrorPage;
+        public string DefaultServerErrorPage;
         public string DefaultRedirectPage;
     }
 }

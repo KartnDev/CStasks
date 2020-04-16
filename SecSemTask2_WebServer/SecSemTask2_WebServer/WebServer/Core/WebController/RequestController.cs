@@ -18,8 +18,13 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
         private string secretToken;
         private readonly Encoding charEncoder = Encoding.UTF8;
         private readonly Logger logger;
-        private Dictionary<string, IEnumerable<string>> routeMap;
-        public RequestController(string contentPath, string secretToken, Logger instanceLogger, Dictionary<string, IEnumerable<string>> routeMap)
+
+        private IDictionary<string, string> redirectionMap;
+        
+        private IDictionary<string, IEnumerable<string>> routeMap;
+        
+        
+        public RequestController(string contentPath, string secretToken, Logger instanceLogger, IDictionary<string, IEnumerable<string>> routeMap)
         {
             this.logger = instanceLogger;
             this.contentPath = contentPath;
@@ -34,6 +39,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
             return charEncoder.GetString(buffer, 0, receivedBCount);
         }
 
+        public void SetRedirectionMap(IDictionary<string, string> urlRedirectingMap)
+        {
+            this.redirectionMap = urlRedirectingMap;
+        }
+        
+        
 
         public int RedirectToHttpHandler(Socket clientSocket)
         {

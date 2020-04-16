@@ -21,9 +21,8 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private readonly int connectionsNum;
         private readonly string contentPath;
         private readonly string token;
-        private readonly string defaultClientErrorPath;
-        private readonly string defaultServerErrorPath;
-        private readonly string defaultRedirectPath;
+        private readonly IDictionary<string, string> redirectionMap = new Dictionary<string, string>();
+
         
         public bool running = false;
 
@@ -32,7 +31,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        private readonly Dictionary<string, IEnumerable<string>> mapRoutes = Preloader.MapRoutePreloader.Load();
+        private readonly IDictionary<string, IEnumerable<string>> mapRoutes = Preloader.MapRoutePreloader.Load();
 
         public Server()
         {
@@ -50,6 +49,12 @@ namespace SecSemTask2_WebServer.WebServer.Core
             this.port = jsonConfig.Port;
             this.connectionsNum = jsonConfig.NumConnections;
             this.token = jsonConfig.SecretToken;
+
+            this.redirectionMap.Add("DefaultRedirectPage", jsonConfig.DefaultRedirectPage);
+            this.redirectionMap.Add("DefaultClientErrorPage",jsonConfig.DefaultClientErrorPage);
+            this.redirectionMap.Add("DefaultServerErrorPage", jsonConfig.DefaultServerErrorPage);
+            
+            
             if (jsonConfig.LocalPath)
             {
                 this.contentPath = projectDir + jsonConfig.ContentPath;
@@ -123,12 +128,13 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
 
                             var controller = new RequestController(contentPath, token, logger, mapRoutes);
+                            controller.SetRedirectionMap(redirectionMap);
                             if (controller.RedirectToHttpHandler(clientSocket) == 1)
                             {
                                 Stop();
                             }
-
                         });
+                        
                         requestHandler.Start();
                     }
                     catch (SocketException e)
