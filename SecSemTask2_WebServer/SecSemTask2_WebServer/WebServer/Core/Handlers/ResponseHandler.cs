@@ -17,27 +17,25 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
     public class ResponseHandler : IReqHandler
     {
-        private string filePath;
+        private readonly string filePath;
         private readonly Logger logger;
-        private IHttpWriter httpWriter;
-        private Assembly assembly;
-        private string projectDir;
+        private readonly IHttpWriter httpWriter;
+        private readonly string projectDir;
+
+        private readonly IEnumerable<Type> controllers;
         
         private IDictionary<string, string> redirectMap = null;
         
-        public ResponseHandler(Socket clientSocket, string filePath, Logger logger)
+        public ResponseHandler(Socket clientSocket, string filePath, IEnumerable<Type> controllers, Logger logger)
         {
+            this.controllers = controllers;
             this.logger = logger;
             this.filePath = filePath;
             this.projectDir = Helper.GetProjectDir();
             httpWriter = new HttpWriter(clientSocket, logger);
             
             
-            
 
-            string assemblyName = (new FileInfo(projectDir + "\\bin\\Debug\\ServerMain.exe")).FullName;
-            byte[] assemblyBytes = File.ReadAllBytes(assemblyName);
-            this.assembly = Assembly.Load(assemblyBytes);
             
         }
         public void SendPage(string response, string pageUrl)
@@ -102,14 +100,11 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
         public void InvokeRouteHandler()
         {
-            var contollers = assembly.GetTypes()
-                .Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller))).ToArray();
-
 
             var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
             var methodName = filePath.Split('/')[2].Split('.')[0].FirstCharToUpper();
 
-            var controller = contollers.First(contr => contr.Name == controllerName);
+            var controller = controllers.First(contr => contr.Name == controllerName);
 
             Object instance = Activator.CreateInstance(controller);
 
@@ -131,14 +126,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         // TOO BIG 
         public void InvokeRouteHandler(IDictionary<string, object> urlParams)
         {
-            var contollers = assembly.GetTypes()
-                .Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller))).ToArray();
 
 
             var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
             var methodName = filePath.Split('/')[2].Split('.')[0].Split('?')[0].FirstCharToUpper();
 
-            var controller = contollers.First(contr => contr.Name == controllerName);
+            var controller = controllers.First(contr => contr.Name == controllerName);
 
             Object instance = Activator.CreateInstance(controller);
             

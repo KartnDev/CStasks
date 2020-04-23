@@ -31,8 +31,8 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        private readonly IDictionary<string, IEnumerable<string>> mapRoutes = Preloader.MapRoutePreloader.Load();
-
+        private readonly IDictionary<string, IEnumerable<string>> mapRoutes = Preloader.MapRoutePreloader.Load().Value.Key;
+        private readonly IEnumerable<Type> controllers = Preloader.MapRoutePreloader.Load().Value.Value;
         public Server()
         {
             string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
@@ -127,7 +127,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
                             clientSocket.SendTimeout = timeout;
 
 
-                            var controller = new RequestController(contentPath, token, logger, mapRoutes);
+                            var controller = new RequestController(contentPath, token, logger, mapRoutes, controllers);
                             controller.SetRedirectionMap(redirectionMap);
                             if (controller.RedirectToHttpHandler(clientSocket) == 1)
                             {

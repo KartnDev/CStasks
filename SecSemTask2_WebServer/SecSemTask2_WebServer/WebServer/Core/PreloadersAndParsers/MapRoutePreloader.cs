@@ -17,11 +17,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
     {
         
 
-        public static Dictionary<string, IEnumerable<string>> Load()
+        public static KeyValuePair<IDictionary<string, IEnumerable<string>>, IEnumerable<Type>>? Load()
         {
             var mapPath = new Dictionary<string, IEnumerable<string>>();
 
             string projectDir = Helper.GetProjectDir();
+            
             
             
             string[] files = Directory.GetFiles(projectDir, "*.exe", SearchOption.AllDirectories);
@@ -64,7 +65,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
 
                     mapPath.Add(controller.Name.ToLower(), methodsOfController);
                 }
-                return mapPath;
+                return new KeyValuePair<IDictionary<string, IEnumerable<string>>, IEnumerable<Type>>(mapPath, controllers);
             }
             else
             {
@@ -72,5 +73,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
                 // TODO or Throw Error ?
             }
         }
+        
     }
 }

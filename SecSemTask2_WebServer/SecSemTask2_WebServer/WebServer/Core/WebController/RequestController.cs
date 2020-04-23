@@ -9,28 +9,31 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using SecSemTask2_WebServer.WebServer.Core.Routers;
+using SecSemTask2_WebServer.WebServer.SDK;
 
 namespace SecSemTask2_WebServer.WebServer.Core.WebController
 {
     public class RequestController
     {
-        private string contentPath;
-        private string secretToken;
+        private readonly string contentPath;
+        private readonly string secretToken;
         private readonly Encoding charEncoder = Encoding.UTF8;
         private readonly Logger logger;
 
         private IDictionary<string, string> redirectionMap;
 
         private IDictionary<string, IEnumerable<string>> routeMap;
+        private readonly IEnumerable<Type> controllers;
 
 
-        public RequestController(string contentPath, string secretToken, Logger instanceLogger,
-            IDictionary<string, IEnumerable<string>> routeMap)
+        public RequestController(string contentPath, string secretToken, Logger logger,
+            IDictionary<string, IEnumerable<string>> routeMap, IEnumerable<Type> controllers)
         {
-            this.logger = instanceLogger;
+            this.logger = logger;
             this.contentPath = contentPath;
             this.secretToken = secretToken;
             this.routeMap = routeMap;
+            this.controllers = controllers;
         }
 
         private string ParseReqString(Socket clientSocket, int reqLen)
@@ -74,8 +77,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
                     requestedUrl = httpMsgParser.GetRequestedFile();
                     //httpMethod = httpMsgParser.GetHttpMethod();
                 }
+
+
                 
-                ResponseHandler handler = new ResponseHandler(clientSocket, requestedUrl, logger);
+                ResponseHandler handler = new ResponseHandler(clientSocket, requestedUrl, controllers, logger);
                 
                 handler.SetRedirectionMapWithCheckParams(redirectionMap);
                 
