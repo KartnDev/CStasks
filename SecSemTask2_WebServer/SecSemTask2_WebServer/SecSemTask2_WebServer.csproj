@@ -72,8 +72,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c">
       <HintPath>..\packages\NLog.4.7.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -116,7 +117,6 @@
     <Compile Include="WebServer\Core\HttpWriters\HttpWriter.cs" />
     <Compile Include="WebServer\Core\HttpWriters\IHttpWriter.cs" />
     <Compile Include="WebServer\Core\PreloadersAndParsers\MapRoutePreloader.cs" />
-    <Compile Include="WebServer\Core\PreloadersAndParsers\ReflectorLib.cs" />
     <Compile Include="WebServer\Core\Types\ContentTypes.cs" />
     <Compile Include="WebServer\Core\Utils\Helper.cs" />
     <Compile Include="WebServer\Core\Types\HttpMethodTypes.cs" />

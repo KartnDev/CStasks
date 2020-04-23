@@ -22,28 +22,47 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
             var mapPath = new Dictionary<string, IEnumerable<string>>();
 
             string projectDir = Helper.GetProjectDir();
+            
+            
+            string[] files = Directory.GetFiles(projectDir, "*.exe", SearchOption.AllDirectories);
 
-            string assemblyName = (new FileInfo(projectDir + "\\bin\\Debug\\ServerMain.exe")).FullName;
-            byte[] assemblyBytes = File.ReadAllBytes(assemblyName);
-            Assembly assembly = Assembly.Load(assemblyBytes);
+            HashSet<Assembly> listOfAssembly = new HashSet<Assembly>();
 
-            var contollers = assembly.GetTypes()
-                .Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller))).ToArray();
-
-
-            if (contollers.Length != 0)
+            foreach (var file in files)
             {
-                foreach (var contoller in contollers)
+                listOfAssembly.Add(Assembly.Load(File.ReadAllBytes(file)));
+            }
+            HashSet<Type> controllers = new HashSet<Type>();
+
+            foreach (var assembly in listOfAssembly)
+            {
+                if (assembly.GetTypes().Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller)))
+                        .Count() != 0)
+                {
+                    var loaderControllers = assembly.GetTypes()
+                        .Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller)));
+                    foreach (var loaded in loaderControllers)
+                    {
+                        controllers.Add(loaded);
+                    }
+                    break;
+                }
+            }
+
+
+            if (controllers.Count != 0)
+            {
+                foreach (var controller in controllers)
                 {
 
                     var methodsOfController = new List<string>();
 
-                    foreach (var item in contoller.GetMethods())
+                    foreach (var item in controller.GetMethods())
                     {
                         methodsOfController.Add(item.Name.ToLower());
                     }
 
-                    mapPath.Add(contoller.Name.ToLower(), methodsOfController);
+                    mapPath.Add(controller.Name.ToLower(), methodsOfController);
                 }
                 return mapPath;
             }
