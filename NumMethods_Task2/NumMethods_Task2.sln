@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumMethods_Task2", "NumMethods_Task2\NumMethods_Task2.csproj", "{CBC13093-BCDC-4D19-A8B4-3E19E3B54E7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBC13093-BCDC-4D19-A8B4-3E19E3B54E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC13093-BCDC-4D19-A8B4-3E19E3B54E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC13093-BCDC-4D19-A8B4-3E19E3B54E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC13093-BCDC-4D19-A8B4-3E19E3B54E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78595648-299B-4009-BB94-191C89311601}
+	EndGlobalSection
+EndGlobal
