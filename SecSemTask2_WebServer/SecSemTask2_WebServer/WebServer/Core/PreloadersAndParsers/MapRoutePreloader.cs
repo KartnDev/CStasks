@@ -17,7 +17,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
     {
         
 
-        public static KeyValuePair<IDictionary<string, IEnumerable<string>>, IEnumerable<Type>>? Load()
+        public static KeyValuePair<IDictionary<string, IEnumerable<string>>, IEnumerable<Type>> Load()
         {
             var mapPath = new Dictionary<string, IEnumerable<string>>();
 
@@ -27,16 +27,18 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
             
             string[] files = Directory.GetFiles(projectDir, "*.exe", SearchOption.AllDirectories);
 
-            HashSet<Assembly> listOfAssembly = new HashSet<Assembly>();
+            ISet<Assembly> listOfAssembly = new HashSet<Assembly>();
 
             foreach (var file in files)
             {
                 listOfAssembly.Add(Assembly.Load(File.ReadAllBytes(file)));
             }
-            HashSet<Type> controllers = new HashSet<Type>();
+            ISet<Type> controllers = new HashSet<Type>();
 
             foreach (var assembly in listOfAssembly)
             {
+                
+                // TODO rewrite
                 if (assembly.GetTypes().Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller)))
                         .Count() != 0)
                 {
@@ -69,7 +71,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
             }
             else
             {
-                return null;
+                return new KeyValuePair<IDictionary<string, IEnumerable<string>>, IEnumerable<Type>>();
                 // TODO or Throw Error ?
             }
         }

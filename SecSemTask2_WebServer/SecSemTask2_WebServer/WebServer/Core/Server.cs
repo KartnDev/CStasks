@@ -31,8 +31,8 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        private readonly IDictionary<string, IEnumerable<string>> mapRoutes = Preloader.MapRoutePreloader.Load().Value.Key;
-        private readonly IEnumerable<Type> controllers = Preloader.MapRoutePreloader.Load().Value.Value;
+        private readonly IDictionary<string, IEnumerable<string>> mapRoutes = Preloader.MapRoutePreloader.Load().Key;
+        private readonly IEnumerable<Type> controllers = Preloader.MapRoutePreloader.Load().Value;
         public Server()
         {
             string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;

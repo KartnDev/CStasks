@@ -107,8 +107,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             var controller = controllers.First(contr => contr.Name == controllerName);
 
             Object instance = Activator.CreateInstance(controller);
-
-            //will reject unparametrized request to paramerized method
+            
 
             if (controller.GetMethod(methodName).GetParameters().Length != 0)
             {
@@ -135,10 +134,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             Object instance = Activator.CreateInstance(controller);
             
-            // TODO REWRITE THIS SHIT 
-            // FCK WTF PARAMS
-            
-            // Check for params in uri
             
             if (urlParams.Keys.Count() == controller.GetMethod(methodName).GetParameters().Length)
             {
