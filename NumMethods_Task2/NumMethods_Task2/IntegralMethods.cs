@@ -64,13 +64,13 @@ namespace NumMethods_Task2
             for (int i = 1; i < steps; i++)
             {
                 value = lowerBorder + i * width;
-                if (i % 2 == 0) 
-                { 
-                    temp = 2; 
+                if (i % 2 == 0)
+                {
+                    temp = 2;
                 }
-                else 
-                { 
-                    temp = 4; 
+                else
+                {
+                    temp = 4;
                 }
                 sum += temp * func(value);
             }
@@ -81,7 +81,25 @@ namespace NumMethods_Task2
             return 0.33333 * width * sum;
         }
 
+        public delegate double Integral(double lowerBorder, double upperBorder, int steps);
 
+
+
+        public double ComputeWithAcc(double valueX, double lowerA, double upperB, double eps, Integral integral)
+        {
+            int currentStep = 10;
+
+            double result = 0;
+
+            double minAccIntegralVaue = integral(lowerA, upperB, 10); // //Computing value of intercal with rough accuracy
+
+            while (Math.Abs(result - minAccIntegralVaue) > eps)
+            {
+                result = integral(lowerA, upperB, currentStep);
+                currentStep += 1; // Can be 10 or 1000 for accuracy or speed
+            }
+            return result;
+        }
 
     }
 }
