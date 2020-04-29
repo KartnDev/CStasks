@@ -19,21 +19,20 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
         private readonly string secretToken;
         private readonly Encoding charEncoder = Encoding.UTF8;
         private readonly Logger logger;
+        
+        private readonly IEnumerable<Controller> stateless;
+        private readonly IEnumerable<Type> stateful;
 
         private IDictionary<string, string> redirectionMap;
 
-        private IDictionary<string, IEnumerable<string>> routeMap;
-        private readonly IEnumerable<Type> controllers;
-
-
         public RequestController(string contentPath, string secretToken, Logger logger,
-            IDictionary<string, IEnumerable<string>> routeMap, IEnumerable<Type> controllers)
+            IEnumerable<Controller> stateless, IEnumerable<Type> stateful)
         {
             this.logger = logger;
+            this.stateless = stateless;
+            this.stateful = stateful;
             this.contentPath = contentPath;
             this.secretToken = secretToken;
-            this.routeMap = routeMap;
-            this.controllers = controllers;
         }
 
         private string ParseReqString(Socket clientSocket, int reqLen)
@@ -66,21 +65,18 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
             }
             
 
-            bool isHavingRoute = httpMsgParser.HavingRoute(routeMap) && httpMsgParser.IsCorrectUrl();
+            bool isHavingRoute = httpMsgParser.HavingRoute(stateful.Concat(stateless)) && httpMsgParser.IsCorrectUrl();
 
             if (httpMsgParser.IsCorrect(new string[] {"GET", "POST"}))
             {
                 var requestedUrl = "/" + redirectionMap["DefaultRedirectPage"];
-                //var httpMethod = HttpMethodTypes.HttpGet;
                 if (isHavingRoute)
                 {
                     requestedUrl = httpMsgParser.GetRequestedFile();
-                    //httpMethod = httpMsgParser.GetHttpMethod();
                 }
 
 
-                
-                ResponseHandler handler = new ResponseHandler(clientSocket, requestedUrl, controllers, logger);
+                ResponseHandler handler = new ResponseHandler(clientSocket, requestedUrl, stateful, stateless, logger);
                 
                 handler.SetRedirectionMapWithCheckParams(redirectionMap);
                 

@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SecSemTask2_WebServer.WebServer.SDK;
+using SecSemTask2_WebServer.WebServer.SDK.ControllerAttributes;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Preloader
 {
@@ -15,9 +16,9 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
 
     public class MapRoutePreloader
     {
+        private readonly ISet<Type> controllers;
         
-
-        public static KeyValuePair<IDictionary<string, IEnumerable<string>>, IEnumerable<Type>> Load()
+        public MapRoutePreloader()
         {
             var mapPath = new Dictionary<string, IEnumerable<string>>();
 
@@ -33,14 +34,15 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
             {
                 listOfAssembly.Add(Assembly.Load(File.ReadAllBytes(file)));
             }
-            ISet<Type> controllers = new HashSet<Type>();
+            controllers = new HashSet<Type>();
 
             foreach (var assembly in listOfAssembly)
             {
+
+                var listed = assembly.GetTypes()
+                    .Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller)));
                 
-                // TODO rewrite
-                if (assembly.GetTypes().Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller)))
-                        .Count() != 0)
+                if (listed.Count() != 0)
                 {
                     var loaderControllers = assembly.GetTypes()
                         .Where(myType => myType.IsClass && myType.IsSubclassOf(typeof(Controller)));
@@ -51,29 +53,41 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
                     break;
                 }
             }
+        }
+        
+        
+        public IEnumerable<Controller> LoadStatelessControllers()
+        {
+            IEnumerable<Controller> statelessControllers = new List<Controller>();
 
-
-            if (controllers.Count != 0)
+            foreach (var anyCont in controllers)
             {
-                foreach (var controller in controllers)
+                var attributes = anyCont.GetCustomAttributes();
+                if (attributes.Count(u => u.GetType() == typeof(StatelessAttribute)) == 1
+                    && attributes.Count(u => u.GetType() == typeof(StatefulAttribute)) == 0)
                 {
-
-                    var methodsOfController = new List<string>();
-
-                    foreach (var item in controller.GetMethods())
-                    {
-                        methodsOfController.Add(item.Name.ToLower());
-                    }
-
-                    mapPath.Add(controller.Name.ToLower(), methodsOfController);
+                    statelessControllers.Append((Controller) Activator.CreateInstance(anyCont));
                 }
-                return new KeyValuePair<IDictionary<string, IEnumerable<string>>, IEnumerable<Type>>(mapPath, controllers);
             }
-            else
+
+            return statelessControllers;
+        }
+
+        public IEnumerable<Type> LoadStatefulControllers()
+        {
+            IEnumerable<Type> statefulControllers = new List<Type>();
+
+            foreach (var anyCont in controllers)
             {
-                return new KeyValuePair<IDictionary<string, IEnumerable<string>>, IEnumerable<Type>>();
-                // TODO or Throw Error ?
+                var attributes = anyCont.GetCustomAttributes();
+                if (attributes.Count(u => u.GetType() == typeof(StatelessAttribute)) == 0
+                    && attributes.Count(u => u.GetType() == typeof(StatefulAttribute)) == 1)
+                {
+                    statefulControllers.Append(anyCont);
+                }
             }
+
+            return statefulControllers;
         }
         
     }

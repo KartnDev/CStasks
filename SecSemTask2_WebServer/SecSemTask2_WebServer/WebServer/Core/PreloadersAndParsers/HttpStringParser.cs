@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SecSemTask2_WebServer.WebServer.SDK;
 
 namespace SecSemTask2_WebServer.WebServer.Core.Utils
 {
@@ -16,25 +17,36 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             this.clientReq = reqeast;
         }
 
-        public bool HavingRoute(IDictionary<string, IEnumerable<string>> routeMap)
+        public bool HavingRoute(IEnumerable<Controller> stateless, IEnumerable<Type> stateful)
         {
+            var listOfControllerTypes = new List<Type>(stateful);
+            foreach (var statelessController in stateless)
+            {
+                listOfControllerTypes.Append(statelessController.GetType());
+            }
+            
+            
+            
             var path = GetRequestedFile().Split('/');
             if (path.Length == 3)
             {
-                foreach (var item in routeMap)
+                foreach (var item in listOfControllerTypes)
                 {
                     if (!IsContainsParams())
                     {
-                        if (item.Key == path[1].ToLower() + "controller" &&
-                            item.Value.Contains(path[2].Split('.')[0].ToLower()))
+                        if (item.GetType().Name.ToLower() == path[1].ToLower() + "controller" &&
+                            item.GetType().GetMethods().Any(u => 
+                                u.Name.ToLower() == path[2].Split('.')[0].ToLower()))
                         {
                             return true;
                         }
                     }
                     else
                     {
-                        if (item.Key == path[1].ToLower() + "controller" &&
-                            item.Value.Contains(path[2].Split('.')[0].ToLower()))
+                        // TODO WTF PARAMS ?????
+                        if (item.GetType().Name.ToLower() == path[1].ToLower() + "controller" &&
+                            item.GetType().GetMethods().Any(u => 
+                                u.Name.ToLower() == path[2].Split('.')[0].ToLower()))
                         {
                             return true;
                         }

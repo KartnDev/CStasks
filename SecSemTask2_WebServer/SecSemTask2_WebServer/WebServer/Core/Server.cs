@@ -11,6 +11,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using SecSemTask2_WebServer.WebServer.Core.Preloader;
+using SecSemTask2_WebServer.WebServer.SDK;
 
 namespace SecSemTask2_WebServer.WebServer.Core
 {
@@ -22,7 +24,8 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private readonly string contentPath;
         private readonly string token;
         private readonly IDictionary<string, string> redirectionMap = new Dictionary<string, string>();
-
+        private readonly IEnumerable<Type> statefulControllers;
+        private readonly IEnumerable<Controller> statelessControllers;
         
         public bool running = false;
 
@@ -31,37 +34,49 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        private readonly IDictionary<string, IEnumerable<string>> mapRoutes = Preloader.MapRoutePreloader.Load().Key;
-        private readonly IEnumerable<Type> controllers = Preloader.MapRoutePreloader.Load().Value;
+
         public Server()
         {
-            string projectDir = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-
-            ConfigModel jsonConfig; // == null ?? throw Exception 
-
-            using (StreamReader r = new StreamReader(projectDir + "\\Configuration\\Config.JSON"))
+            var preloader = new MapRoutePreloader();
+            statefulControllers = preloader.LoadStatefulControllers();
+            statelessControllers = preloader.LoadStatelessControllers();
+            
+            var directoryInfo = Directory.GetParent(Environment.CurrentDirectory).Parent;
+            if (directoryInfo != null)
             {
-                string json = r.ReadToEnd();
-                jsonConfig = JsonConvert.DeserializeObject<ConfigModel>(json);
-            }
+                string projectDir = directoryInfo.FullName;
 
-            this.ipAddress = IPAddress.Parse(jsonConfig.Ip);
-            this.port = jsonConfig.Port;
-            this.connectionsNum = jsonConfig.NumConnections;
-            this.token = jsonConfig.SecretToken;
+                ConfigModel jsonConfig; 
 
-            this.redirectionMap.Add("DefaultRedirectPage", jsonConfig.DefaultRedirectPage);
-            this.redirectionMap.Add("DefaultClientErrorPage",jsonConfig.DefaultClientErrorPage);
-            this.redirectionMap.Add("DefaultServerErrorPage", jsonConfig.DefaultServerErrorPage);
+                using (StreamReader r = new StreamReader(projectDir + "\\Configuration\\Config.JSON"))
+                {
+                    string json = r.ReadToEnd();
+                    jsonConfig = JsonConvert.DeserializeObject<ConfigModel>(json);
+                }
+
+                this.ipAddress = IPAddress.Parse(jsonConfig.Ip);
+                this.port = jsonConfig.Port;
+                this.connectionsNum = jsonConfig.NumConnections;
+                this.token = jsonConfig.SecretToken;
+
+                this.redirectionMap.Add("DefaultRedirectPage", jsonConfig.DefaultRedirectPage);
+                this.redirectionMap.Add("DefaultClientErrorPage",jsonConfig.DefaultClientErrorPage);
+                this.redirectionMap.Add("DefaultServerErrorPage", jsonConfig.DefaultServerErrorPage);
             
             
-            if (jsonConfig.LocalPath)
-            {
-                this.contentPath = projectDir + jsonConfig.ContentPath;
+                if (jsonConfig.LocalPath)
+                {
+                    this.contentPath = projectDir + jsonConfig.ContentPath;
+                }
+                else
+                {
+                    this.contentPath = jsonConfig.ContentPath;
+                }
             }
             else
             {
-                this.contentPath = jsonConfig.ContentPath;
+                logger.Fatal("Cannot find directory");
+                throw new ArgumentException("Directory was wrong");
             }
 
             ConfigLogger("log.txt");
@@ -127,7 +142,7 @@ namespace SecSemTask2_WebServer.WebServer.Core
                             clientSocket.SendTimeout = timeout;
 
 
-                            var controller = new RequestController(contentPath, token, logger, mapRoutes, controllers);
+                            var controller = new RequestController(contentPath, token, logger, statelessControllers, statefulControllers);
                             controller.SetRedirectionMap(redirectionMap);
                             if (controller.RedirectToHttpHandler(clientSocket) == 1)
                             {

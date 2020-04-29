@@ -26,7 +26,8 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         
         private IDictionary<string, string> redirectMap = null;
         
-        public ResponseHandler(Socket clientSocket, string filePath, IEnumerable<Type> controllers, Logger logger)
+        public ResponseHandler(Socket clientSocket, string filePath, IEnumerable<Type> stateful, 
+            IEnumerable<Controller> stateless, Logger logger)
         {
             this.controllers = controllers;
             this.logger = logger;
