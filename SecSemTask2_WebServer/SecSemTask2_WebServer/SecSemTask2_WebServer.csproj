@@ -115,6 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebServer\Core\Handlers\IReqHandler.cs" />
     <Compile Include="WebServer\Core\Handlers\ResponseHandler.cs" />
+    <Compile Include="WebServer\Core\HttpWriters\AsyncHttpWriter.cs" />
     <Compile Include="WebServer\Core\HttpWriters\HttpWriter.cs" />
     <Compile Include="WebServer\Core\HttpWriters\IHttpWriter.cs" />
     <Compile Include="WebServer\Core\PreloadersAndParsers\MapRoutePreloader.cs" />

@@ -115,7 +115,7 @@
     <Content Include="View\Edit\edit.html" />
     <Content Include="View\Error\ClientErrorPage.html" />
     <Content Include="View\Error\ServerErrorPage.html" />
-    <Content Include="View\Home\home.html" />
+    <Content Include="View\Home\home1.html" />
     <Content Include="View\Home\index.css" />
     <Content Include="View\Home\Index.html" />
   </ItemGroup>

@@ -99,11 +99,11 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             
             foreach (var controller in stateless)
             {
-                if (split[0].ToLower().Equals(controller.GetType().Name.ToLower()))
+                if (split[1].ToLower().Equals(controller.GetType().Name.ToLower().Replace("controller", "")))
                 {
                     foreach (var methodOfController in controller.GetType().GetMethods())
                     {
-                        if (split[1].ToLower().Equals(methodOfController.Name.ToLower()))
+                        if (split[2].Split('.')[0].ToLower().Equals(methodOfController.Name.ToLower()))
                         {
                             return controller;
                         }
@@ -112,11 +112,11 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             }
             foreach (var controllerType in stateful)
             {
-                if (split[0].ToLower().Equals(controllerType.Name.ToLower()))
+                if (split[1].ToLower().Equals(controllerType.Name.ToLower().Replace("controller", "")))
                 {
                     foreach (var methodOfController in controllerType.GetMethods())
                     {
-                        if (split[1].ToLower().Equals(methodOfController.Name.ToLower()))
+                        if (split[2].Split('.')[0].ToLower().Equals(methodOfController.Name.ToLower()))
                         {
                             return (Controller)Activator.CreateInstance(controllerType);
                         }

@@ -56,15 +56,19 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
         
         public IEnumerable<Controller> LoadStatelessControllers()
         {
-            IEnumerable<Controller> statelessControllers = new List<Controller>();
+            List<Controller> statelessControllers = new List<Controller>();
 
-            foreach (var anyCont in controllers)
+            foreach (Type anyCont in controllers)
             {
                 var attributes = anyCont.GetCustomAttributes();
-                if (attributes.Count(u => u.GetType() == typeof(StatelessAttribute)) == 1
-                    && attributes.Count(u => u.GetType() == typeof(StatefulAttribute)) == 0)
+                if (attributes.Count(u => u.GetType() == typeof(StatelessAttribute)) == 1)
                 {
-                    statelessControllers.Append((Controller) Activator.CreateInstance(anyCont));
+                    if (attributes.Count(u => u.GetType() == typeof(StatefulAttribute)) == 0)
+                    {
+                        Controller c = Activator.CreateInstance(anyCont) as Controller;
+
+                        statelessControllers.Add(c);
+                    }
                 }
             }
             GC.KeepAlive(statelessControllers);

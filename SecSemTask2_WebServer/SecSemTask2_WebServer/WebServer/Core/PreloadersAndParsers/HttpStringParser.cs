@@ -22,34 +22,20 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             var listOfControllerTypes = new List<Type>(stateful);
             foreach (var statelessController in stateless)
             {
-                listOfControllerTypes.Append(statelessController.GetType());
+                listOfControllerTypes.Add(statelessController.GetType());
             }
-            
-            
-            
+
+
             var path = GetRequestedFile().Split('/');
             if (path.Length == 3)
             {
                 foreach (var item in listOfControllerTypes)
                 {
-                    if (!IsContainsParams())
+                    if (item.Name.ToLower() == path[1].ToLower() + "controller" &&
+                        item.GetMethods().Any(u =>
+                            u.Name.ToLower() == path[2].Split('.')[0].ToLower()))
                     {
-                        if (item.GetType().Name.ToLower() == path[1].ToLower() + "controller" &&
-                            item.GetType().GetMethods().Any(u => 
-                                u.Name.ToLower() == path[2].Split('.')[0].ToLower()))
-                        {
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        // TODO WTF PARAMS ?????
-                        if (item.GetType().Name.ToLower() == path[1].ToLower() + "controller" &&
-                            item.GetType().GetMethods().Any(u => 
-                                u.Name.ToLower() == path[2].Split('.')[0].ToLower()))
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }
@@ -102,7 +88,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
                    GetRequestedFile().Split('/').Length == 3 &&
                    (GetRequestedFile().Contains(".html") || GetRequestedFile().Contains(".css"));
         }
-        
+
         public bool IsCorrect(string[] methods)
         {
             var words = clientReq.Split(' ');

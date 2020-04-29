@@ -79,7 +79,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
                 ResponseHandler handler = new ResponseHandler(clientSocket, requestedUrl, stateful, stateless, logger);
                 
                 handler.SetRedirectionMapWithCheckParams(redirectionMap);
-                
+
                 if (isHavingRoute)
                 {
                     if (httpMsgParser.IsContainsParams())

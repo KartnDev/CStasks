@@ -110,7 +110,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
             try
             {
                 byte[] bHeader = charEncoder.GetBytes(
-                    "HTTP/1.1 " + "301	Moved Permanently" + "\r\n"
+                    "HTTP/1.1 " + "300 Moved" + "\r\n"
                     + "Location: "+ url + "\r\n" 
                     + "Server: Cherkasov Simple Web Server\r\n"
                     + "Connection: close\r\n");
