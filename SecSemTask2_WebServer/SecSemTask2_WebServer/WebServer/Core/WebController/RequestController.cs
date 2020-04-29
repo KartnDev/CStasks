@@ -50,22 +50,22 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 
         public int RedirectToHttpHandler(Socket clientSocket)
         {
-            var strRecieved = this.ParseReqString(clientSocket, 10240);
+            var strReceived = this.ParseReqString(clientSocket, 10240);
 
-            if (strRecieved.Contains("stop" + secretToken))
+            if (strReceived.Contains("stop" + secretToken))
             {
                 return 1;
             }
 
-            HttpStringParser httpMsgParser = new HttpStringParser(strRecieved);
+            HttpStringParser httpMsgParser = new HttpStringParser(strReceived);
 
-            if (strRecieved.Equals("") || strRecieved == null)
+            if (strReceived.Equals("") || strReceived == null)
             {
                 return 0;
             }
             
 
-            bool isHavingRoute = httpMsgParser.HavingRoute(stateful.Concat(stateless)) && httpMsgParser.IsCorrectUrl();
+            bool isHavingRoute = httpMsgParser.HavingRoute(stateless, stateful) && httpMsgParser.IsCorrectUrl();
 
             if (httpMsgParser.IsCorrect(new string[] {"GET", "POST"}))
             {

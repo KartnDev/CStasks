@@ -9,11 +9,9 @@ using System.Threading.Tasks;
 using SecSemTask2_WebServer.WebServer.SDK;
 using SecSemTask2_WebServer.WebServer.SDK.ControllerAttributes;
 
+
 namespace SecSemTask2_WebServer.WebServer.Core.Preloader
 {
-
-    
-
     public class MapRoutePreloader
     {
         private readonly ISet<Type> controllers;
@@ -69,7 +67,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
                     statelessControllers.Append((Controller) Activator.CreateInstance(anyCont));
                 }
             }
-
+            GC.KeepAlive(statelessControllers);
             return statelessControllers;
         }
 

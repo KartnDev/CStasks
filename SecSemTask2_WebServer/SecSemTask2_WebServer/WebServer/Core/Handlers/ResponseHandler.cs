@@ -12,26 +12,29 @@ using System.Text;
 using System.Threading.Tasks;
 using SecSemTask2_WebServer.WebServer.SDK;
 using static SecSemTask2_WebServer.WebServer.Core.Utils.Helper;
+// ReSharper disable PossibleNullReferenceException
 
 namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
     public class ResponseHandler : IReqHandler
     {
         private readonly string filePath;
+        private readonly IEnumerable<Type> stateful;
+        private readonly IEnumerable<Controller> stateless;
         private readonly Logger logger;
         private readonly IHttpWriter httpWriter;
         private readonly string projectDir;
-
-        private readonly IEnumerable<Type> controllers;
+        
         
         private IDictionary<string, string> redirectMap = null;
         
         public ResponseHandler(Socket clientSocket, string filePath, IEnumerable<Type> stateful, 
             IEnumerable<Controller> stateless, Logger logger)
         {
-            this.controllers = controllers;
             this.logger = logger;
             this.filePath = filePath;
+            this.stateful = stateful;
+            this.stateless = stateless;
             this.projectDir = Helper.GetProjectDir();
             httpWriter = new HttpWriter(clientSocket, logger);
             
@@ -76,7 +79,6 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         {
             if (redirectMap["DefaultRedirectPage"] != null)
             {
-                //SendPage("200 OK", redirectMap["DefaultRedirectPage"]);
                 httpWriter.Redirect("/" + redirectMap["DefaultRedirectPage"]);
             }
             else
@@ -91,36 +93,68 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         }
 
 
+        private Controller FindAndGetInstance()
+        {
+            var split = filePath.Split('/');
+            
+            foreach (var controller in stateless)
+            {
+                if (split[0].ToLower().Equals(controller.GetType().Name.ToLower()))
+                {
+                    foreach (var methodOfController in controller.GetType().GetMethods())
+                    {
+                        if (split[1].ToLower().Equals(methodOfController.Name.ToLower()))
+                        {
+                            return controller;
+                        }
+                    }
+                }
+            }
+            foreach (var controllerType in stateful)
+            {
+                if (split[0].ToLower().Equals(controllerType.Name.ToLower()))
+                {
+                    foreach (var methodOfController in controllerType.GetMethods())
+                    {
+                        if (split[1].ToLower().Equals(methodOfController.Name.ToLower()))
+                        {
+                            return (Controller)Activator.CreateInstance(controllerType);
+                        }
+                    }
+                }
+            }
 
+            return null;
+        }
         
         
-        
-        
-        //TODO Simplify Code 
-
-
         public void InvokeRouteHandler()
         {
 
             var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
             var methodName = filePath.Split('/')[2].Split('.')[0].FirstCharToUpper();
 
-            var controller = controllers.First(contr => contr.Name == controllerName);
+            var controller = FindAndGetInstance();
 
-            Object instance = Activator.CreateInstance(controller);
-            
-
-            if (controller.GetMethod(methodName).GetParameters().Length != 0)
+            if (controller != null)
             {
-                HandleClientError("This request must have params!");
-                return;
+                if (controller.GetType().GetMethod(methodName).GetParameters().Length != 0)
+                {
+                    HandleClientError("This request must have params!");
+                    return;
+                }
+
+                IActionResult result =
+                    (IActionResult) controller.GetType().GetMethod(methodName).Invoke(controller, new Object[] { });
+
+
+                SendPage("200 OK", filePath);
             }
-
-            IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, new Object[] { });
-
-
-            SendPage("200 OK", filePath);
-
+            else
+            {
+                logger.Info("doesnt find controller to url " + filePath);
+                httpWriter.WriteClientError();
+            }
         }
 
         // TOO BIG 
@@ -131,54 +165,62 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
             var methodName = filePath.Split('/')[2].Split('.')[0].Split('?')[0].FirstCharToUpper();
 
-            var controller = controllers.First(contr => contr.Name == controllerName);
-
-            Object instance = Activator.CreateInstance(controller);
-            
-            
-            if (urlParams.Keys.Count() == controller.GetMethod(methodName).GetParameters().Length)
+            var controller = FindAndGetInstance();
+            if (controller != null)
             {
-                foreach (var parameter in controller.GetMethod(methodName).GetParameters().ToArray())
+
+                if (urlParams.Keys.Count() == controller.GetType().GetMethod(methodName).GetParameters().Length)
                 {
-                    if (!urlParams.Keys.Contains(parameter.Name))
+
+                    foreach (var parameter in controller.GetType().GetMethod(methodName).GetParameters().ToArray())
                     {
-                        HandleClientError("Wrong names of params");
-                        return;
+                        if (!urlParams.Keys.Contains(parameter.Name))
+                        {
+                            HandleClientError("Wrong names of params");
+                            return;
+                        }
                     }
                 }
+                else
+                {
+                    HandleClientError("You used wrong count params");
+                    return;
+                }
+
+                var parameters = new object[urlParams.Count];
+
+                //creating sequence of parameters 
+                int iter = 0;
+                foreach (var param in controller.GetType().GetMethod(methodName).GetParameters())
+                {
+                    var key = urlParams.Keys.First(u => u.Equals(param.Name));
+                    parameters[iter] = urlParams[key];
+                    iter++;
+                }
+                
+                try
+                {
+                    IActionResult result =
+                        (IActionResult) controller.GetType().GetMethod(methodName).Invoke(controller, parameters);
+                }
+                catch (ArgumentException e)
+                {
+                    logger.Error(e, "Handle error - 404 error - created 400 response");
+                    HandleClientError("");
+                }
+                catch (Exception e)
+                {
+                    logger.Error(e, "Unhandled error while handling reques - created 500 response ");
+                    HandleServerError("Server cannot response it");
+                }
+
+                SendPage("200 OK", filePath);
             }
             else
             {
-                HandleClientError("You used wrong count params");
-                return;
+                logger.Info("doesnt find controller to url " + filePath);
+                httpWriter.WriteClientError();
             }
-            var parameters = new object[urlParams.Count];
-            
-            //creating sequence of parameters 
-            int iter = 0;
-            foreach (var param in controller.GetMethod(methodName).GetParameters())
-            {
-                var key = urlParams.Keys.First(u => u.Equals(param.Name));
-                parameters[iter] = urlParams[key];
-                iter++;
-            }
-
-            
-            try
-            {
-                IActionResult result = (IActionResult)controller.GetMethod(methodName).Invoke(instance, parameters);
-            }
-            catch (ArgumentException e)
-            {
-                logger.Error(e, "Handle error - 404 error - created 400 response");
-                HandleClientError("");
-            }
-            catch (Exception e)
-            {
-                logger.Error(e, "Unhandled error while handling reques - created 500 response ");
-                HandleServerError("Server cannot response it");
-            }
-            SendPage("200 OK", filePath);
         }
         
     }
