@@ -30,7 +30,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             if (path.Length == 3)
             {
                 foreach (var item in listOfControllerTypes)
-                {
+                { 
                     if (item.Name.ToLower() == path[1].ToLower() + "controller" &&
                         item.GetMethods().Any(u =>
                             u.Name.ToLower() == path[2].Split('.')[0].ToLower()))

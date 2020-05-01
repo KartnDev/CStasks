@@ -42,26 +42,26 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
             return charEncoder.GetString(buffer, 0, receivedBCount);
         }
 
-        public void SetRedirectionMap(IDictionary<string, string> urlRedirectingMap)
+        internal void SetRedirectionMap(IDictionary<string, string> urlRedirectingMap)
         {
             this.redirectionMap = urlRedirectingMap;
         }
 
 
-        public int RedirectToHttpHandler(Socket clientSocket)
+        internal OnExitCode RedirectToHttpHandler(Socket clientSocket)
         {
             var strReceived = this.ParseReqString(clientSocket, 10240);
 
             if (strReceived.Contains("stop" + secretToken))
             {
-                return 1;
+                return OnExitCode.OnStop;
             }
 
             HttpStringParser httpMsgParser = new HttpStringParser(strReceived);
 
             if (strReceived.Equals("") || strReceived == null)
             {
-                return 0;
+                return OnExitCode.OnNormalExit;
             }
             
 
@@ -98,7 +98,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
                 }
             }
 
-            return 0;
+            return OnExitCode.OnNormalExit;
         }
     }
 }

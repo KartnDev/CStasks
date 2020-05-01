@@ -133,6 +133,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
 
         public void WriteClientError()
         {
+            
             SendResponse("<html><head><meta" +
                       "http - equiv =\"Content-Type\" content=\"text/html;" +
                       "charset = utf - 8\">" +

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using SecSemTask2_WebServer.WebServer.Core.Preloader;
+using SecSemTask2_WebServer.WebServer.Core.Utils;
 using SecSemTask2_WebServer.WebServer.SDK;
 
 namespace SecSemTask2_WebServer.WebServer.Core
@@ -144,9 +145,14 @@ namespace SecSemTask2_WebServer.WebServer.Core
 
                             var controller = new RequestController(contentPath, token, logger, statelessControllers, statefulControllers);
                             controller.SetRedirectionMap(redirectionMap);
-                            if (controller.RedirectToHttpHandler(clientSocket) == 1)
+                            var statusOfWroteEnd = controller.RedirectToHttpHandler(clientSocket);
+                            if (statusOfWroteEnd == OnExitCode.OnStop)
                             {
                                 Stop();
+                            }
+                            else
+                            {
+                                // continue to run
                             }
                         });
                         

@@ -12,11 +12,12 @@ using System.Text;
 using System.Threading.Tasks;
 using SecSemTask2_WebServer.WebServer.SDK;
 using static SecSemTask2_WebServer.WebServer.Core.Utils.Helper;
+
 // ReSharper disable PossibleNullReferenceException
 
 namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
-    public class ResponseHandler : IReqHandler
+    internal class ResponseHandler : IReqHandler
     {
         private readonly string filePath;
         private readonly IEnumerable<Type> stateful;
@@ -24,11 +25,11 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         private readonly Logger logger;
         private readonly IHttpWriter httpWriter;
         private readonly string projectDir;
-        
-        
+
+
         private IDictionary<string, string> redirectMap = null;
-        
-        public ResponseHandler(Socket clientSocket, string filePath, IEnumerable<Type> stateful, 
+
+        public ResponseHandler(Socket clientSocket, string filePath, IEnumerable<Type> stateful,
             IEnumerable<Controller> stateless, Logger logger)
         {
             this.logger = logger;
@@ -36,22 +37,23 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             this.stateful = stateful;
             this.stateless = stateless;
             this.projectDir = Helper.GetProjectDir();
-            httpWriter = new HttpWriter(clientSocket, logger);
-            
-            
-
-            
+            httpWriter = new AsyncHttpWriter(clientSocket, logger);
         }
-        public void SendPage(string response, string pageUrl)
+
+        private async void SendPage(string response, string pageUrl)
         {
-            httpWriter.SendResponse(File.ReadAllBytes(projectDir + "\\View\\" + pageUrl.Replace('/', '\\')), 
-                response, 
-                "text/" + pageUrl.Split('.')[1]);
+            using (var reader = File.OpenText(projectDir + "\\View\\" + pageUrl.Replace('/', '\\')))
+            {
+                var onAsRead = reader.ReadToEndAsync();
+                var fileText = await onAsRead;
+                httpWriter.SendResponse(Encoding.UTF8.GetBytes(fileText),
+                    response,
+                    "text/" + pageUrl.Split('.')[1]);
+            }
         }
 
-        
 
-        private void HandleClientError(string message="")
+        private void HandleClientError(string message = "")
         {
             if (redirectMap["DefaultClientErrorPage"] != null)
             {
@@ -96,7 +98,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         private Controller FindAndGetInstance()
         {
             var split = filePath.Split('/');
-            
+
             foreach (var controller in stateless)
             {
                 if (split[1].ToLower().Equals(controller.GetType().Name.ToLower().Replace("controller", "")))
@@ -110,6 +112,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                     }
                 }
             }
+
             foreach (var controllerType in stateful)
             {
                 if (split[1].ToLower().Equals(controllerType.Name.ToLower().Replace("controller", "")))
@@ -118,7 +121,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                     {
                         if (split[2].Split('.')[0].ToLower().Equals(methodOfController.Name.ToLower()))
                         {
-                            return (Controller)Activator.CreateInstance(controllerType);
+                            return (Controller) Activator.CreateInstance(controllerType);
                         }
                     }
                 }
@@ -126,11 +129,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 
             return null;
         }
-        
-        
+
+
         public void InvokeRouteHandler()
         {
-
             var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
             var methodName = filePath.Split('/')[2].Split('.')[0].FirstCharToUpper();
 
@@ -160,18 +162,14 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         // TOO BIG 
         public void InvokeRouteHandler(IDictionary<string, object> urlParams)
         {
-
-
             var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
             var methodName = filePath.Split('/')[2].Split('.')[0].Split('?')[0].FirstCharToUpper();
 
             var controller = FindAndGetInstance();
             if (controller != null)
             {
-
                 if (urlParams.Keys.Count() == controller.GetType().GetMethod(methodName).GetParameters().Length)
                 {
-
                     foreach (var parameter in controller.GetType().GetMethod(methodName).GetParameters().ToArray())
                     {
                         if (!urlParams.Keys.Contains(parameter.Name))
@@ -197,7 +195,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                     parameters[iter] = urlParams[key];
                     iter++;
                 }
-                
+
                 try
                 {
                     IActionResult result =
@@ -222,7 +220,5 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
                 httpWriter.WriteClientError();
             }
         }
-        
     }
-
 }

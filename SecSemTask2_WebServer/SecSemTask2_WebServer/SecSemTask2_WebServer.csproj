@@ -124,6 +124,7 @@
     <Compile Include="WebServer\Core\Types\HttpMethodTypes.cs" />
     <Compile Include="WebServer\Core\Server.cs" />
     <Compile Include="WebServer\Core\PreloadersAndParsers\HttpStringParser.cs" />
+    <Compile Include="WebServer\Core\Utils\OnExitCode.cs" />
     <Compile Include="WebServer\Core\WebController\IRequestController.cs" />
     <Compile Include="WebServer\Core\WebController\RequestController.cs" />
     <Compile Include="WebServer\Core\Models\ConfigModel.cs" />
