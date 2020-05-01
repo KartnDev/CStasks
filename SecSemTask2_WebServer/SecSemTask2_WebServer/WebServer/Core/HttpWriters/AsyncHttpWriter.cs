@@ -45,35 +45,15 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
                 responseCode, "text/html");
         }
 
+        
         public void SendResponse(byte[] bContent, string responseCode, string contentType, 
             Dictionary<string, string> cookies)
         {
             try
             {
-                StringBuilder stringBuilder = new StringBuilder();
-
-                stringBuilder.Append("HTTP/1.1 "); 
-                stringBuilder.Append(responseCode);
-                stringBuilder.Append("\r\n");
-
-                foreach (var cookiePair in cookies)
-                {
-                    stringBuilder.Append("Set-Cookie: ");
-                    stringBuilder.Append(cookiePair.Key);
-                    stringBuilder.Append("=");
-                    stringBuilder.Append(cookies.Values);
-                    stringBuilder.Append("\r\r");
-                }
+                byte[] bHeader = charEncoder.GetBytes(WriterUtils.CreateStringHeader(contentType, 
+                                                            responseCode, bContent.Length, cookies));
                 
-                
-                
-                byte[] bHeader = charEncoder.GetBytes(
-                    
-                    + session=123 
-                    + "Server: Cherkasov Simple Web Server\r\n"
-                    + "Content-Length: " + bContent.Length.ToString() + "\r\n"
-                    + "Connection: close\r\n"
-                    + "Content-Type: " + contentType + "\r\n\r\n");
                 clientSocket.Send(bHeader);
                 if (bContent.Length > 10240)
                 {
@@ -111,13 +91,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
         {
             try
             {
-                byte[] bHeader = charEncoder.GetBytes(
-                    "HTTP/1.1 " + responseCode + "\r\n"
-                    + "Set-Cookie: session=123 \r\r"
-                    + "Server: Cherkasov Simple Web Server\r\n"
-                    + "Content-Length: " + bContent.Length.ToString() + "\r\n"
-                    + "Connection: close\r\n"
-                    + "Content-Type: " + contentType + "\r\n\r\n");
+                byte[] bHeader = charEncoder.GetBytes(WriterUtils.CreateStringHeader(contentType, 
+                                                            responseCode, 
+                                                            bContent.Length));
+                
                 clientSocket.Send(bHeader);
                 if (bContent.Length > 10240)
                 {
@@ -179,13 +156,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
             try
             {
 
-                byte[] bHeader = charEncoder.GetBytes(
-                    "HTTP/1.1 " + "300 Moved" + "\r\n"
-                    + "Location: "+ url + "\r\n" 
-                    + "Server: Cherkasov Simple Web Server\r\n"
-                    + "Connection: close\r\n");
-
-
+                byte[] bHeader = charEncoder.GetBytes(WriterUtils.CreateStringHeader("text/html","300 Moved"));
                 clientSocket.BeginSend(bHeader, 0, bHeader.Length, flags,
                     ar => logger.Info("End async send (redirect)"), null);
                 

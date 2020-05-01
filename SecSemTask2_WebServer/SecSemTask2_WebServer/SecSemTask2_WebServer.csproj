@@ -118,6 +118,7 @@
     <Compile Include="WebServer\Core\HttpWriters\AsyncHttpWriter.cs" />
     <Compile Include="WebServer\Core\HttpWriters\HttpWriter.cs" />
     <Compile Include="WebServer\Core\HttpWriters\IHttpWriter.cs" />
+    <Compile Include="WebServer\Core\HttpWriters\WriterUtils.cs" />
     <Compile Include="WebServer\Core\PreloadersAndParsers\MapRoutePreloader.cs" />
     <Compile Include="WebServer\Core\Types\ContentTypes.cs" />
     <Compile Include="WebServer\Core\Utils\Helper.cs" />
