@@ -10,10 +10,13 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
 {
     public class HttpWriter : IHttpWriter
     {
-        private Socket clientSocket;
+        private readonly Socket clientSocket;
 
         private readonly Encoding charEncoder = Encoding.UTF8;
         private readonly Logger logger;
+        
+        private readonly SocketFlags flags = SocketFlags.Partial;
+        
         public HttpWriter(Socket clientSocket, Logger logger)
         {
             this.logger = logger;
@@ -22,7 +25,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
 
 
 
-        public void SendResponse(string strContent, string responseCode,
+        private void SendResponse(string strContent, string responseCode,
                                   string contentType)
         {
             byte[] bContent = charEncoder.GetBytes(strContent);
@@ -46,23 +49,23 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
         {
             try
             {
-                byte[] bHeader = charEncoder.GetBytes(
-                                    "HTTP/1.1 " + responseCode + "\r\n"
-                                  + "Server: Cherkasov Simple Web Server\r\n"
-                                  + "Content-Length: " + bContent.Length.ToString() + "\r\n"
-                                  + "Connection: close\r\n"
-                                  + "Content-Type: " + contentType + "\r\n\r\n");
+                byte[] bHeader = charEncoder.GetBytes(WriterUtils.CreateStringHeader(contentType, 
+                    responseCode, bContent.Length));
+                
                 clientSocket.Send(bHeader);
                 if (bContent.Length > 10240)
                 {
                     for (int i = 0; i < bContent.Length; i += 10240)
                     {
-                        clientSocket.Send(bContent.Skip(i).Take(10240).ToArray());
+                        clientSocket.BeginSend(bContent.Skip(i).Take(10240).ToArray(), 
+                            0, bContent.Length, flags, 
+                            ar => logger.Info("End async (responsing)"), null);
                     }
                 }
                 else
                 {
-                    clientSocket.Send(bContent);
+                    clientSocket.BeginSend(bContent, 0, bContent.Length, flags, 
+                        ar => logger.Info("End async (responsing)"), null);
                 }
 
             }
@@ -72,7 +75,47 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
             }
             catch (Exception e)
             {
-                logger.Error(e, "Send response unhandled error..");
+                logger.Fatal(e, "Send response unhandled error..");
+                throw;
+            }
+            finally
+            {
+                Interrupt();
+            }
+        }
+
+        public void SendResponse(byte[] bContent, string responseCode, string contentType, 
+            Dictionary<string, string> cookies)
+        {
+            try
+            {
+                byte[] bHeader = charEncoder.GetBytes(WriterUtils.CreateStringHeader(contentType, 
+                    responseCode, bContent.Length, cookies));
+                
+                clientSocket.Send(bHeader);
+                if (bContent.Length > 10240)
+                {
+                    for (int i = 0; i < bContent.Length; i += 10240)
+                    {
+                        clientSocket.BeginSend(bContent.Skip(i).Take(10240).ToArray(), 
+                            0, bContent.Length, flags, 
+                            ar => logger.Info("End async (responsing)"), null);
+                    }
+                }
+                else
+                {
+                    clientSocket.BeginSend(bContent, 0, bContent.Length, flags, 
+                        ar => logger.Info("End async (responsing)"), null);
+                }
+
+            }
+            catch (SocketException e)
+            {
+                logger.Error(e, "Send response error..");
+            }
+            catch (Exception e)
+            {
+                logger.Fatal(e, "Send response unhandled error..");
                 throw;
             }
             finally
@@ -109,12 +152,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
         {
             try
             {
-                byte[] bHeader = charEncoder.GetBytes(
-                    "HTTP/1.1 " + "300 Moved" + "\r\n"
-                    + "Location: "+ url + "\r\n" 
-                    + "Server: Cherkasov Simple Web Server\r\n"
-                    + "Connection: close\r\n");
+
+                byte[] bHeader = charEncoder.GetBytes(WriterUtils.CreateStringHeader("text/html","300 Moved"));
                 clientSocket.Send(bHeader);
+                
             }
             catch (SocketException e)
             {
@@ -122,7 +163,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
             }
             catch (Exception e)
             {
-                logger.Error(e, "Send response unhandled error..");
+                logger.Fatal(e, "Send response unhandled error..");
                 throw;
             }
             finally

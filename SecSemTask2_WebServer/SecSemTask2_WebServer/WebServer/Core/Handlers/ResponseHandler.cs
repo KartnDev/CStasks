@@ -46,9 +46,17 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
             {
                 var onAsRead = reader.ReadToEndAsync();
                 var fileText = await onAsRead;
+                
+                
+                var cookies = new Dictionary<string, string>();
+                cookies.Add("first", "12345667898");
+                cookies.Add("second", "1");
+                
+                
                 httpWriter.SendResponse(Encoding.UTF8.GetBytes(fileText),
                     response,
-                    "text/" + pageUrl.Split('.')[1]);
+                    "text/" + pageUrl.Split('.')[1],
+                    cookies);
             }
         }
 

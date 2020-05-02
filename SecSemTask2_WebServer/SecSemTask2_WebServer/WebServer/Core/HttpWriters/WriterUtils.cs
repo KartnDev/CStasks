@@ -22,8 +22,8 @@ namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
                     stringBuilder.Append("Set-Cookie: ");
                     stringBuilder.Append(cookiePair.Key);
                     stringBuilder.Append("=");
-                    stringBuilder.Append(cookies.Values);
-                    stringBuilder.Append("\r\r");
+                    stringBuilder.Append(cookiePair.Value);
+                    stringBuilder.Append(" \r\n");
                 }
             }
 
