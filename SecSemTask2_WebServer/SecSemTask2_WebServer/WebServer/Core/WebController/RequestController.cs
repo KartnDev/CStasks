@@ -20,13 +20,13 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
         private readonly Encoding charEncoder = Encoding.UTF8;
         private readonly Logger logger;
         
-        private readonly IEnumerable<Controller> stateless;
-        private readonly IEnumerable<Type> stateful;
+        private readonly IDictionary<string, Controller> stateless;
+        private readonly IDictionary<string, Type> stateful;
 
         private IDictionary<string, string> redirectionMap;
 
         public RequestController(string contentPath, string secretToken, Logger logger,
-            IEnumerable<Controller> stateless, IEnumerable<Type> stateful)
+            IDictionary<string, Controller> stateless, IDictionary<string, Type> stateful)
         {
             this.logger = logger;
             this.stateless = stateless;
@@ -59,7 +59,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
 
             HttpStringParser httpMsgParser = new HttpStringParser(strReceived);
 
-            if (strReceived.Equals("") || strReceived == null)
+            if (strReceived.Equals("") || string.IsNullOrEmpty(strReceived))
             {
                 return OnExitCode.OnNormalExit;
             }
@@ -75,8 +75,10 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
                     requestedUrl = httpMsgParser.GetRequestedFile();
                 }
 
-
-                ResponseHandler handler = new ResponseHandler(clientSocket, requestedUrl, stateful, stateless, logger);
+                var controller = FindAndGetInstance(requestedUrl);
+                
+                
+                ResponseHandler handler = new ResponseHandler(clientSocket, controller, requestedUrl, logger);
                 
                 handler.SetRedirectionMapWithCheckParams(redirectionMap);
 
@@ -99,6 +101,41 @@ namespace SecSemTask2_WebServer.WebServer.Core.WebController
             }
 
             return OnExitCode.OnNormalExit;
+        }
+        
+        private Controller FindAndGetInstance(string filePath)
+        {
+            var split = filePath.Split('/');
+
+            foreach (var controller in stateless)
+            {
+                if (split[1].ToLower().Equals(controller.Key.ToLower().Replace("controller", "")))
+                {
+                    foreach (var methodOfController in controller.Value.GetType().GetMethods())
+                    {
+                        if (split[2].Split('.')[0].ToLower().Equals(methodOfController.Name.ToLower()))
+                        {
+                            return controller.Value;
+                        }
+                    }
+                }
+            }
+
+            foreach (var ctrNameType in stateful)
+            {
+                if (split[1].ToLower().Equals(ctrNameType.Key.ToLower().Replace("controller", "")))
+                {
+                    foreach (var methodOfController in ctrNameType.Value.GetMethods())
+                    {
+                        if (split[2].Split('.')[0].ToLower().Equals(methodOfController.Name.ToLower()))
+                        {
+                            return (Controller) Activator.CreateInstance(ctrNameType.Value);
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

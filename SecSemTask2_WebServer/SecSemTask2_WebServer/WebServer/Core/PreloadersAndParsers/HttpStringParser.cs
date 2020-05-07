@@ -17,12 +17,12 @@ namespace SecSemTask2_WebServer.WebServer.Core.Utils
             this.clientReq = reqeast;
         }
 
-        public bool HavingRoute(IEnumerable<Controller> stateless, IEnumerable<Type> stateful)
+        public bool HavingRoute(IDictionary<string, Controller> stateless, IDictionary<string, Type> stateful)
         {
-            var listOfControllerTypes = new List<Type>(stateful);
+            var listOfControllerTypes = new List<Type>(stateful.Values);
             foreach (var statelessController in stateless)
             {
-                listOfControllerTypes.Add(statelessController.GetType());
+                listOfControllerTypes.Add(statelessController.Value.GetType());
             }
 
 

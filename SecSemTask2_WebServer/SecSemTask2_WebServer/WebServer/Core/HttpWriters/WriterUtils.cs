@@ -3,7 +3,7 @@ using System.Text;
 
 namespace SecSemTask2_WebServer.WebServer.Core.HttpWriters
 {
-    internal class WriterUtils
+    static class WriterUtils
     {
         internal static string CreateStringHeader(string contentType, 
             string responseCode, 

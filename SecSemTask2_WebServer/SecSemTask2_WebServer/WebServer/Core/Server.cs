@@ -25,8 +25,8 @@ namespace SecSemTask2_WebServer.WebServer.Core
         private readonly string contentPath;
         private readonly string token;
         private readonly IDictionary<string, string> redirectionMap = new Dictionary<string, string>();
-        private readonly IEnumerable<Type> statefulControllers;
-        private readonly IEnumerable<Controller> statelessControllers;
+        private readonly IDictionary<string, Type> statefulControllers;
+        private readonly IDictionary<string, Controller> statelessControllers;
         
         public bool running = false;
 

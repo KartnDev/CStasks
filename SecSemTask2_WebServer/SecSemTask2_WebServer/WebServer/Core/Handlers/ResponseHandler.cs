@@ -19,23 +19,21 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
 {
     internal class ResponseHandler : IReqHandler
     {
-        private readonly string filePath;
-        private readonly IEnumerable<Type> stateful;
-        private readonly IEnumerable<Controller> stateless;
         private readonly Logger logger;
         private readonly IHttpWriter httpWriter;
         private readonly string projectDir;
 
 
+        private readonly Controller controller;
+        private readonly string filePath;
+
         private IDictionary<string, string> redirectMap = null;
 
-        public ResponseHandler(Socket clientSocket, string filePath, IEnumerable<Type> stateful,
-            IEnumerable<Controller> stateless, Logger logger)
+        public ResponseHandler(Socket clientSocket, Controller controller, string filePath, Logger logger)
         {
-            this.logger = logger;
+            this.controller = controller;
             this.filePath = filePath;
-            this.stateful = stateful;
-            this.stateless = stateless;
+            this.logger = logger;
             this.projectDir = Helper.GetProjectDir();
             httpWriter = new AsyncHttpWriter(clientSocket, logger);
         }
@@ -103,48 +101,14 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         }
 
 
-        private Controller FindAndGetInstance()
-        {
-            var split = filePath.Split('/');
-
-            foreach (var controller in stateless)
-            {
-                if (split[1].ToLower().Equals(controller.GetType().Name.ToLower().Replace("controller", "")))
-                {
-                    foreach (var methodOfController in controller.GetType().GetMethods())
-                    {
-                        if (split[2].Split('.')[0].ToLower().Equals(methodOfController.Name.ToLower()))
-                        {
-                            return controller;
-                        }
-                    }
-                }
-            }
-
-            foreach (var controllerType in stateful)
-            {
-                if (split[1].ToLower().Equals(controllerType.Name.ToLower().Replace("controller", "")))
-                {
-                    foreach (var methodOfController in controllerType.GetMethods())
-                    {
-                        if (split[2].Split('.')[0].ToLower().Equals(methodOfController.Name.ToLower()))
-                        {
-                            return (Controller) Activator.CreateInstance(controllerType);
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
+        
 
 
         public void InvokeRouteHandler()
         {
             var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
             var methodName = filePath.Split('/')[2].Split('.')[0].FirstCharToUpper();
-
-            var controller = FindAndGetInstance();
+            
 
             if (controller != null)
             {
@@ -172,8 +136,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Handlers
         {
             var controllerName = filePath.Split('/')[1].FirstCharToUpper() + "Controller";
             var methodName = filePath.Split('/')[2].Split('.')[0].Split('?')[0].FirstCharToUpper();
-
-            var controller = FindAndGetInstance();
+            
             if (controller != null)
             {
                 if (urlParams.Keys.Count() == controller.GetType().GetMethod(methodName).GetParameters().Length)
