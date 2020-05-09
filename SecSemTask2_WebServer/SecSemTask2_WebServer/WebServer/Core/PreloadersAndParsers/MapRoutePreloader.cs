@@ -70,7 +70,7 @@ namespace SecSemTask2_WebServer.WebServer.Core.Preloader
                 }
             }
 
-            GC.KeepAlive(statelessControllers);
+            
             return statelessControllers;
         }
 
