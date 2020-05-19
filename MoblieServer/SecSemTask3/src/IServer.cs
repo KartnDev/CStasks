@@ -2,7 +2,7 @@
 {
     public interface IServer
     {
-        void Serve();
+        bool Serve();
         void Shutdown();
         void Abort();
     }
