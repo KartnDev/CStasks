@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[5.0.0-preview.4.20220.10, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0-preview.4.20220.10, )"
+            },
             "NLog": {
               "target": "Package",
               "version": "[4.7.2, )"

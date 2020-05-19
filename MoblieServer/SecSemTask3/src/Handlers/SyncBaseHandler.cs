@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using NLog;
+using SecSemTask3.Methods;
 
 namespace SecSemTask3.Handlers
 {
@@ -42,11 +43,14 @@ namespace SecSemTask3.Handlers
                 var methodName = resultParse["methodName"];
                 var @params = resultParse["params"];
 
+                IMethod methodWorker;
+                
                 switch (methodName)
                 {
                     case "register":
                     {
-                        
+                        methodWorker = new RegisterMethod(clientSocket, @params as IDictionary<string, string>);
+                        methodWorker.WorkSync();
                     } break;
                     
                     default:
