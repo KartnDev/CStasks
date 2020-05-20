@@ -35,7 +35,7 @@ namespace SecSemTask3.Methods
                     Password = _params["password"],
                     PhoneNum = _params["phone_num"]
                 };
-                
+                Console.WriteLine(user);
                 
                 db.Users.Add(user);
                 var result = $"user_token={user.UserToken}&user_id={user.Id}";

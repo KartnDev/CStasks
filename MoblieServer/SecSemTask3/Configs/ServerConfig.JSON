@@ -1,5 +1,5 @@
 ﻿{
-  "Addr": {"ip": "localhost", "port": "3305"},
+  "Addr": {"ip": "127.0.0.1", "port": "3305"},
   "AppToken": "98F1EJJDa4fjwD2fUIHWUd2dsaAsS289IFFFadde3A8213HFI7",
   "MSSQL": {}
 }

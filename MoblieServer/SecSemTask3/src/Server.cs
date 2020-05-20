@@ -32,11 +32,11 @@ namespace SecSemTask3
             var directoryInfo = Directory.GetParent(Environment.CurrentDirectory).Parent;
             if (directoryInfo != null)
             {
-                string projectDir = directoryInfo.FullName;
+                string projectDir = directoryInfo.Parent.FullName;
 
                 ConfigModel jsonConfig;
 
-                var path = projectDir + "\\Configuration\\Config.JSON";
+                var path = projectDir + "\\Configs\\ServerConfig.JSON";
                 if (!File.Exists(path))
                 {
                     Exception ex = new FileNotFoundException("Cannot find config file! path:" + path);

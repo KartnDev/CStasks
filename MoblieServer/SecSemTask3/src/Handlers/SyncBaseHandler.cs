@@ -38,7 +38,7 @@ namespace SecSemTask3.Handlers
             var requestStr = ParseReqString(clientSocket, ReceiveMaxLen);
 
             var resultParse = RequestProtocolParser(requestStr);
-            if (requestStr.Length == 2)
+            if (resultParse.Count == 2)
             {
                 var methodName = resultParse["methodName"];
                 var @params = resultParse["params"];

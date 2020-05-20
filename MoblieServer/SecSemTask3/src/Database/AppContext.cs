@@ -16,7 +16,7 @@ namespace SecSemTask3.Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Server=(localdb)\\mssqllocaldb;Database=<НАЗВАНИЕ БД ТУТ>;Trusted_Connection=True;");
+                "Server=DESKTOP-88GGUQH\\SQLEXPRESS;Database=MobileDB;Trusted_Connection=True;");
         }
     }
 }
