@@ -16,12 +16,17 @@ namespace TcpClient
                 Int32 port = 3305;
                 System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("localhost", port);
 
-                var s = "98F1EJJDa4fjwD2fUIHWUd2dsaAsS289IFFFadde3A8213HFI7" +
-                        "?register?" +
-                        "name=adsfdsaafsf1" +
-                        "&surname=Chsdgfasdsodfsd" +
-                        "&password=zasfdc" +
-                        "&phone_num=9221330";
+                Console.WriteLine("Type the method name (register or etc)");
+                string method = Console.ReadLine();
+                Console.WriteLine("Type the args passing this rule (name=Dmitry&surname=Cherkasov&password=123&phone_num=9221330");
+                string @params = Console.ReadLine();
+
+                var s = $"98F1EJJDa4fjwD2fUIHWUd2dsaAsS289IFFFadde3A8213HFI7" +
+                        $"?{method}?" + @params;
+                       
+                
+                
+                
                 
                 // Translate the passed message into ASCII and store it as a Byte array.
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(s);
