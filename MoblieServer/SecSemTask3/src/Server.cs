@@ -2,6 +2,9 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Threading;
 using Newtonsoft.Json;
 using SecSemTask3.Utils.CustomExceptions;
@@ -11,6 +14,7 @@ using SecSemTask3.Handlers;
 
 namespace SecSemTask3
 {
+    
     public class Server : IServer
     {
         private volatile bool _status = false;
@@ -19,14 +23,17 @@ namespace SecSemTask3
         private readonly string _ipAddrStr;
         private const int ConnMaxValue = ushort.MaxValue;
         private const int Timeout = -1;
-
+        
+        private Thread _clientListenLoop;
+        
+        private readonly string _sqlServerName;
         private readonly string _appToken;
         
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         private Socket _serverSocket;
 
-        
+
         public Server()
         {
             var directoryInfo = Directory.GetParent(Environment.CurrentDirectory).Parent;
@@ -39,18 +46,26 @@ namespace SecSemTask3
                 var path = projectDir + "\\Configs\\ServerConfig.JSON";
                 if (!File.Exists(path))
                 {
-                    Exception ex = new FileNotFoundException("Cannot find config file! path:" + path);
-                    _logger.Fatal(ex);
-                    throw ex;
+                    if(File.Exists("ServerConfig.JSON"))
+                    {
+                        path = "ServerConfig.JSON";
+                    }
+                    else
+                    {
+                        Exception ex = new FileNotFoundException("Cannot find config file! path:" + path);
+                        _logger.Fatal(ex);
+                        throw ex;
+                    }
                 }
                 
+                _logger.Info("Reading configurations..");
                 using (var r = new StreamReader(path))
                 {
                     string json = r.ReadToEnd();
                     jsonConfig = JsonConvert.DeserializeObject<ConfigModel>(json);
                 }
 
-                this._ipAddrStr = jsonConfig.Addr["ip"];
+                _ipAddrStr = jsonConfig.Addr["ip"];
                 
                 if (!int.TryParse(jsonConfig.Addr["port"], out _port))
                 {
@@ -59,7 +74,8 @@ namespace SecSemTask3
                     throw ex;
                 }
 
-                this._appToken = jsonConfig.AppToken;
+                _appToken = jsonConfig.AppToken;
+                _sqlServerName = jsonConfig.MSSQLName;
             }
             else
             {
@@ -68,6 +84,7 @@ namespace SecSemTask3
             }
 
             ConfigLogger("log.txt");
+            _logger.Info("Start listening..");
         }
 
         private static void ConfigLogger(string filename)
@@ -114,11 +131,13 @@ namespace SecSemTask3
                 throw;
             }
 
-            Thread clientListenLoop = new Thread(ClientLoop);
-            clientListenLoop.Start();
+            
+            _clientListenLoop = new Thread(ClientLoop);
+            _clientListenLoop.Priority = ThreadPriority.Lowest;
+            _clientListenLoop.Start();
 
 
-            return true;
+            return _status;
         }
 
         private void ClientLoop()
@@ -148,23 +167,37 @@ namespace SecSemTask3
                         clientSocket.ReceiveTimeout = Timeout;
                         clientSocket.SendTimeout = Timeout;
                         
-                        IHandler handler = new SyncBaseHandler(_appToken, _logger);
+                        IHandler handler = new SyncBaseHandler(_appToken, _sqlServerName, _logger);
                         handler.Handle(clientSocket);
                     });
                     requestHandler.Start();
+                    if (!_status)
+                    {
+                        requestHandler.Interrupt();
+                    }
                 }
             }
         }
 
+        
+        
+        
 
         public void Shutdown()
         {
-            throw new System.NotImplementedException();
+            _status = false;
+            _clientListenLoop.Interrupt();
+            GC.Collect();
+            _logger.Info("Client loop was stopped normally");
         }
+        
+
 
         public void Abort()
         {
-            throw new System.NotImplementedException();
+            _status = false;
+
+            _logger.Info($"Client event loop was aborted critically!");
         }
     }
 }

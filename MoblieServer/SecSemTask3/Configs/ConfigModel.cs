@@ -6,5 +6,6 @@ namespace SecSemTask3.Configs
     {
         public Dictionary<string, string> Addr;
         public string AppToken;
+        public string MSSQLName;
     }
 }

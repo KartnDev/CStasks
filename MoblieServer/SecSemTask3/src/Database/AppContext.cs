@@ -1,22 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SecSemTask3.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace SecSemTask3.Database
 {
     public sealed class AppContext : DbContext
     {
+        private readonly string _serverName;
         public DbSet<UserModel> Users { get; set; }
 
-        public AppContext()
+        public AppContext(string serverName)
         {
+            _serverName = serverName;
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Server=DESKTOP-88GGUQH\\SQLEXPRESS;Database=MobileDB;Trusted_Connection=True;");
+                $"Server={_serverName};Database=MobileDB;Trusted_Connection=True;");
         }
     }
 }

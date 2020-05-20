@@ -11,14 +11,18 @@ namespace SecSemTask3.Handlers
     public class SyncBaseHandler : IHandler
     {
         private readonly string _appToken;
+        private readonly string  _sqlServerName;
         private readonly Logger _logger;
         private const int ReceiveMaxLen = 1024;
         
         private readonly Encoding _charEncoder = Encoding.UTF8;
 
-        public SyncBaseHandler(string appToken, Logger logger)
+        private IMethod _methodWorker = null;
+        
+        public SyncBaseHandler(string appToken,string sqlServerName, Logger logger)
         {
             _appToken = appToken;
+            _sqlServerName = sqlServerName;
             _logger = logger;
         }
         
@@ -35,6 +39,7 @@ namespace SecSemTask3.Handlers
         
         public void Handle(Socket clientSocket)
         {
+            _logger.Info("Client accepted, handling the request...");
             var requestStr = ParseReqString(clientSocket, ReceiveMaxLen);
 
             var resultParse = RequestProtocolParser(requestStr);
@@ -43,14 +48,17 @@ namespace SecSemTask3.Handlers
                 var methodName = resultParse["methodName"];
                 var @params = resultParse["params"];
 
-                IMethod methodWorker;
+                
                 
                 switch (methodName)
                 {
                     case "register":
                     {
-                        methodWorker = new RegisterMethod(clientSocket, @params as IDictionary<string, string>);
-                        methodWorker.WorkSync();
+                        _methodWorker = new RegisterMethod(clientSocket, 
+                                                          _sqlServerName,
+                                                          @params as IDictionary<string, string>,
+                                                          _logger);
+                        _methodWorker.WorkSync();
                     } break;
                     
                     default:
@@ -66,12 +74,12 @@ namespace SecSemTask3.Handlers
 
         public void Interrupt()
         {
-            throw new System.NotImplementedException();
+            _methodWorker.InterruptMethod();
         }
 
         public void Abort()
         {
-            throw new System.NotImplementedException();
+            _methodWorker.AbortMethod();
         }
 
         // Example application_token?register?username=<>&surname=<>&password=<>

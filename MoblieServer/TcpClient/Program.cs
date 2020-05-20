@@ -18,10 +18,10 @@ namespace TcpClient
 
                 var s = "98F1EJJDa4fjwD2fUIHWUd2dsaAsS289IFFFadde3A8213HFI7" +
                         "?register?" +
-                        "name=Dsdfgasf1" +
-                        "&surname=Chsdgsodfsd" +
+                        "name=adsfdsaafsf1" +
+                        "&surname=Chsdgfasdsodfsd" +
                         "&password=zasfdc" +
-                        "&phone_num=92321110";
+                        "&phone_num=9221330";
                 
                 // Translate the passed message into ASCII and store it as a Byte array.
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(s);
