@@ -38,6 +38,7 @@ namespace SecSemTask3.Methods
                 Console.WriteLine(user);
                 
                 db.Users.Add(user);
+                db.SaveChanges();
                 var result = $"user_token={user.UserToken}&user_id={user.Id}";
                 _clientSocket.Send(Encoding.UTF8.GetBytes(result));
             }
