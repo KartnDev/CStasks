@@ -47,10 +47,10 @@ namespace SecSemTask3.Methods
                     db.SaveChanges();
                     var result = $"user_token={user.UserToken.ToString()}&user_id={user.Id.ToString()}";
                     _clientSocket.Send(Encoding.UTF8.GetBytes(result));
-
+                    
                     _logger.Info($"User {user.Id.ToString()} with Name:{user.Name} " +
                                  $"and Surname {user.Surname} " +
-                                 $"and PhoneNumber: {user.Surname} successfully registered");
+                                 $"and PhoneNumber: {user.PhoneNum} successfully registered");
                 }
                 else
                 {

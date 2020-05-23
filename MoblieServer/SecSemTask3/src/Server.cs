@@ -133,7 +133,7 @@ namespace SecSemTask3
 
             
             _clientListenLoop = new Thread(ClientLoop);
-            _clientListenLoop.Priority = ThreadPriority.Lowest;
+            _clientListenLoop.Priority = ThreadPriority.Highest;
             _clientListenLoop.Start();
 
 
@@ -196,7 +196,7 @@ namespace SecSemTask3
         public void Abort()
         {
             _status = false;
-
+            _clientListenLoop.Abort();
             _logger.Info($"Client event loop was aborted critically!");
         }
     }
