@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Text;
 
 namespace TcpClient
 {
@@ -17,9 +18,9 @@ namespace TcpClient
                 System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient("localhost", port);
 
                 Console.WriteLine("Type the method name (register or etc)");
-                string method = Console.ReadLine();
+                string method = "register"; //Console.ReadLine();
                 Console.WriteLine("Type the args passing this rule (name=Dmitry&surname=Cherkasov&password=123&phone_num=9221330");
-                string @params = Console.ReadLine();
+                string @params = "name=ads3ry&surname=Casd43sov&password=1123434gfd5423&phone_num=861318761"; //Console.ReadLine();
 
                 var s = $"98F1EJJDa4fjwD2fUIHWUd2dsaAsS289IFFFadde3A8213HFI7" +
                         $"?{method}?" + @params;
@@ -53,7 +54,25 @@ namespace TcpClient
                 Int32 bytes = stream.Read(data, 0, data.Length);
                 responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
                 Console.WriteLine("Received: {0}", responseData);
+                if (!responseData.Contains("error=100"))
+                {
+                    String uuid = responseData.Split("UUID=")[1].Split(" ")[0];
 
+                    Console.WriteLine("Sent: {0}", uuid);
+                    stream.Write(Encoding.UTF8.GetBytes(uuid));
+
+
+                    responseData = String.Empty;
+
+                    // Read the first batch of the TcpServer response bytes.
+                    bytes = stream.Read(data, 0, data.Length);
+                    responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+                    Console.WriteLine("Received status: {0}", responseData);
+                }
+                else
+                {
+                    Console.WriteLine("User exists!");
+                }
                 // Close everything.
                 stream.Close();
                 client.Close();
