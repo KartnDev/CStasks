@@ -19,8 +19,8 @@ namespace TcpClient
 
                 Console.WriteLine("Type the method name (register or etc)");
                 string method = "register"; //Console.ReadLine();
-                Console.WriteLine("Type the args passing this rule (name=Dmitry&surname=Cherkasov&password=123&phone_num=9221330");
-                string @params = "name=ads3ry&surname=Casd43sov&password=1123434gfd5423&phone_num=861318761"; //Console.ReadLine();
+                Console.WriteLine("Type the args passing this rule (name=Dmitry&surname=Cherkasov&password=123&phone_num=2343");
+                string @params = "name=ads3ry&surname=Casd43sov&password=1123434gfd5423&phone_num=8615346534"; //Console.ReadLine();
 
                 var s = $"98F1EJJDa4fjwD2fUIHWUd2dsaAsS289IFFFadde3A8213HFI7" +
                         $"?{method}?" + @params;
