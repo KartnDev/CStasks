@@ -16,10 +16,13 @@ namespace NumMethods4
 
         private void DrawFunction(LambdaFunc func, Color color)
         {
+            new Task(() => { 
             for (double i = 20; i < pictureBox1.Width - 20; i += 1)
             {
                 _graphics.DrawLine(new Pen(color, 2), (float)i, pictureBox1.Height - func(i), (float)(i + 1), pictureBox1.Height - func(i + 1));
+                Task.Delay(1);
             }
+            }).Start();
         }
 
 
@@ -32,21 +35,44 @@ namespace NumMethods4
 
         private void DrawButtonClick(object sender, EventArgs e)
         {
-            var t1 = new Task(() =>
+            _graphics.DrawLine(Pens.Black, 20, 40, 20, 425);
+            _graphics.DrawLine(Pens.Black, 20, 425, 700, 425);
+
+            if (comboBox1.SelectedItem == "CountingEuler")
             {
-                DrawFunction((x) => (float)(1 / x), Color.Black); // График
+                DrawFunction((x) => (float)DiffMethods.EulerCounting(0, 1, x, 0.1), Color.Aqua);
+            }
 
-                DrawFunction((x) => 4 + (float)DiffMethods.Adams(0, 1, x, 2), Color.Brown);
-
-                DrawFunction((x) => 8 + (float)DiffMethods.EulerCounting(0, 1, x, 0.1), Color.Aqua);
-
-                DrawFunction((x) => 16 + (float)DiffMethods.RungeKutta(0, 1, x, 0.1), Color.Blue);
-
-                DrawFunction((x) => 32 + (float)DiffMethods.ModifiedEuler(0, 1, x, 0.1), Color.DarkMagenta);
-
-            });
-            t1.Start();
-
+            if (comboBox1.SelectedItem == "ModifiedEuler")
+            {
+                DrawFunction((x) => (float)DiffMethods.ModifiedEuler(0, 1, x, 0.1), Color.DarkMagenta);
+            }
+            if (comboBox1.SelectedItem == "RungeKutta4th")
+            {
+                DrawFunction((x) => (float)DiffMethods.RungeKutta(0, 1, x, 0.1), Color.Blue);
+            }
+            if (comboBox1.SelectedItem == "Adams4th")
+            {
+                DrawFunction((x) => (float)DiffMethods.Adams(0, 1, x, 2), Color.Brown);
+            }
         }
+
+        private void ClearButtonClick(object sender, EventArgs e)
+        {
+            this._graphics.Clear(pictureBox1.BackColor);
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            label1.Text = "X: " + e.X;
+            label2.Text = "Y: " + e.Y;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            label1.Text = "X: " + e.X;
+            label2.Text = "Y: " + e.Y;
+        }
+
     }
 }

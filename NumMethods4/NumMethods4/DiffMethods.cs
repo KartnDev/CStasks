@@ -7,7 +7,7 @@ namespace NumMethods4
 
         private static double func(double x, double y) 
         {
-            return  100*Math.Sin(x/10) / y;
+            return  300*Math.Sin(x/10) / y;
         }
 
 
