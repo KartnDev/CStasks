@@ -7,20 +7,20 @@ namespace NumMethods4
 
         private static double func(double x, double y) 
         {
-            return  300*Math.Sin(x/10) / y;
+            return  300*Math.Sin(x/10)/y;
         }
 
 
         public static double Adams(double x0, double y0, double xat, double hSteps)
         {
-            double h = hSteps; //шаг
-            int n = (int)((xat - x0) / h); //кол во точек
+            double h = hSteps; 
+            int n = (int)((xat - x0) / h);
 
             double[] x = new double[n];
             double[] y = new double[n];
             double[] f = new double[n];
             x[0] = x0;
-            y[0] = y0; // начальная задача коши
+            y[0] = y0; 
             f[0] = func(x[0], y[0]);
 
 
@@ -47,14 +47,14 @@ namespace NumMethods4
 
         public static double EulerCounting(double x0, double y0, double xat, double hSteps)
         {
-            double h = hSteps; // шаг
-            int n = (int)((xat - x0) / h); //кол во точек
+            double h = hSteps; 
+            int n = (int)((xat - x0) / h); 
 
             double[] x = new double[n];
             double[] y = new double[n];
 
             x[0] = x0;
-            y[0] = y0; // начальная задача коши
+            y[0] = y0; 
 
             double yii;
 
@@ -71,15 +71,15 @@ namespace NumMethods4
 
         public static double RungeKutta(double x0, double y0, double xat, double hSteps)
         {
-            double а = 0, b = 1; //отрезок, на  котором ищется у(х)
-            double h = hSteps; // шаг
-            int n = (int)((xat - x0) / h); //кол во точек
+            double а = 0, b = 1; 
+            double h = hSteps; 
+            int n = (int)((xat - x0) / h);
 
             double[] x = new double[n];
             double[] y = new double[n];
 
             x[0] = x0;
-            y[0] = y0; // начальная задача коши
+            y[0] = y0; 
 
             double k0, k1, k2, k3;
 
@@ -99,15 +99,15 @@ namespace NumMethods4
 
         public static double ModifiedEuler(double x0, double y0, double xat, double hSteps)
         {
-            double а = 0, b = 1; //отрезок, на  котором ищется у(х)
-            double h = hSteps; // шаг
-            int n = (int)((xat - x0) / h); //кол во точек
+            double а = 0, b = 1; 
+            double h = hSteps; 
+            int n = (int)((xat - x0) / h); 
 
             double[] x = new double[n];
             double[] y = new double[n];
 
             x[0] = x0;
-            y[0] = y0; // начальная задача коши
+            y[0] = y0;
 
             double y12;
             for (int i = 0; i < n - 1; i++)
