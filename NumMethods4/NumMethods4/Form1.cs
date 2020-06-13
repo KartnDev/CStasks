@@ -12,54 +12,6 @@ namespace NumMethods4
 {
     public partial class Form1 : Form
     {
-        static double dydx(double x, double y)
-        {
-            return x / y;
-        }
-
-        // Finds value of y for a given x 
-        // using step size h and initial 
-        // value y0 at x0. 
-        static double rungeKutta(double x0, double y0, double x, double h)
-        {
-
-            // Count number of iterations using 
-            // step size or step height h 
-            int n = (int)((x - x0) / h);
-
-            double k1, k2, k3, k4;
-
-            // Iterate for number of iterations 
-            double y = y0;
-
-            for (int i = 1; i <= n; i++)
-            {
-
-                // Apply Runge Kutta Formulas 
-                // to find next value of y 
-                k1 = h * (dydx(x0, y));
-
-                k2 = h * (dydx(x0 + 0.5 * h,
-                         y + 0.5 * k1));
-
-                k3 = h * (dydx(x0 + 0.5 * h,
-                         y + 0.5 * k2));
-
-                k4 = h * (dydx(x0 + h, y + k3));
-
-                // Update next value of y 
-                y = y + (1.0 / 6.0) * (k1 + 2
-                                       * k2 + 2 * k3 + k4);
-
-                // Update next value of x 
-                x0 = x0 + h;
-            }
-
-            return y;
-        }
-
-
-
         public delegate float LambdaFunc(double argX);
 
         private void DrawFunction(LambdaFunc func, Color color)
@@ -80,19 +32,21 @@ namespace NumMethods4
 
         private void DrawButtonClick(object sender, EventArgs e)
         {
-            new Task(() => {
-            DrawFunction((x) => (float)(1/x), Color.Black); // График
-            Task.Delay(100);
-            DrawFunction((x) => 2 + (float)DiffMethods.Adams(0, 1, x, 0.1), Color.Brown);
-            Task.Delay(100);
-            DrawFunction((x) => 4 + (float) DiffMethods.EulerCounting(0, 1, x, 0.1), Color.Aqua);
-            Task.Delay(100);
-            DrawFunction((x) => 6 +(float)DiffMethods.RungeKutta(0, 1, x, 0.1), Color.Blue);
-            Task.Delay(100);
-            DrawFunction((x) => 8 + (float)DiffMethods.ModifiedEuler(0, 1, x, 0.1), Color.DarkMagenta);
-            Task.Delay(100);
-            }).Start();
-            
+            var t1 = new Task(() =>
+            {
+                DrawFunction((x) => (float)(1 / x), Color.Black); // График
+
+                DrawFunction((x) => 4 + (float)DiffMethods.Adams(0, 1, x, 2), Color.Brown);
+
+                DrawFunction((x) => 8 + (float)DiffMethods.EulerCounting(0, 1, x, 0.1), Color.Aqua);
+
+                DrawFunction((x) => 16 + (float)DiffMethods.RungeKutta(0, 1, x, 0.1), Color.Blue);
+
+                DrawFunction((x) => 32 + (float)DiffMethods.ModifiedEuler(0, 1, x, 0.1), Color.DarkMagenta);
+
+            });
+            t1.Start();
+
         }
     }
 }
